@@ -13,7 +13,6 @@ import { Search } from 'lucide-react';
 import React, { useState } from 'react';
 import type { Uma, UmaModalProps } from '../types/uma';
 
-// Sample Uma data for demonstration
 const sampleUmas: Uma[] = [
   {
     id: 1,
@@ -72,7 +71,7 @@ const sampleUmas: Uma[] = [
   },
 ];
 
-const UmaModal: React.FC<UmaModalProps> = ({ isOpen, onClose, onSelectUma, level, position }) => {
+const UmaModal = ({ isOpen, onClose, onSelectUma, level, position }: UmaModalProps) => {
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [selectedUma, setSelectedUma] = useState<Uma | null>(null);
 

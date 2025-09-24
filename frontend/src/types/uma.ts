@@ -19,13 +19,6 @@ export interface TreeData {
   [level: number]: (Uma | null)[];
 }
 
-export interface UmaCardProps {
-  uma?: Uma | null;
-  onSelectUma: (level: number, position: number) => void;
-  level: number;
-  position: number;
-}
-
 export interface UmaModalProps {
   isOpen: boolean;
   onClose: () => void;
