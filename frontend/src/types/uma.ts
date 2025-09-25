@@ -10,6 +10,15 @@ export interface Uma {
   racesWon: number;
 }
 
+// Blue spark stat/level selection for a given card position
+export interface BlueSparkSelection {
+  stat: string; // e.g. "Speed", "Stamina", "Power", "Guts", "Wits"
+  level: number; // 1-3
+}
+
+// Pink spark selection (same shape) for aptitude/running style categories
+export type PinkSparkSelection = BlueSparkSelection;
+
 export interface TreeSlot {
   level: number | null;
   position: number | null;

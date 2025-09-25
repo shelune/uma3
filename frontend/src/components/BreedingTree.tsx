@@ -1,9 +1,8 @@
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Trash2 } from 'lucide-react';
 import React, { useState } from 'react';
-import type { TreeData, TreeSlot, Uma } from '../types/uma';
+import type { BlueSparkSelection, PinkSparkSelection, TreeData, TreeSlot, Uma } from '../types/uma';
 import UmaCard from './UmaCard';
 import UmaModal from './UmaModal';
 
@@ -27,6 +26,8 @@ const BreedingTree: React.FC = () => {
   });
 
   const [modalOpen, setModalOpen] = useState<boolean>(false);
+  const [blueSparkSelections, setBlueSparkSelections] = useState<Record<number, Record<number, BlueSparkSelection>>>({});
+  const [pinkSparkSelections, setPinkSparkSelections] = useState<Record<number, Record<number, PinkSparkSelection>>>({});
   const [selectedSlot, setSelectedSlot] = useState<TreeSlot>({ level: null, position: null });
 
   const handleSelectUma = (level: number, position: number): void => {
@@ -51,6 +52,26 @@ const BreedingTree: React.FC = () => {
     setSelectedSlot({ level: null, position: null });
   };
 
+  const handleBlueSparkChange = (value: BlueSparkSelection, meta: { level: number; position: number }) => {
+    setBlueSparkSelections(prev => ({
+      ...prev,
+      [meta.level]: {
+        ...(prev[meta.level] || {}),
+        [meta.position]: value
+      }
+    }));
+  };
+
+  const handlePinkSparkChange = (value: PinkSparkSelection, meta: { level: number; position: number }) => {
+    setPinkSparkSelections(prev => ({
+      ...prev,
+      [meta.level]: {
+        ...(prev[meta.level] || {}),
+        [meta.position]: value
+      }
+    }));
+  };
+
   const renderTreeLevel = (level: number) => {
     const cardsInLevel = Math.pow(2, level);
     const cards = treeData[level] || [];
@@ -62,28 +83,8 @@ const BreedingTree: React.FC = () => {
       rows.push({ cards: Array.from({ length: rowSize }, (_, idx) => ({ card: cards[i + idx], position: i + idx })), size: rowSize });
     }
 
-    const getGridCols = (size: number) => {
-      switch (size) {
-        case 1: return 'grid-cols-1';
-        case 2: return 'grid-cols-2';
-        case 3: return 'grid-cols-3';
-        case 4: return 'grid-cols-4';
-        case 5: return 'grid-cols-5';
-        case 6: return 'grid-cols-6';
-        case 7: return 'grid-cols-7';
-        case 8: return 'grid-cols-8';
-        default: return 'grid-cols-8';
-      }
-    };
-
     return (
       <div key={level} className="mb-12 relative">
-        <div className="text-center mb-6">
-          <Badge variant="outline" className="px-4 py-2 text-sm font-semibold bg-blue-50 text-blue-700 border-blue-200">
-            Level {level + 1}
-          </Badge>
-        </div>
-
         <div className="space-y-4">
           {rows.map((row, rowIndex) => (
             <div key={`row-${rowIndex}`} className={`grid grid-cols-[repeat(auto-fit,minmax(100px,1fr))] auto-rows-auto gap-4 mx-auto justify-items-center items-center`}>
@@ -95,6 +96,10 @@ const BreedingTree: React.FC = () => {
                     level={level}
                     position={position}
                     size={level >= 3 ? "small" : "big"}
+                    blueSparkValue={blueSparkSelections[level]?.[position]}
+                    onBlueSparkChange={handleBlueSparkChange}
+                    pinkSparkValue={pinkSparkSelections[level]?.[position]}
+                    onPinkSparkChange={handlePinkSparkChange}
                   />
                 </div>
               ))}
@@ -117,8 +122,11 @@ const BreedingTree: React.FC = () => {
       }
       return clearedTree;
     });
+    setBlueSparkSelections({});
   };
 
+  console.log({ blueSparkSelections })
+  console.log({ pinkSparkSelections })
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 p-4">
       <Card className="max-w-8xl mx-auto">
