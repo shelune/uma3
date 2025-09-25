@@ -24,3 +24,7 @@ dist-ssr
 *.sw?
 
 **/*instructions.md
+*.mdb
+*.db
+*.csv
+*.columns

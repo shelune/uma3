@@ -1,0 +1,3532 @@
+[
+  {
+    "name_en": "Certain Victory",
+    "jpname": "絶対は、ボクだ",
+    "char": [
+      100302
+    ],
+    "iconid": 20013,
+    "id": 110031
+  },
+  {
+    "name_en": "Legacy of the Strong",
+    "jpname": "最強の名を懸けて",
+    "char": [
+      101302
+    ],
+    "iconid": 20013,
+    "id": 110131
+  },
+  {
+    "name_en": "Warning Shot!",
+    "jpname": "波乱注意砲！",
+    "char": [
+      100701
+    ],
+    "iconid": 20013,
+    "id": 10071
+  },
+  {
+    "name_en": "Xceleration",
+    "jpname": "アクセルX",
+    "char": [
+      100801
+    ],
+    "iconid": 20013,
+    "id": 10081
+  },
+  {
+    "name_en": "Red Ace",
+    "jpname": "レッドエース",
+    "char": [
+      100901
+    ],
+    "iconid": 20013,
+    "id": 10091
+  },
+  {
+    "name_en": "Focused Mind",
+    "jpname": "精神一到",
+    "char": [
+      101101
+    ],
+    "iconid": 20013,
+    "id": 10111
+  },
+  {
+    "name_en": "Corazón ☆ Ardiente",
+    "jpname": "熱血☆アミーゴ",
+    "char": [
+      101401
+    ],
+    "iconid": 20013,
+    "id": 10141
+  },
+  {
+    "name_en": "Empress's Pride",
+    "jpname": "エンプレス・プライド",
+    "char": [
+      101801
+    ],
+    "iconid": 20013,
+    "id": 10181
+  },
+  {
+    "name_en": "1st Place Kiss☆",
+    "jpname": "勝利のキッス☆",
+    "char": [
+      102401
+    ],
+    "iconid": 20013,
+    "id": 10241
+  },
+  {
+    "name_en": "Feel the Burn!",
+    "jpname": "燃えろ筋肉！",
+    "char": [
+      102701
+    ],
+    "iconid": 20043,
+    "id": 10271
+  },
+  {
+    "name_en": "Introduction to Physiology",
+    "jpname": "introduction：My body",
+    "char": [
+      103201
+    ],
+    "iconid": 20023,
+    "id": 10321
+  },
+  {
+    "name_en": "V Is for Victory!",
+    "jpname": "全力Vサインッ！",
+    "char": [
+      103501
+    ],
+    "iconid": 20013,
+    "id": 10351
+  },
+  {
+    "name_en": "Class Rep + Speed = Bakushin",
+    "jpname": "学級委員長+速さ＝バクシン",
+    "char": [
+      104101
+    ],
+    "iconid": 20013,
+    "id": 10411
+  },
+  {
+    "name_en": "Clear Heart",
+    "jpname": "クリアハート",
+    "char": [
+      104501
+    ],
+    "iconid": 20023,
+    "id": 10451
+  },
+  {
+    "name_en": "Super-Duper Stoked",
+    "jpname": "ワクワクよーいドン",
+    "char": [
+      105201
+    ],
+    "iconid": 20023,
+    "id": 10521
+  },
+  {
+    "name_en": "Luck Be with Me!",
+    "jpname": "来てください来てください！",
+    "char": [
+      105601
+    ],
+    "iconid": 20013,
+    "id": 10561
+  },
+  {
+    "name_en": "I Can Win Sometimes, Right?",
+    "jpname": "アタシもたまには、ね？",
+    "char": [
+      106001
+    ],
+    "iconid": 20013,
+    "id": 10601
+  },
+  {
+    "name_en": "Call Me King",
+    "jpname": "Call me KING",
+    "char": [
+      106101
+    ],
+    "iconid": 20013,
+    "id": 10611
+  },
+  {
+    "name_en": "Shooting Star",
+    "jpname": "シューティングスター",
+    "char": [
+      100101
+    ],
+    "iconid": 20013,
+    "id": 100011
+  },
+  {
+    "name_en": "The View from the Lead Is Mine!",
+    "jpname": "先頭の景色は譲らない…！",
+    "char": [
+      100201
+    ],
+    "iconid": 20013,
+    "id": 100021
+  },
+  {
+    "name_en": "Sky-High Teio Step",
+    "jpname": "究極テイオーステップ",
+    "char": [
+      100301
+    ],
+    "iconid": 20013,
+    "id": 100031
+  },
+  {
+    "name_en": "Red Shift/LP1211-M",
+    "jpname": "紅焔ギア/LP1211-M",
+    "char": [
+      100401
+    ],
+    "iconid": 20043,
+    "id": 100041
+  },
+  {
+    "name_en": "Triumphant Pulse",
+    "jpname": "勝利の鼓動",
+    "char": [
+      100601
+    ],
+    "iconid": 20013,
+    "id": 100061
+  },
+  {
+    "name_en": "Anchors Aweigh!",
+    "jpname": "不沈艦、抜錨ォッ！",
+    "char": [
+      100701
+    ],
+    "iconid": 20013,
+    "id": 100071
+  },
+  {
+    "name_en": "Cut and Drive!",
+    "jpname": "カッティング×DRIVE！",
+    "char": [
+      100801
+    ],
+    "iconid": 20013,
+    "id": 100081
+  },
+  {
+    "name_en": "Resplendent Red Ace",
+    "jpname": "ブリリアント・レッドエース",
+    "char": [
+      100901
+    ],
+    "iconid": 20013,
+    "id": 100091
+  },
+  {
+    "name_en": "Shooting for Victory!",
+    "jpname": "ヴィクトリーショット！",
+    "char": [
+      101001
+    ],
+    "iconid": 20043,
+    "id": 100101
+  },
+  {
+    "name_en": "Where There's a Will, There's a Way",
+    "jpname": "精神一到何事か成らざらん",
+    "char": [
+      101101
+    ],
+    "iconid": 20013,
+    "id": 100111
+  },
+  {
+    "name_en": "The Duty of Dignity Calls",
+    "jpname": "貴顕の使命を果たすべく",
+    "char": [
+      101301
+    ],
+    "iconid": 20013,
+    "id": 100131
+  },
+  {
+    "name_en": "Victoria por plancha ☆",
+    "jpname": "プランチャ☆ガナドール",
+    "char": [
+      101401
+    ],
+    "iconid": 20013,
+    "id": 100141
+  },
+  {
+    "name_en": "This Dance Is for Vittoria!",
+    "jpname": "ヴィットーリアに捧ぐ舞踏",
+    "char": [
+      101501
+    ],
+    "iconid": 20013,
+    "id": 100151
+  },
+  {
+    "name_en": "Behold Thine Emperor's Divine Might",
+    "jpname": "汝、皇帝の神威を見よ",
+    "char": [
+      101701
+    ],
+    "iconid": 20013,
+    "id": 100171
+  },
+  {
+    "name_en": "Blazing Pride",
+    "jpname": "ブレイズ・オブ・プライド",
+    "char": [
+      101801
+    ],
+    "iconid": 20013,
+    "id": 100181
+  },
+  {
+    "name_en": "∴win Q.E.D.",
+    "jpname": "∴win Q.E.D.",
+    "char": [
+      102301
+    ],
+    "iconid": 20013,
+    "id": 100231
+  },
+  {
+    "name_en": "Flashy☆Landing",
+    "jpname": "ひらめき☆ランディング",
+    "char": [
+      102401
+    ],
+    "iconid": 20013,
+    "id": 100241
+  },
+  {
+    "name_en": "G00 1st. F∞;",
+    "jpname": "G00 1st.F∞;",
+    "char": [
+      102601
+    ],
+    "iconid": 20013,
+    "id": 100261
+  },
+  {
+    "name_en": "Let's Pump Some Iron!",
+    "jpname": "レッツ・アナボリック！",
+    "char": [
+      102701
+    ],
+    "iconid": 20043,
+    "id": 100271
+  },
+  {
+    "name_en": "Blue Rose Closer",
+    "jpname": "ブルーローズチェイサー",
+    "char": [
+      103001
+    ],
+    "iconid": 20013,
+    "id": 100301
+  },
+  {
+    "name_en": "U=ma2",
+    "jpname": "U=ma2",
+    "char": [
+      103201
+    ],
+    "iconid": 20023,
+    "id": 100321
+  },
+  {
+    "name_en": "Our Ticket to Win!",
+    "jpname": "勝利のチケットを、君にッ！",
+    "char": [
+      103501
+    ],
+    "iconid": 20013,
+    "id": 100351
+  },
+  {
+    "name_en": "Genius x Bakushin = Victory",
+    "jpname": "優等生×バクシン＝大勝利ッ",
+    "char": [
+      104101
+    ],
+    "iconid": 20013,
+    "id": 100411
+  },
+  {
+    "name_en": "Pure Heart",
+    "jpname": "ピュリティオブハート",
+    "char": [
+      104501
+    ],
+    "iconid": 20023,
+    "id": 100451
+  },
+  {
+    "name_en": "Super-Duper Climax",
+    "jpname": "ワクワククライマックス",
+    "char": [
+      105201
+    ],
+    "iconid": 20023,
+    "id": 100521
+  },
+  {
+    "name_en": "I See Victory in My Future!",
+    "jpname": "来ます来てます来させます！",
+    "char": [
+      105601
+    ],
+    "iconid": 20013,
+    "id": 100561
+  },
+  {
+    "name_en": "Just a Little Farther!",
+    "jpname": "きっとその先へ…！",
+    "char": [
+      106001
+    ],
+    "iconid": 20013,
+    "id": 100601
+  },
+  {
+    "name_en": "Prideful King",
+    "jpname": "Pride of KING",
+    "char": [
+      106101
+    ],
+    "iconid": 20013,
+    "id": 100611
+  },
+  {
+    "name_en": "Right-Handed",
+    "jpname": "右回り○",
+    "char": [
+      105602,
+      102201,
+      106701,
+      105802,
+      106703,
+      106803,
+      111901,
+      102303,
+      111101,
+      112701,
+      110902,
+      111301,
+      110602
+    ],
+    "iconid": 10011,
+    "id": 200012
+  },
+  {
+    "name_en": "Left-Handed",
+    "jpname": "左回り○",
+    "char": [
+      100201,
+      107101,
+      109401,
+      109501
+    ],
+    "iconid": 10011,
+    "id": 200022
+  },
+  {
+    "name_en": "Tokyo Racecourse",
+    "jpname": "東京レース場○",
+    "char": [
+      103101,
+      107102,
+      108401,
+      110401,
+      107202,
+      103703
+    ],
+    "iconid": 10021,
+    "id": 200032
+  },
+  {
+    "name_en": "Nakayama Racecourse",
+    "jpname": "中山レース場○",
+    "char": [
+      108301
+    ],
+    "iconid": 10021,
+    "id": 200042
+  },
+  {
+    "name_en": "Hanshin Racecourse",
+    "jpname": "阪神レース場○",
+    "char": [
+      104001,
+      105102
+    ],
+    "iconid": 10021,
+    "id": 200052
+  },
+  {
+    "name_en": "Kyoto Racecourse",
+    "jpname": "京都レース場○",
+    "char": [
+      105602,
+      105901,
+      105902,
+      110601,
+      103003
+    ],
+    "iconid": 10021,
+    "id": 200062
+  },
+  {
+    "name_en": "Chukyo Racecourse",
+    "jpname": "中京レース場○",
+    "iconid": 10021,
+    "id": 200072
+  },
+  {
+    "name_en": "Sapporo Racecourse",
+    "jpname": "札幌レース場○",
+    "iconid": 10021,
+    "id": 200082
+  },
+  {
+    "name_en": "Hakodate Racecourse",
+    "jpname": "函館レース場○",
+    "iconid": 10021,
+    "id": 200092
+  },
+  {
+    "name_en": "Fukushima Racecourse",
+    "jpname": "福島レース場○",
+    "iconid": 10021,
+    "id": 200102
+  },
+  {
+    "name_en": "Niigata Racecourse",
+    "jpname": "新潟レース場○",
+    "iconid": 10021,
+    "id": 200112
+  },
+  {
+    "name_en": "Kokura Racecourse",
+    "jpname": "小倉レース場○",
+    "char": [
+      106001
+    ],
+    "iconid": 10021,
+    "id": 200122
+  },
+  {
+    "name_en": "Standard Distance",
+    "jpname": "根幹距離○",
+    "char": [
+      103901,
+      103503,
+      110502,
+      103201
+    ],
+    "iconid": 10021,
+    "id": 200132
+  },
+  {
+    "name_en": "Non-Standard Distance",
+    "jpname": "非根幹距離○",
+    "char": [
+      101501,
+      105801,
+      102502
+    ],
+    "iconid": 10021,
+    "id": 200142
+  },
+  {
+    "name_en": "Firm Conditions",
+    "jpname": "良バ場○",
+    "char": [
+      106701,
+      102202,
+      104201,
+      107701,
+      106003,
+      103501
+    ],
+    "iconid": 10031,
+    "id": 200152
+  },
+  {
+    "name_en": "Wet Conditions",
+    "jpname": "道悪○",
+    "char": [
+      100101,
+      101901,
+      102301,
+      104601,
+      101002,
+      108701,
+      102102,
+      104301,
+      100703,
+      107402,
+      108801,
+      107002
+    ],
+    "iconid": 10031,
+    "id": 200162
+  },
+  {
+    "name_en": "Spring Runner",
+    "jpname": "春ウマ娘○",
+    "char": [
+      100302,
+      101301,
+      106901,
+      102002,
+      106102,
+      101602,
+      110501,
+      112701
+    ],
+    "iconid": 10011,
+    "id": 200172
+  },
+  {
+    "name_en": "Summer Runner",
+    "jpname": "夏ウマ娘○",
+    "char": [
+      103202,
+      106301
+    ],
+    "iconid": 10011,
+    "id": 200182
+  },
+  {
+    "name_en": "Fall Runner",
+    "jpname": "秋ウマ娘○",
+    "char": [
+      101302,
+      101702,
+      102201,
+      102202,
+      104701,
+      104702,
+      112101,
+      109302
+    ],
+    "iconid": 10011,
+    "id": 200192
+  },
+  {
+    "name_en": "Winter Runner",
+    "jpname": "冬ウマ娘○",
+    "char": [
+      101502,
+      103401,
+      107402,
+      101103
+    ],
+    "iconid": 10011,
+    "id": 200202
+  },
+  {
+    "name_en": "Sunny Days",
+    "jpname": "晴れの日○",
+    "char": [
+      100102,
+      102801
+    ],
+    "iconid": 10041,
+    "id": 200212
+  },
+  {
+    "name_en": "Cloudy Days",
+    "jpname": "曇りの日○",
+    "char": [
+      100601
+    ],
+    "iconid": 10041,
+    "id": 200222
+  },
+  {
+    "name_en": "Rainy Days",
+    "jpname": "雨の日○",
+    "char": [
+      102601,
+      102501,
+      104002,
+      105701,
+      102701
+    ],
+    "iconid": 10041,
+    "id": 200232
+  },
+  {
+    "name_en": "Snowy Days",
+    "jpname": "雪の日○",
+    "char": [
+      105202,
+      102901
+    ],
+    "iconid": 10041,
+    "id": 200242
+  },
+  {
+    "name_en": "Inner Post Proficiency",
+    "jpname": "内枠得意○",
+    "char": [
+      101502
+    ],
+    "iconid": 10051,
+    "id": 200252
+  },
+  {
+    "name_en": "Inner Post Averseness",
+    "jpname": "内枠苦手",
+    "iconid": 10054,
+    "id": 200253
+  },
+  {
+    "name_en": "Outer Post Proficiency",
+    "jpname": "外枠得意○",
+    "char": [
+      102301,
+      106101
+    ],
+    "iconid": 10011,
+    "id": 200262
+  },
+  {
+    "name_en": "Outer Post Averseness",
+    "jpname": "外枠苦手",
+    "iconid": 10014,
+    "id": 200263
+  },
+  {
+    "name_en": "Maverick",
+    "jpname": "おひとり様○",
+    "iconid": 10011,
+    "id": 200272
+  },
+  {
+    "name_en": "Competitive Spirit",
+    "jpname": "対抗意識○",
+    "char": [
+      102902,
+      106502,
+      100901
+    ],
+    "iconid": 10031,
+    "id": 200282
+  },
+  {
+    "name_en": "Wallflower",
+    "jpname": "引っ込み思案",
+    "iconid": 10034,
+    "id": 200283
+  },
+  {
+    "name_en": "Target in Sight",
+    "jpname": "徹底マーク○",
+    "char": [
+      102702,
+      111701
+    ],
+    "iconid": 10041,
+    "id": 200292
+  },
+  {
+    "name_en": "Long Shot",
+    "jpname": "伏兵○",
+    "char": [
+      104801,
+      103702,
+      106002,
+      106401,
+      107801,
+      106501,
+      110601,
+      104802,
+      105201
+    ],
+    "iconid": 10011,
+    "id": 200302
+  },
+  {
+    "name_en": "G1 Averseness",
+    "jpname": "GⅠ苦手",
+    "iconid": 10014,
+    "id": 200311
+  },
+  {
+    "name_en": "Paddock Fright",
+    "jpname": "小心者",
+    "iconid": 10024,
+    "id": 200321
+  },
+  {
+    "name_en": "Professor of Curvature",
+    "jpname": "弧線のプロフェッサー",
+    "char": [
+      101701,
+      104502
+    ],
+    "iconid": 20012,
+    "id": 200331
+  },
+  {
+    "name_en": "Corner Adept",
+    "jpname": "コーナー巧者○",
+    "char": [
+      101701,
+      102402,
+      104502,
+      100103
+    ],
+    "iconid": 20011,
+    "id": 200332
+  },
+  {
+    "name_en": "Corner Connoisseur",
+    "jpname": "曲線のソムリエ",
+    "char": [
+      100601,
+      101802,
+      102902
+    ],
+    "iconid": 20042,
+    "id": 200341
+  },
+  {
+    "name_en": "Corner Acceleration",
+    "jpname": "コーナー加速○",
+    "char": [
+      100601,
+      101802,
+      106901,
+      107201,
+      107801,
+      102902,
+      106103
+    ],
+    "iconid": 20041,
+    "id": 200342
+  },
+  {
+    "name_en": "Swinging Maestro",
+    "jpname": "円弧のマエストロ",
+    "char": [
+      102402,
+      101502,
+      105802,
+      104501
+    ],
+    "iconid": 20022,
+    "id": 200351
+  },
+  {
+    "name_en": "Corner Recovery",
+    "jpname": "コーナー回復○",
+    "char": [
+      100302,
+      100402,
+      102402,
+      103002,
+      101502,
+      105802,
+      100703,
+      104501
+    ],
+    "iconid": 20021,
+    "id": 200352
+  },
+  {
+    "name_en": "Beeline Burst",
+    "jpname": "ハヤテ一文字",
+    "char": [
+      101302,
+      101601,
+      105101,
+      106902
+    ],
+    "iconid": 20012,
+    "id": 200361
+  },
+  {
+    "name_en": "Straightaway Adept",
+    "jpname": "直線巧者",
+    "char": [
+      100401,
+      101001,
+      101302,
+      101501,
+      101601,
+      105101,
+      106902,
+      108401,
+      106402,
+      101401
+    ],
+    "iconid": 20011,
+    "id": 200362
+  },
+  {
+    "name_en": "Rushing Gale!",
+    "jpname": "一陣の風",
+    "char": [
+      104202
+    ],
+    "iconid": 20042,
+    "id": 200371
+  },
+  {
+    "name_en": "Straightaway Acceleration",
+    "jpname": "直線加速",
+    "char": [
+      104202,
+      100801
+    ],
+    "iconid": 20041,
+    "id": 200372
+  },
+  {
+    "name_en": "Breath of Fresh Air",
+    "jpname": "好転一息",
+    "char": [
+      110201,
+      100801,
+      102401
+    ],
+    "iconid": 20022,
+    "id": 200381
+  },
+  {
+    "name_en": "Straightaway Recovery",
+    "jpname": "直線回復",
+    "char": [
+      100202,
+      110201,
+      100801,
+      102401
+    ],
+    "iconid": 20021,
+    "id": 200382
+  },
+  {
+    "name_en": "Ramp Revulsion",
+    "jpname": "坂苦手",
+    "iconid": 20024,
+    "id": 200391
+  },
+  {
+    "name_en": "Packphobia",
+    "jpname": "バ群嫌い",
+    "iconid": 20024,
+    "id": 200401
+  },
+  {
+    "name_en": "Defeatist",
+    "jpname": "あきらめ癖",
+    "iconid": 20014,
+    "id": 200411
+  },
+  {
+    "name_en": "Reckless",
+    "jpname": "手抜き癖",
+    "iconid": 20014,
+    "id": 200421
+  },
+  {
+    "name_en": "Concentration",
+    "jpname": "コンセントレーション",
+    "char": [
+      100201,
+      102602,
+      103102,
+      104603
+    ],
+    "iconid": 20062,
+    "id": 200431
+  },
+  {
+    "name_en": "Focus",
+    "jpname": "集中力",
+    "char": [
+      100201,
+      100401,
+      102402,
+      103701,
+      102602,
+      106801,
+      101303,
+      103102,
+      104603,
+      106601
+    ],
+    "iconid": 20061,
+    "id": 200432
+  },
+  {
+    "name_en": "Gatekept",
+    "jpname": "ゲート難",
+    "iconid": 20064,
+    "id": 200433
+  },
+  {
+    "name_en": "Iron Will",
+    "jpname": "鋼の意志",
+    "char": [
+      105201
+    ],
+    "iconid": 20022,
+    "id": 200441
+  },
+  {
+    "name_en": "Lay Low",
+    "jpname": "隠れ蓑",
+    "char": [
+      105201
+    ],
+    "iconid": 20021,
+    "id": 200442
+  },
+  {
+    "name_en": "Center Stage",
+    "jpname": "注目の踊り子",
+    "char": [
+      104601,
+      105202
+    ],
+    "iconid": 20052,
+    "id": 200451
+  },
+  {
+    "name_en": "Prudent Positioning",
+    "jpname": "ポジションセンス",
+    "char": [
+      100301,
+      100302,
+      104601,
+      105202,
+      108001,
+      108702,
+      104603,
+      103103
+    ],
+    "iconid": 20051,
+    "id": 200452
+  },
+  {
+    "name_en": "It's On!",
+    "jpname": "アガッてきた！",
+    "char": [
+      100102,
+      107201,
+      101902,
+      102102,
+      108201
+    ],
+    "iconid": 20012,
+    "id": 200461
+  },
+  {
+    "name_en": "Ramp Up",
+    "jpname": "ペースアップ",
+    "char": [
+      100102,
+      101302,
+      101802,
+      103801,
+      107201,
+      103601,
+      105301,
+      101902,
+      102102,
+      103503,
+      104503,
+      108201,
+      106103,
+      104501
+    ],
+    "iconid": 20011,
+    "id": 200462
+  },
+  {
+    "name_en": "Indomitable",
+    "jpname": "不屈の心",
+    "char": [
+      105801,
+      107401,
+      107102,
+      105201
+    ],
+    "iconid": 20022,
+    "id": 200471
+  },
+  {
+    "name_en": "Pace Strategy",
+    "jpname": "ペースキープ",
+    "char": [
+      101102,
+      105801,
+      107401,
+      107102,
+      102701,
+      105201
+    ],
+    "iconid": 20021,
+    "id": 200472
+  },
+  {
+    "name_en": "Unruffled",
+    "jpname": "どこ吹く風",
+    "char": [
+      106201
+    ],
+    "iconid": 20022,
+    "id": 200481
+  },
+  {
+    "name_en": "Calm in a Crowd",
+    "jpname": "ウマ込み冷静",
+    "char": [
+      106201
+    ],
+    "iconid": 20021,
+    "id": 200482
+  },
+  {
+    "name_en": "No Stopping Me!",
+    "jpname": "ノンストップガール",
+    "char": [
+      103901,
+      106002,
+      102901,
+      100802,
+      105501,
+      111601,
+      102401
+    ],
+    "iconid": 20042,
+    "id": 200491
+  },
+  {
+    "name_en": "Nimble Navigator",
+    "jpname": "垂れウマ回避",
+    "char": [
+      100601,
+      103901,
+      103301,
+      106002,
+      105002,
+      102901,
+      100802,
+      105501,
+      105302,
+      107001,
+      108601,
+      109101,
+      103203,
+      111901,
+      111601,
+      102401
+    ],
+    "iconid": 20041,
+    "id": 200492
+  },
+  {
+    "name_en": "Lane Legerdemain",
+    "jpname": "レーンの魔術師",
+    "char": [
+      103701,
+      101801
+    ],
+    "iconid": 20052,
+    "id": 200501
+  },
+  {
+    "name_en": "Go with the Flow",
+    "jpname": "臨機応変",
+    "char": [
+      100301,
+      101201,
+      103701,
+      108501,
+      101801,
+      102401
+    ],
+    "iconid": 20051,
+    "id": 200502
+  },
+  {
+    "name_en": "In Body and Mind",
+    "jpname": "全身全霊",
+    "char": [
+      100101,
+      101601,
+      103701,
+      102302,
+      108901
+    ],
+    "iconid": 20012,
+    "id": 200511
+  },
+  {
+    "name_en": "Homestretch Haste",
+    "jpname": "末脚",
+    "char": [
+      100101,
+      101402,
+      101601,
+      103701,
+      102302,
+      108901,
+      101101,
+      106201
+    ],
+    "iconid": 20011,
+    "id": 200512
+  },
+  {
+    "name_en": "Running Idle",
+    "jpname": "空回り",
+    "iconid": 20024,
+    "id": 200521
+  },
+  {
+    "name_en": "Taking the Lead",
+    "jpname": "先手必勝",
+    "char": [
+      102601,
+      106801,
+      108701,
+      106802,
+      110401,
+      106502,
+      106601
+    ],
+    "iconid": 20042,
+    "id": 200531
+  },
+  {
+    "name_en": "Early Lead",
+    "jpname": "先駆け",
+    "char": [
+      100401,
+      102601,
+      106801,
+      102002,
+      106401,
+      108701,
+      106802,
+      104102,
+      110401,
+      106402,
+      106803,
+      108001,
+      106502,
+      104603,
+      106601
+    ],
+    "iconid": 20041,
+    "id": 200532
+  },
+  {
+    "name_en": "Escape Artist",
+    "jpname": "脱出術",
+    "char": [
+      102001,
+      102602,
+      102002,
+      106802,
+      100202,
+      110701
+    ],
+    "iconid": 20012,
+    "id": 200541
+  },
+  {
+    "name_en": "Fast-Paced",
+    "jpname": "急ぎ足",
+    "char": [
+      100201,
+      102001,
+      102602,
+      102002,
+      106802,
+      104102,
+      100202,
+      110701
+    ],
+    "iconid": 20011,
+    "id": 200542
+  },
+  {
+    "name_en": "Unrestrained",
+    "jpname": "逃亡者",
+    "char": [
+      100201
+    ],
+    "iconid": 20042,
+    "id": 200551
+  },
+  {
+    "name_en": "Final Push",
+    "jpname": "押し切り準備",
+    "char": [
+      100201,
+      110401
+    ],
+    "iconid": 20041,
+    "id": 200552
+  },
+  {
+    "name_en": "Calm and Collected",
+    "jpname": "余裕綽々",
+    "char": [
+      101301,
+      102301,
+      103002,
+      101702,
+      109901,
+      100303,
+      101401
+    ],
+    "iconid": 20022,
+    "id": 200561
+  },
+  {
+    "name_en": "Stamina to Spare",
+    "jpname": "スタミナキープ",
+    "char": [
+      101301,
+      101302,
+      101501,
+      102301,
+      103002,
+      101702,
+      101303,
+      109901,
+      100303,
+      100901,
+      101401
+    ],
+    "iconid": 20021,
+    "id": 200562
+  },
+  {
+    "name_en": "Race Planner",
+    "jpname": "レースプランナー",
+    "char": [
+      100302,
+      100501,
+      104801,
+      107101,
+      104701,
+      100901,
+      106301,
+      103201
+    ],
+    "iconid": 20022,
+    "id": 200571
+  },
+  {
+    "name_en": "Preferred Position",
+    "jpname": "好位追走",
+    "char": [
+      100302,
+      100501,
+      101601,
+      101701,
+      104801,
+      102302,
+      102101,
+      107101,
+      104701,
+      100901,
+      106301,
+      103201
+    ],
+    "iconid": 20021,
+    "id": 200572
+  },
+  {
+    "name_en": "Speed Star",
+    "jpname": "スピードスター",
+    "char": [
+      101501,
+      105801,
+      102201,
+      106901,
+      100502,
+      109301
+    ],
+    "iconid": 20012,
+    "id": 200581
+  },
+  {
+    "name_en": "Prepared to Pass",
+    "jpname": "抜け出し準備",
+    "char": [
+      101501,
+      103801,
+      105801,
+      102201,
+      106901,
+      100502,
+      109301,
+      110901,
+      100901
+    ],
+    "iconid": 20011,
+    "id": 200582
+  },
+  {
+    "name_en": "Fast & Furious",
+    "jpname": "迅速果断",
+    "char": [
+      100102,
+      102101,
+      108801,
+      105401,
+      103501
+    ],
+    "iconid": 20012,
+    "id": 200591
+  },
+  {
+    "name_en": "Position Pilfer",
+    "jpname": "位置取り押し上げ",
+    "char": [
+      100102,
+      102101,
+      103702,
+      103502,
+      108301,
+      108801,
+      101101,
+      105401,
+      103501
+    ],
+    "iconid": 20011,
+    "id": 200592
+  },
+  {
+    "name_en": "On Your Left!",
+    "jpname": "乗り換え上手",
+    "char": [
+      104001,
+      104801,
+      105302,
+      108302,
+      106003,
+      101101
+    ],
+    "iconid": 20042,
+    "id": 200601
+  },
+  {
+    "name_en": "Slick Surge",
+    "jpname": "差し切り体勢",
+    "char": [
+      104001,
+      105602,
+      104801,
+      106202,
+      105302,
+      108302,
+      106003,
+      100801,
+      101101,
+      106201
+    ],
+    "iconid": 20041,
+    "id": 200602
+  },
+  {
+    "name_en": "Rising Dragon",
+    "jpname": "昇り龍",
+    "char": [
+      101402,
+      103901,
+      106102,
+      105301,
+      102701
+    ],
+    "iconid": 20012,
+    "id": 200611
+  },
+  {
+    "name_en": "Outer Swell",
+    "jpname": "外差し準備",
+    "char": [
+      100101,
+      101402,
+      103901,
+      106102,
+      100103,
+      105301,
+      106703,
+      102701
+    ],
+    "iconid": 20011,
+    "id": 200612
+  },
+  {
+    "name_en": "Sleeping Lion",
+    "jpname": "眠れる獅子",
+    "char": [
+      105001
+    ],
+    "iconid": 20022,
+    "id": 200621
+  },
+  {
+    "name_en": "Standing By",
+    "jpname": "後方待機",
+    "char": [
+      105001,
+      100701
+    ],
+    "iconid": 20021,
+    "id": 200622
+  },
+  {
+    "name_en": "Sturm und Drang",
+    "jpname": "疾風怒濤",
+    "char": [
+      101201,
+      103301,
+      108401
+    ],
+    "iconid": 20012,
+    "id": 200631
+  },
+  {
+    "name_en": "Masterful Gambit",
+    "jpname": "仕掛け抜群",
+    "char": [
+      101201,
+      103301,
+      108401,
+      101202,
+      100703,
+      104402,
+      108402
+    ],
+    "iconid": 20011,
+    "id": 200632
+  },
+  {
+    "name_en": "Encroaching Shadow",
+    "jpname": "迫る影",
+    "char": [
+      105001,
+      103402,
+      105701,
+      100703,
+      102502
+    ],
+    "iconid": 20042,
+    "id": 200641
+  },
+  {
+    "name_en": "Straightaway Spurt",
+    "jpname": "直線一気",
+    "char": [
+      105001,
+      102101,
+      103401,
+      104401,
+      103402,
+      105701,
+      108401,
+      101202,
+      100703,
+      102502
+    ],
+    "iconid": 20041,
+    "id": 200642
+  },
+  {
+    "name_en": "Turbo Sprint",
+    "jpname": "スプリントターボ",
+    "char": [
+      103802,
+      105302,
+      104101
+    ],
+    "iconid": 20042,
+    "id": 200651
+  },
+  {
+    "name_en": "Sprinting Gear",
+    "jpname": "スプリントギア",
+    "char": [
+      105101,
+      103802,
+      105302,
+      105401,
+      104101,
+      105201
+    ],
+    "iconid": 20041,
+    "id": 200652
+  },
+  {
+    "name_en": "Wait-and-See",
+    "jpname": "様子見",
+    "iconid": 20021,
+    "id": 200662
+  },
+  {
+    "name_en": "Blinding Flash",
+    "jpname": "電撃の煌めき",
+    "char": [
+      105401,
+      106101
+    ],
+    "iconid": 20012,
+    "id": 200671
+  },
+  {
+    "name_en": "Gap Closer",
+    "jpname": "詰め寄り",
+    "char": [
+      106102,
+      105401,
+      106101
+    ],
+    "iconid": 20011,
+    "id": 200672
+  },
+  {
+    "name_en": "Mile Maven",
+    "jpname": "マイルの支配者",
+    "char": [
+      100402,
+      101001,
+      101002,
+      106502,
+      108602
+    ],
+    "iconid": 20012,
+    "id": 200681
+  },
+  {
+    "name_en": "Productive Plan",
+    "jpname": "積極策",
+    "char": [
+      100402,
+      101001,
+      101002,
+      106902,
+      106502,
+      100403,
+      108602
+    ],
+    "iconid": 20011,
+    "id": 200682
+  },
+  {
+    "name_en": "Keen Eye",
+    "jpname": "慧眼",
+    "char": [
+      104001
+    ],
+    "iconid": 20022,
+    "id": 200691
+  },
+  {
+    "name_en": "Watchful Eye",
+    "jpname": "展開窺い",
+    "char": [
+      104001,
+      106102
+    ],
+    "iconid": 20021,
+    "id": 200692
+  },
+  {
+    "name_en": "Furious Feat",
+    "jpname": "豪脚",
+    "char": [
+      101402,
+      106103,
+      108402,
+      100801
+    ],
+    "iconid": 20042,
+    "id": 200701
+  },
+  {
+    "name_en": "Updrafters",
+    "jpname": "上昇気流",
+    "char": [
+      101402,
+      101902,
+      106103,
+      108402,
+      100801
+    ],
+    "iconid": 20041,
+    "id": 200702
+  },
+  {
+    "name_en": "Trackblazer",
+    "jpname": "切り開く者",
+    "char": [
+      102601
+    ],
+    "iconid": 20022,
+    "id": 200711
+  },
+  {
+    "name_en": "Rosy Outlook",
+    "jpname": "前途洋々",
+    "char": [
+      100201,
+      102601,
+      102002,
+      106802
+    ],
+    "iconid": 20021,
+    "id": 200712
+  },
+  {
+    "name_en": "Killer Tunes",
+    "jpname": "キラーチューン",
+    "char": [
+      101501,
+      102102,
+      107001,
+      111301,
+      100901,
+      102701
+    ],
+    "iconid": 20012,
+    "id": 200721
+  },
+  {
+    "name_en": "Up-Tempo",
+    "jpname": "テンポアップ",
+    "char": [
+      101501,
+      105901,
+      102102,
+      107001,
+      110701,
+      111301,
+      100901,
+      101401,
+      101801,
+      102701
+    ],
+    "iconid": 20011,
+    "id": 200722
+  },
+  {
+    "name_en": "Unyielding",
+    "jpname": "勝利への執念",
+    "char": [
+      101201,
+      107201
+    ],
+    "iconid": 20012,
+    "id": 200731
+  },
+  {
+    "name_en": "Steadfast",
+    "jpname": "食い下がり",
+    "char": [
+      100101,
+      101201,
+      107201,
+      106902,
+      110401,
+      103501
+    ],
+    "iconid": 20011,
+    "id": 200732
+  },
+  {
+    "name_en": "Cooldown",
+    "jpname": "クールダウン",
+    "char": [
+      101102,
+      101302,
+      102301,
+      103001,
+      112701
+    ],
+    "iconid": 20022,
+    "id": 200741
+  },
+  {
+    "name_en": "Deep Breaths",
+    "jpname": "深呼吸",
+    "char": [
+      101102,
+      101302,
+      102301,
+      103001,
+      101602,
+      102502,
+      104503,
+      112701,
+      102401,
+      104501
+    ],
+    "iconid": 20021,
+    "id": 200742
+  },
+  {
+    "name_en": "Innate Experience",
+    "jpname": "内的体験",
+    "char": [
+      105602,
+      100602,
+      100702,
+      103402,
+      103602
+    ],
+    "iconid": 20012,
+    "id": 200751
+  },
+  {
+    "name_en": "Inside Scoop",
+    "jpname": "内弁慶",
+    "char": [
+      105602,
+      101702,
+      100602,
+      100702,
+      103402,
+      103602
+    ],
+    "iconid": 20011,
+    "id": 200752
+  },
+  {
+    "name_en": "Adrenaline Rush",
+    "jpname": "火事場のバ鹿力",
+    "iconid": 20022,
+    "id": 200761
+  },
+  {
+    "name_en": "Extra Tank",
+    "jpname": "別腹タンク",
+    "char": [
+      102602
+    ],
+    "iconid": 20021,
+    "id": 200762
+  },
+  {
+    "name_en": "Trick (Front)",
+    "jpname": "トリック（前）",
+    "char": [
+      100501,
+      101102,
+      103002,
+      100502
+    ],
+    "iconid": 30051,
+    "id": 200771
+  },
+  {
+    "name_en": "Trick (Rear)",
+    "jpname": "トリック（後）",
+    "char": [
+      104401,
+      105601
+    ],
+    "iconid": 30051,
+    "id": 200781
+  },
+  {
+    "name_en": "Frenzied Front Runners",
+    "jpname": "逃げ駆け引き",
+    "iconid": 30041,
+    "id": 200791
+  },
+  {
+    "name_en": "Frenzied Pace Chasers",
+    "jpname": "先行駆け引き",
+    "iconid": 30041,
+    "id": 200801
+  },
+  {
+    "name_en": "Frenzied Late Surgers",
+    "jpname": "差し駆け引き",
+    "iconid": 30041,
+    "id": 200811
+  },
+  {
+    "name_en": "Frenzied End Closers",
+    "jpname": "追込駆け引き",
+    "char": [
+      102301
+    ],
+    "iconid": 30041,
+    "id": 200821
+  },
+  {
+    "name_en": "Subdued Front Runners",
+    "jpname": "逃げけん制",
+    "iconid": 30051,
+    "id": 200831
+  },
+  {
+    "name_en": "Flustered Front Runners",
+    "jpname": "逃げ焦り",
+    "char": [
+      104101
+    ],
+    "iconid": 30051,
+    "id": 200841
+  },
+  {
+    "name_en": "Hesitant Front Runners",
+    "jpname": "逃げためらい",
+    "char": [
+      103002,
+      103802,
+      108501
+    ],
+    "iconid": 30011,
+    "id": 200851
+  },
+  {
+    "name_en": "Subdued Pace Chasers",
+    "jpname": "先行けん制",
+    "char": [
+      103001,
+      105801,
+      103301,
+      109901
+    ],
+    "iconid": 30051,
+    "id": 200861
+  },
+  {
+    "name_en": "Flustered Pace Chasers",
+    "jpname": "先行焦り",
+    "char": [
+      101101
+    ],
+    "iconid": 30051,
+    "id": 200871
+  },
+  {
+    "name_en": "Hesitant Pace Chasers",
+    "jpname": "先行ためらい",
+    "char": [
+      102001,
+      104501
+    ],
+    "iconid": 30011,
+    "id": 200881
+  },
+  {
+    "name_en": "Subdued Late Surgers",
+    "jpname": "差しけん制",
+    "char": [
+      101701
+    ],
+    "iconid": 30051,
+    "id": 200891
+  },
+  {
+    "name_en": "Flustered Late Surgers",
+    "jpname": "差し焦り",
+    "iconid": 30051,
+    "id": 200901
+  },
+  {
+    "name_en": "Hesitant Late Surgers",
+    "jpname": "差しためらい",
+    "char": [
+      106001
+    ],
+    "iconid": 30011,
+    "id": 200911
+  },
+  {
+    "name_en": "Subdued End Closers",
+    "jpname": "追込けん制",
+    "iconid": 30051,
+    "id": 200921
+  },
+  {
+    "name_en": "Flustered End Closers",
+    "jpname": "追込焦り",
+    "char": [
+      101801
+    ],
+    "iconid": 30051,
+    "id": 200931
+  },
+  {
+    "name_en": "Hesitant End Closers",
+    "jpname": "追込ためらい",
+    "char": [
+      101801
+    ],
+    "iconid": 30011,
+    "id": 200941
+  },
+  {
+    "name_en": "Oi Racecourse",
+    "jpname": "大井レース場○",
+    "char": [
+      104601,
+      103402
+    ],
+    "iconid": 10021,
+    "id": 200952
+  },
+  {
+    "name_en": "Sprint Straightaways",
+    "jpname": "短距離直線○",
+    "char": [
+      104201,
+      104102,
+      112001
+    ],
+    "iconid": 20011,
+    "id": 200962
+  },
+  {
+    "name_en": "Sprint Corners",
+    "jpname": "短距離コーナー○",
+    "char": [
+      105301,
+      108701,
+      105302,
+      106103
+    ],
+    "iconid": 20011,
+    "id": 200972
+  },
+  {
+    "name_en": "Staggering Lead",
+    "jpname": "圧倒的リード",
+    "char": [
+      104101
+    ],
+    "iconid": 20012,
+    "id": 200981
+  },
+  {
+    "name_en": "Huge Lead",
+    "jpname": "大きなリード",
+    "char": [
+      104101
+    ],
+    "iconid": 20011,
+    "id": 200982
+  },
+  {
+    "name_en": "Plan X",
+    "jpname": "プランX",
+    "iconid": 20042,
+    "id": 200991
+  },
+  {
+    "name_en": "Countermeasure",
+    "jpname": "善後策",
+    "char": [
+      109301,
+      104101
+    ],
+    "iconid": 20041,
+    "id": 200992
+  },
+  {
+    "name_en": "Perfect Prep!",
+    "jpname": "準備万全！",
+    "char": [
+      102801
+    ],
+    "iconid": 20052,
+    "id": 201001
+  },
+  {
+    "name_en": "Meticulous Measures",
+    "jpname": "仕掛け準備",
+    "char": [
+      102801,
+      103801,
+      105401
+    ],
+    "iconid": 20051,
+    "id": 201002
+  },
+  {
+    "name_en": "Intimidate",
+    "jpname": "後方釘付",
+    "char": [
+      102801,
+      103801,
+      103802,
+      108702
+    ],
+    "iconid": 30011,
+    "id": 201012
+  },
+  {
+    "name_en": "You've Got No Shot",
+    "jpname": "逃亡禁止令",
+    "iconid": 30052,
+    "id": 201021
+  },
+  {
+    "name_en": "Stop Right There!",
+    "jpname": "抜け駆け禁止",
+    "iconid": 30051,
+    "id": 201022
+  },
+  {
+    "name_en": "Mile Straightaways",
+    "jpname": "マイル直線○",
+    "char": [
+      101001,
+      110001,
+      106501,
+      108001,
+      100403,
+      107802,
+      113101,
+      100801
+    ],
+    "iconid": 20011,
+    "id": 201032
+  },
+  {
+    "name_en": "Mile Corners",
+    "jpname": "マイルコーナー○",
+    "char": [
+      100501,
+      100502,
+      102202,
+      101002,
+      107801,
+      105102,
+      102902,
+      108201
+    ],
+    "iconid": 20011,
+    "id": 201042
+  },
+  {
+    "name_en": "Changing Gears",
+    "jpname": "ギアチェンジ",
+    "char": [
+      100401,
+      101001,
+      102202,
+      107801,
+      106501
+    ],
+    "iconid": 20012,
+    "id": 201051
+  },
+  {
+    "name_en": "Shifting Gears",
+    "jpname": "ギアシフト",
+    "char": [
+      100401,
+      100501,
+      101001,
+      102202,
+      107801,
+      106501,
+      104301,
+      100403
+    ],
+    "iconid": 20011,
+    "id": 201052
+  },
+  {
+    "name_en": "Step on the Gas!",
+    "jpname": "アクセル全開！",
+    "char": [
+      100401
+    ],
+    "iconid": 20042,
+    "id": 201061
+  },
+  {
+    "name_en": "Acceleration",
+    "jpname": "アクセラレーション",
+    "char": [
+      100401,
+      100601,
+      104001,
+      105101
+    ],
+    "iconid": 20041,
+    "id": 201062
+  },
+  {
+    "name_en": "Big-Sisterly",
+    "jpname": "姉御肌",
+    "char": [
+      100501,
+      101802,
+      104201,
+      110001,
+      100403
+    ],
+    "iconid": 20012,
+    "id": 201071
+  },
+  {
+    "name_en": "Unyielding Spirit",
+    "jpname": "負けん気",
+    "char": [
+      100501,
+      101402,
+      101802,
+      103901,
+      105202,
+      104201,
+      110001,
+      104301,
+      105102,
+      102902,
+      104202,
+      100403,
+      106101
+    ],
+    "iconid": 20011,
+    "id": 201072
+  },
+  {
+    "name_en": "Greed for Speed",
+    "jpname": "スピードグリード",
+    "iconid": 30012,
+    "id": 201081
+  },
+  {
+    "name_en": "Speed Eater",
+    "jpname": "スピードイーター",
+    "char": [
+      100402,
+      103101,
+      103102
+    ],
+    "iconid": 30011,
+    "id": 201082
+  },
+  {
+    "name_en": "Battle Formation",
+    "jpname": "布陣",
+    "char": [
+      104002
+    ],
+    "iconid": 30022,
+    "id": 201091
+  },
+  {
+    "name_en": "Opening Gambit",
+    "jpname": "布石",
+    "char": [
+      104002
+    ],
+    "iconid": 30021,
+    "id": 201092
+  },
+  {
+    "name_en": "Medium Straightaways",
+    "jpname": "中距離直線○",
+    "char": [
+      101601,
+      101901,
+      104502,
+      104801,
+      103702,
+      106801,
+      106701,
+      105902,
+      102901,
+      105802,
+      104901,
+      107102,
+      100703,
+      111001,
+      111101,
+      110702,
+      107002,
+      108802,
+      107301,
+      102701,
+      103201
+    ],
+    "iconid": 20011,
+    "id": 201102
+  },
+  {
+    "name_en": "Medium Corners",
+    "jpname": "中距離コーナー○",
+    "char": [
+      103701,
+      105801,
+      102201,
+      106901,
+      109801,
+      100802,
+      104701,
+      102702,
+      106202,
+      107001,
+      106703,
+      103902,
+      108801,
+      103302,
+      107301,
+      103201
+    ],
+    "iconid": 20011,
+    "id": 201112
+  },
+  {
+    "name_en": "Clairvoyance",
+    "jpname": "千里眼",
+    "char": [
+      101401
+    ],
+    "iconid": 20092,
+    "id": 201121
+  },
+  {
+    "name_en": "Hawkeye",
+    "jpname": "ホークアイ",
+    "char": [
+      101401
+    ],
+    "iconid": 20091,
+    "id": 201122
+  },
+  {
+    "name_en": "Lightning Step",
+    "jpname": "ライトニングステップ",
+    "char": [
+      100301
+    ],
+    "iconid": 20052,
+    "id": 201131
+  },
+  {
+    "name_en": "Thunderbolt Step",
+    "jpname": "イナズマステップ",
+    "char": [
+      100102,
+      100301,
+      102101
+    ],
+    "iconid": 20051,
+    "id": 201132
+  },
+  {
+    "name_en": "Miraculous Step",
+    "jpname": "神業ステップ",
+    "char": [
+      100302
+    ],
+    "iconid": 20022,
+    "id": 201141
+  },
+  {
+    "name_en": "Soft Step",
+    "jpname": "軽やかステップ",
+    "char": [
+      100301,
+      100302,
+      105901,
+      107101,
+      105701,
+      104802,
+      106101
+    ],
+    "iconid": 20021,
+    "id": 201142
+  },
+  {
+    "name_en": "Dominator",
+    "jpname": "独占力",
+    "char": [
+      101701,
+      103702,
+      106002,
+      101101,
+      103201
+    ],
+    "iconid": 30012,
+    "id": 201151
+  },
+  {
+    "name_en": "Tether",
+    "jpname": "束縛",
+    "char": [
+      101701,
+      103702,
+      103301,
+      106002,
+      101202,
+      101101,
+      103201
+    ],
+    "iconid": 30011,
+    "id": 201152
+  },
+  {
+    "name_en": "Mystifying Murmur",
+    "jpname": "魅惑のささやき",
+    "char": [
+      102402,
+      104502,
+      106001
+    ],
+    "iconid": 30052,
+    "id": 201161
+  },
+  {
+    "name_en": "Murmur",
+    "jpname": "ささやき",
+    "char": [
+      102402,
+      105001,
+      104502,
+      106001
+    ],
+    "iconid": 30051,
+    "id": 201162
+  },
+  {
+    "name_en": "Long Straightaways",
+    "jpname": "長距離直線○",
+    "char": [
+      103002,
+      106801,
+      100103,
+      100902,
+      104701,
+      107701,
+      106402,
+      104503,
+      103003,
+      102303
+    ],
+    "iconid": 20011,
+    "id": 201172
+  },
+  {
+    "name_en": "Long Corners",
+    "jpname": "長距離コーナー○",
+    "char": [
+      101301,
+      100103,
+      100902
+    ],
+    "iconid": 20011,
+    "id": 201182
+  },
+  {
+    "name_en": "Vanguard Spirit",
+    "jpname": "先陣の心得",
+    "char": [
+      101301,
+      102001,
+      106401
+    ],
+    "iconid": 20012,
+    "id": 201191
+  },
+  {
+    "name_en": "Keeping the Lead",
+    "jpname": "リードキープ",
+    "char": [
+      101301,
+      102001,
+      106401
+    ],
+    "iconid": 20011,
+    "id": 201192
+  },
+  {
+    "name_en": "Passing Pro",
+    "jpname": "パス上手",
+    "char": [
+      102501,
+      102302
+    ],
+    "iconid": 20021,
+    "id": 201202
+  },
+  {
+    "name_en": "Overwhelming Pressure",
+    "jpname": "怒涛の追い上げ",
+    "char": [
+      105602,
+      100103,
+      107402,
+      106201
+    ],
+    "iconid": 20012,
+    "id": 201211
+  },
+  {
+    "name_en": "Pressure",
+    "jpname": "追い上げ",
+    "char": [
+      105602,
+      107401,
+      100103,
+      107402,
+      100701,
+      106201
+    ],
+    "iconid": 20011,
+    "id": 201212
+  },
+  {
+    "name_en": "Stamina Siphon",
+    "jpname": "スタミナグリード",
+    "char": [
+      102501,
+      106702,
+      103602
+    ],
+    "iconid": 30052,
+    "id": 201221
+  },
+  {
+    "name_en": "Stamina Eater",
+    "jpname": "スタミナイーター",
+    "char": [
+      102501,
+      107401,
+      106702,
+      103602
+    ],
+    "iconid": 30051,
+    "id": 201222
+  },
+  {
+    "name_en": "Illusionist",
+    "jpname": "奇術師",
+    "char": [
+      105601
+    ],
+    "iconid": 30072,
+    "id": 201231
+  },
+  {
+    "name_en": "Smoke Screen",
+    "jpname": "目くらまし",
+    "char": [
+      105601
+    ],
+    "iconid": 30071,
+    "id": 201232
+  },
+  {
+    "name_en": "Front Runner Straightaways",
+    "jpname": "逃げ直線○",
+    "char": [
+      102601,
+      106401,
+      106502,
+      112001
+    ],
+    "iconid": 20011,
+    "id": 201242
+  },
+  {
+    "name_en": "Front Runner Corners",
+    "jpname": "逃げコーナー○",
+    "char": [
+      102601,
+      104602,
+      103102,
+      100202,
+      106601
+    ],
+    "iconid": 20011,
+    "id": 201252
+  },
+  {
+    "name_en": "Dodging Danger",
+    "jpname": "危険回避",
+    "char": [
+      106802,
+      102403
+    ],
+    "iconid": 20051,
+    "id": 201262
+  },
+  {
+    "name_en": "Leader's Pride",
+    "jpname": "先頭プライド",
+    "char": [
+      106801,
+      102002,
+      102401
+    ],
+    "iconid": 20011,
+    "id": 201272
+  },
+  {
+    "name_en": "Restless",
+    "jpname": "じゃじゃウマ娘",
+    "char": [
+      100402,
+      103101,
+      100902
+    ],
+    "iconid": 20022,
+    "id": 201281
+  },
+  {
+    "name_en": "Moxie",
+    "jpname": "勢い任せ",
+    "char": [
+      100402,
+      103101,
+      100902,
+      106601
+    ],
+    "iconid": 20021,
+    "id": 201282
+  },
+  {
+    "name_en": "Reignition",
+    "jpname": "再燃焼",
+    "iconid": 20042,
+    "id": 201291
+  },
+  {
+    "name_en": "Second Wind",
+    "jpname": "二の矢",
+    "iconid": 20041,
+    "id": 201292
+  },
+  {
+    "name_en": "Restart",
+    "jpname": "リスタート",
+    "iconid": 30021,
+    "id": 201302
+  },
+  {
+    "name_en": "Pace Chaser Straightaways",
+    "jpname": "先行直線○",
+    "char": [
+      101702,
+      102302,
+      101502,
+      109301,
+      100303,
+      110901,
+      104702,
+      113301,
+      101401,
+      107301,
+      104101
+    ],
+    "iconid": 20011,
+    "id": 201312
+  },
+  {
+    "name_en": "Pace Chaser Corners",
+    "jpname": "先行コーナー○",
+    "char": [
+      101701,
+      101802,
+      104502,
+      107101,
+      107201,
+      103802,
+      101002,
+      102901,
+      104701,
+      102702,
+      106902,
+      107102,
+      103203,
+      111601,
+      107702,
+      109501,
+      107301
+    ],
+    "iconid": 20011,
+    "id": 201322
+  },
+  {
+    "name_en": "Technician",
+    "jpname": "技巧派",
+    "char": [
+      100301
+    ],
+    "iconid": 20042,
+    "id": 201331
+  },
+  {
+    "name_en": "Shrewd Step",
+    "jpname": "巧みなステップ",
+    "char": [
+      100301,
+      102402,
+      100502,
+      109901
+    ],
+    "iconid": 20041,
+    "id": 201332
+  },
+  {
+    "name_en": "Determined Descent",
+    "jpname": "決意の直滑降",
+    "char": [
+      103001,
+      102201,
+      105101,
+      102901,
+      102702,
+      110902
+    ],
+    "iconid": 20042,
+    "id": 201341
+  },
+  {
+    "name_en": "Straight Descent",
+    "jpname": "直滑降",
+    "char": [
+      103001,
+      101702,
+      102201,
+      105101,
+      102901,
+      102702,
+      110902,
+      111301
+    ],
+    "iconid": 20041,
+    "id": 201342
+  },
+  {
+    "name_en": "Gourmand",
+    "jpname": "食いしん坊",
+    "char": [
+      100101,
+      100601,
+      102801,
+      100602
+    ],
+    "iconid": 20022,
+    "id": 201351
+  },
+  {
+    "name_en": "Hydrate",
+    "jpname": "栄養補給",
+    "char": [
+      100101,
+      100601,
+      101301,
+      102801,
+      103001,
+      104502,
+      100602,
+      108601,
+      108901
+    ],
+    "iconid": 20021,
+    "id": 201352
+  },
+  {
+    "name_en": "Shatterproof",
+    "jpname": "くじけぬ精神",
+    "iconid": 20042,
+    "id": 201361
+  },
+  {
+    "name_en": "Tactical Tweak",
+    "jpname": "まき直し",
+    "char": [
+      102801
+    ],
+    "iconid": 20041,
+    "id": 201362
+  },
+  {
+    "name_en": "Dazzling Disorientation",
+    "jpname": "幻惑のかく乱",
+    "char": [
+      103801,
+      101801,
+      104501
+    ],
+    "iconid": 30072,
+    "id": 201371
+  },
+  {
+    "name_en": "Disorient",
+    "jpname": "かく乱",
+    "char": [
+      103801,
+      101801,
+      104501
+    ],
+    "iconid": 30071,
+    "id": 201372
+  },
+  {
+    "name_en": "Late Surger Straightaways",
+    "jpname": "差し直線○",
+    "char": [
+      101901,
+      103901,
+      105901,
+      106102,
+      104901,
+      100802,
+      106702,
+      107601,
+      110601,
+      106003,
+      109401,
+      103703,
+      101103,
+      105401
+    ],
+    "iconid": 20011,
+    "id": 201382
+  },
+  {
+    "name_en": "Late Surger Corners",
+    "jpname": "差しコーナー○",
+    "char": [
+      104002,
+      103702,
+      105101,
+      108501,
+      103602,
+      101103,
+      104003,
+      110602,
+      103501
+    ],
+    "iconid": 20011,
+    "id": 201392
+  },
+  {
+    "name_en": "Hard Worker",
+    "jpname": "努力家",
+    "char": [
+      105202,
+      103501
+    ],
+    "iconid": 20042,
+    "id": 201401
+  },
+  {
+    "name_en": "Fighter",
+    "jpname": "がんばり屋",
+    "char": [
+      105202,
+      103501
+    ],
+    "iconid": 20041,
+    "id": 201402
+  },
+  {
+    "name_en": "15,000,000 CC",
+    "jpname": "百万バリキ",
+    "char": [
+      103502
+    ],
+    "iconid": 20012,
+    "id": 201411
+  },
+  {
+    "name_en": "1,500,000 CC",
+    "jpname": "十万バリキ",
+    "char": [
+      101402,
+      103502,
+      111001,
+      113201,
+      105201
+    ],
+    "iconid": 20011,
+    "id": 201412
+  },
+  {
+    "name_en": "Relax",
+    "jpname": "リラックス",
+    "char": [
+      101102,
+      102501,
+      110601
+    ],
+    "iconid": 20022,
+    "id": 201421
+  },
+  {
+    "name_en": "A Small Breather",
+    "jpname": "小休憩",
+    "char": [
+      101102,
+      102501,
+      100602,
+      110601,
+      105601,
+      106001
+    ],
+    "iconid": 20021,
+    "id": 201422
+  },
+  {
+    "name_en": "The Bigger Picture",
+    "jpname": "大局観",
+    "char": [
+      106101
+    ],
+    "iconid": 20092,
+    "id": 201431
+  },
+  {
+    "name_en": "Studious",
+    "jpname": "読解力",
+    "char": [
+      106101
+    ],
+    "iconid": 20091,
+    "id": 201432
+  },
+  {
+    "name_en": "All-Seeing Eyes",
+    "jpname": "八方にらみ",
+    "char": [
+      105901,
+      106001
+    ],
+    "iconid": 30052,
+    "id": 201441
+  },
+  {
+    "name_en": "Sharp Gaze",
+    "jpname": "鋭い眼光",
+    "char": [
+      105901,
+      109101,
+      106001
+    ],
+    "iconid": 30051,
+    "id": 201442
+  },
+  {
+    "name_en": "End Closer Straightaways",
+    "jpname": "追込直線○",
+    "char": [
+      101201,
+      105001,
+      103401,
+      103601,
+      105002,
+      105003,
+      108402
+    ],
+    "iconid": 20011,
+    "id": 201452
+  },
+  {
+    "name_en": "End Closer Corners",
+    "jpname": "追込コーナー○",
+    "char": [
+      101201,
+      107401,
+      110801,
+      112101,
+      111501
+    ],
+    "iconid": 20011,
+    "id": 201462
+  },
+  {
+    "name_en": "The Coast Is Clear!",
+    "jpname": "視界良好！異常なし！",
+    "char": [
+      100701
+    ],
+    "iconid": 20092,
+    "id": 201471
+  },
+  {
+    "name_en": "I Can See Right Through You",
+    "jpname": "お見通し",
+    "char": [
+      103402,
+      100701
+    ],
+    "iconid": 20091,
+    "id": 201472
+  },
+  {
+    "name_en": "Go-Home Specialist",
+    "jpname": "下校後のスペシャリスト",
+    "char": [
+      104401,
+      100701
+    ],
+    "iconid": 20022,
+    "id": 201481
+  },
+  {
+    "name_en": "After-School Stroll",
+    "jpname": "下校の楽しみ",
+    "char": [
+      104401,
+      100702,
+      100701
+    ],
+    "iconid": 20021,
+    "id": 201482
+  },
+  {
+    "name_en": "Serenity",
+    "jpname": "冷静沈着",
+    "char": [
+      103301
+    ],
+    "iconid": 20022,
+    "id": 201491
+  },
+  {
+    "name_en": "Levelheaded",
+    "jpname": "冷静",
+    "char": [
+      103301,
+      103601
+    ],
+    "iconid": 20021,
+    "id": 201492
+  },
+  {
+    "name_en": "Crusader",
+    "jpname": "天命士",
+    "iconid": 20092,
+    "id": 201501
+  },
+  {
+    "name_en": "Strategist",
+    "jpname": "策士",
+    "char": [
+      103601
+    ],
+    "iconid": 20091,
+    "id": 201502
+  },
+  {
+    "name_en": "Petrifying Gaze",
+    "jpname": "熱いまなざし",
+    "char": [
+      104401
+    ],
+    "iconid": 30012,
+    "id": 201511
+  },
+  {
+    "name_en": "Intense Gaze",
+    "jpname": "まなざし",
+    "char": [
+      104401,
+      111701
+    ],
+    "iconid": 30011,
+    "id": 201512
+  },
+  {
+    "name_en": "Front Runner Savvy",
+    "jpname": "逃げのコツ○",
+    "char": [
+      102001,
+      104601,
+      102602,
+      103102,
+      104102
+    ],
+    "iconid": 10051,
+    "id": 201522
+  },
+  {
+    "name_en": "Pace Chaser Savvy",
+    "jpname": "先行のコツ○",
+    "char": [
+      101001,
+      101802,
+      102302,
+      106901,
+      103802,
+      101303,
+      109801,
+      110001
+    ],
+    "iconid": 10051,
+    "id": 201532
+  },
+  {
+    "name_en": "Late Surger Savvy",
+    "jpname": "差しのコツ○",
+    "char": [
+      101102,
+      103701,
+      104002,
+      106002,
+      105501
+    ],
+    "iconid": 10051,
+    "id": 201542
+  },
+  {
+    "name_en": "End Closer Savvy",
+    "jpname": "追込のコツ○",
+    "char": [
+      105002
+    ],
+    "iconid": 10051,
+    "id": 201552
+  },
+  {
+    "name_en": "Super Lucky Seven",
+    "jpname": "スーパーラッキーセブン",
+    "char": [
+      105601
+    ],
+    "iconid": 10062,
+    "id": 201561
+  },
+  {
+    "name_en": "Lucky Seven",
+    "jpname": "ラッキーセブン",
+    "char": [
+      100702,
+      105601
+    ],
+    "iconid": 10061,
+    "id": 201562
+  },
+  {
+    "name_en": "Triple 7s",
+    "jpname": "スリーセブン",
+    "char": [
+      100402,
+      100602,
+      105601
+    ],
+    "iconid": 20021,
+    "id": 201571
+  },
+  {
+    "name_en": "Highlander",
+    "jpname": "登山家",
+    "char": [
+      103001,
+      102501,
+      103003
+    ],
+    "iconid": 20041,
+    "id": 201581
+  },
+  {
+    "name_en": "Uma Stan",
+    "jpname": "ウマ好み",
+    "char": [
+      101901,
+      101902,
+      105701,
+      110201,
+      103203,
+      107702,
+      105702,
+      100701
+    ],
+    "iconid": 20011,
+    "id": 201591
+  },
+  {
+    "name_en": "Groundwork",
+    "jpname": "地固め",
+    "char": [
+      102602,
+      108701,
+      106802,
+      103102,
+      106402,
+      108001,
+      106502,
+      102403,
+      109001,
+      110902
+    ],
+    "iconid": 20041,
+    "id": 201601
+  },
+  {
+    "name_en": "Tail Held High",
+    "jpname": "尻尾上がり",
+    "char": [
+      100102,
+      102001,
+      102101,
+      103401,
+      102102,
+      107601,
+      100202,
+      100303,
+      110701,
+      108901,
+      106803,
+      108502,
+      107202
+    ],
+    "iconid": 20011,
+    "id": 201611
+  },
+  {
+    "name_en": "Shake It Out",
+    "jpname": "ふり絞り",
+    "char": [
+      100602,
+      105202,
+      106201
+    ],
+    "iconid": 20021,
+    "id": 201621
+  },
+  {
+    "name_en": "Sympathy",
+    "jpname": "シンパシー",
+    "char": [
+      110502
+    ],
+    "iconid": 10011,
+    "id": 201631
+  },
+  {
+    "name_en": "Lone Wolf",
+    "jpname": "一匹狼",
+    "char": [
+      101601,
+      105001
+    ],
+    "iconid": 10011,
+    "id": 201641
+  },
+  {
+    "name_en": "Slipstream",
+    "jpname": "スリップストリーム",
+    "char": [
+      104001,
+      103101,
+      106501,
+      110501,
+      108901,
+      106003,
+      110201,
+      107202,
+      104402,
+      110602
+    ],
+    "iconid": 20011,
+    "id": 201651
+  },
+  {
+    "name_en": "Playtime's Over!",
+    "jpname": "遊びはおしまいっ！",
+    "char": [
+      106401,
+      110201,
+      112401,
+      103103
+    ],
+    "iconid": 20011,
+    "id": 201661
+  },
+  {
+    "name_en": "#LookatCurren",
+    "jpname": "#LookatCurren",
+    "char": [
+      103801
+    ],
+    "iconid": 20013,
+    "id": 100381
+  },
+  {
+    "name_en": "Adored by All",
+    "jpname": "悩殺術",
+    "char": [
+      103801,
+      103802
+    ],
+    "iconid": 30012,
+    "id": 201011
+  },
+  {
+    "name_en": "Nemesis",
+    "jpname": "Nemesis",
+    "char": [
+      105001
+    ],
+    "iconid": 20013,
+    "id": 100501
+  },
+  {
+    "name_en": "SPARKLY☆STARDOM",
+    "jpname": "キラキラ☆STARDOM",
+    "char": [
+      104601
+    ],
+    "iconid": 20013,
+    "id": 100461
+  },
+  {
+    "name_en": "Trending in the Charts!",
+    "jpname": "チャート急上昇！",
+    "char": [
+      104601,
+      104602,
+      109901
+    ],
+    "iconid": 20012,
+    "id": 201671
+  },
+  {
+    "name_en": "Top Pick",
+    "jpname": "レコメンド",
+    "char": [
+      104601,
+      104602,
+      109901
+    ],
+    "iconid": 20011,
+    "id": 201672
+  },
+  {
+    "name_en": "Shadow Break",
+    "jpname": "Shadow Break",
+    "char": [
+      101601
+    ],
+    "iconid": 20013,
+    "id": 100161
+  },
+  {
+    "name_en": "Eternal Moments",
+    "jpname": "薫風、永遠なる瞬間を",
+    "char": [
+      101802
+    ],
+    "iconid": 20013,
+    "id": 110181
+  },
+  {
+    "name_en": "Flowery☆Maneuver",
+    "jpname": "フラワリー☆マニューバ",
+    "char": [
+      102402
+    ],
+    "iconid": 20013,
+    "id": 110241
+  },
+  {
+    "name_en": "Sixth Sense",
+    "jpname": "シックスセンス",
+    "iconid": 20052,
+    "id": 201261
+  },
+  {
+    "name_en": "Angling and Scheming",
+    "jpname": "アングリング×スキーミング",
+    "char": [
+      102001
+    ],
+    "iconid": 20043,
+    "id": 100201
+  },
+  {
+    "name_en": "You and Me! One-on-One!",
+    "jpname": "タイマン！デッドヒート！",
+    "char": [
+      101201
+    ],
+    "iconid": 20013,
+    "id": 100121
+  },
+  {
+    "name_en": "Superior Heal",
+    "jpname": "ゲインヒール・スペリアー",
+    "char": [
+      101102
+    ],
+    "iconid": 20023,
+    "id": 110111
+  },
+  {
+    "name_en": "Condor's Fury",
+    "jpname": "コンドル猛撃波",
+    "char": [
+      101402
+    ],
+    "iconid": 20043,
+    "id": 110141
+  },
+  {
+    "name_en": "Lights of Vaudeville",
+    "jpname": "煌星のヴォードヴィル",
+    "char": [
+      100501
+    ],
+    "iconid": 20013,
+    "id": 100051
+  },
+  {
+    "name_en": "KEEP IT REAL.",
+    "jpname": "KEEP IT REAL.",
+    "char": [
+      104001
+    ],
+    "iconid": 20013,
+    "id": 100401
+  },
+  {
+    "name_en": "Dazzl'n ♪ Diver",
+    "jpname": "わやかわ♪マリンダイヴ",
+    "char": [
+      100102
+    ],
+    "iconid": 20023,
+    "id": 110011
+  },
+  {
+    "name_en": "A Kiss for Courage",
+    "jpname": "グッときて♪Chu",
+    "char": [
+      100402
+    ],
+    "iconid": 20013,
+    "id": 110041
+  },
+  {
+    "name_en": "I Never Goof Up!",
+    "jpname": "I Never Goof Up!",
+    "char": [
+      105801
+    ],
+    "iconid": 20013,
+    "id": 100581
+  },
+  {
+    "name_en": "Schwarzes Schwert",
+    "jpname": "Schwarzes Schwert",
+    "char": [
+      103701
+    ],
+    "iconid": 20013,
+    "id": 100371
+  },
+  {
+    "name_en": "Bountiful Harvest",
+    "jpname": "禾スナハチ登ル",
+    "char": [
+      105602
+    ],
+    "iconid": 20013,
+    "id": 110561
+  },
+  {
+    "name_en": "Burning Spirit SPD",
+    "jpname": "アオハル燃焼・速",
+    "iconid": 20102,
+    "id": 210011
+  },
+  {
+    "name_en": "Ignited Spirit SPD",
+    "jpname": "アオハル点火・速",
+    "iconid": 20101,
+    "id": 210012
+  },
+  {
+    "name_en": "Burning Spirit STA",
+    "jpname": "アオハル燃焼・体",
+    "iconid": 20112,
+    "id": 210021
+  },
+  {
+    "name_en": "Ignited Spirit STA",
+    "jpname": "アオハル点火・体",
+    "iconid": 20111,
+    "id": 210022
+  },
+  {
+    "name_en": "Burning Spirit PWR",
+    "jpname": "アオハル燃焼・力",
+    "iconid": 20122,
+    "id": 210031
+  },
+  {
+    "name_en": "Ignited Spirit PWR",
+    "jpname": "アオハル点火・力",
+    "iconid": 20121,
+    "id": 210032
+  },
+  {
+    "name_en": "Burning Spirit GUTS",
+    "jpname": "アオハル燃焼・根",
+    "iconid": 20102,
+    "id": 210041
+  },
+  {
+    "name_en": "Ignited Spirit GUTS",
+    "jpname": "アオハル点火・根",
+    "iconid": 20101,
+    "id": 210042
+  },
+  {
+    "name_en": "Burning Spirit WIT",
+    "jpname": "アオハル燃焼・賢",
+    "iconid": 20132,
+    "id": 210051
+  },
+  {
+    "name_en": "Ignited Spirit WIT",
+    "jpname": "アオハル点火・賢",
+    "iconid": 20131,
+    "id": 210052
+  },
+  {
+    "name_en": "Unquenched Thirst",
+    "jpname": "癒えない渇き",
+    "iconid": 10021,
+    "id": 300011
+  },
+  {
+    "name_en": "Unchanging",
+    "jpname": "変わらぬままで",
+    "iconid": 10012,
+    "id": 300021
+  }
+]
