@@ -1,5 +1,6 @@
 import * as fs from "fs";
 import * as path from "path";
+import { CharacterNameID } from "../types/characterNameId";
 import { DressData } from "../types/dressData";
 import { TextData } from "../types/textData";
 
@@ -14,7 +15,7 @@ const dressData: Array<DressData> = JSON.parse(dressDataRaw);
 
 const dressIds = new Set(dressData.map((item) => item.id));
 
-const formatCharacterName = (item: TextData) => ({
+const formatCharacterName = (item: TextData): CharacterNameID => ({
   chara_id: item.index.toString(),
   chara_name: item.text,
   chara_id_base: item.index.toString().slice(0, 4),
