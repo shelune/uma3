@@ -1,9 +1,20 @@
 // @ts-check
 
-import eslint from "@eslint/js";
-import tseslint from "typescript-eslint";
+import baseConfig from "../eslint.config.js";
 
-export default tseslint.config(
-  eslint.configs.recommended,
-  tseslint.configs.recommended
-);
+export default [
+  ...baseConfig,
+  {
+    languageOptions: {
+      globals: {
+        __dirname: "readonly",
+        __filename: "readonly",
+        Buffer: "readonly",
+        global: "readonly",
+      },
+    },
+    rules: {
+      "@typescript-eslint/no-explicit-any": "off", // Allow any in backend for flexibility
+    },
+  },
+];
