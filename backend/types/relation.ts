@@ -1,4 +1,4 @@
-export type MemberInRelationType = {
+export type MemberInRelation = {
   id: number;
   relation_type: number;
   chara_id: number;
