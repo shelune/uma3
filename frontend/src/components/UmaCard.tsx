@@ -8,9 +8,14 @@ import {
   PopoverTrigger,
 } from '@/components/ui/popover'
 import { Separator } from '@/components/ui/separator'
-import { getBaseAffinity, getImagePath, renderUmaName } from '@/utils'
+import {
+  getBaseAffinity,
+  getImagePath,
+  getRaceAffinity,
+  renderUmaName,
+} from '@/utils'
 import { Settings, Star, User, CircleDot, Circle, Triangle } from 'lucide-react'
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { WHITE_SPARK_RACES } from '../assets/white-sparks'
 import type {
   BlueSparkSelection,
@@ -19,6 +24,8 @@ import type {
   RacesWonSelection,
   Uma,
 } from '../types/uma'
+import { TreeDataContext } from '../contexts/TreeDataContext'
+import Tooltip from './ui/tooltip'
 
 export interface UmaCardProps {
   uma?: Uma | null
@@ -85,68 +92,9 @@ const UmaCard: React.FC<ExtendedUmaCardProps> = ({
   onGreenSparkChange,
   onRacesWonChange,
 }) => {
-  const { blueSpark, pinkSpark, greenSpark, whiteSpark, races } = uma || {}
-
-  const getAffinityIcon = (affinity: number) => {
-    if (affinity < 51) {
-      return <Triangle className="w-4 h-4 text-red-400" />
-    } else if (affinity < 151) {
-      return <Circle className="w-4 h-4 text-yellow-400" />
-    } else {
-      return <CircleDot className="w-4 h-4 text-green-400" />
-    }
-  }
-
-  const getAffinity = () => {
-    console.log('uma?.id,', uma?.baseId)
-    console.log('uma?.parents?.[1]?.id,', uma?.parents?.[1]?.id)
-    console.log('uma?.grandParents?.[1]?.id,', uma?.grandParents?.[1]?.id)
-    if (!uma || !uma.parents) {
-      return 0
-    }
-    const { baseId, grandParents, parents } = uma
-    if (baseId && (parents || grandParents)) {
-      const baseAffinityLeft_1 = getBaseAffinity(
-        baseId,
-        parents?.[1]?.id,
-        grandParents?.[1]?.id
-      )
-      const baseAffinityLeft_2 = getBaseAffinity(
-        baseId,
-        parents?.[1]?.id,
-        grandParents?.[2]?.id
-      )
-      const baseAffinityRight_1 = getBaseAffinity(
-        baseId,
-        parents?.[2]?.id,
-        grandParents?.[1]?.id
-      )
-      const baseAffinityRight_2 = getBaseAffinity(
-        baseId,
-        parents?.[2]?.id,
-        grandParents?.[2]?.id
-      )
-      console.log({ baseAffinityLeft_1 })
-      return (
-        baseAffinityLeft_1 +
-        baseAffinityLeft_2 +
-        baseAffinityRight_1 +
-        baseAffinityRight_2
-      )
-    }
-    return 0
-  }
-
-  // Dynamic sizing based on level
-  const getCardSize = () => {
-    if (size === 'big') {
-      return 'w-56 min-h-48'
-    } else {
-      return 'w-40 min-h-32'
-    }
-  }
-
-  const isSmallSize = size === 'small'
+  const treeDataContext = useContext(TreeDataContext)
+  const { treeData } = treeDataContext || {}
+  const { blueSpark, pinkSpark, greenSpark, whiteSpark, races = [] } = uma || {}
 
   // Selection states (handled by popovers)
   const [blueSparkSelection, setBlueSparkSelection] =
@@ -161,9 +109,6 @@ const UmaCard: React.FC<ExtendedUmaCardProps> = ({
     })
   const [greenSparkSelection, setGreenSparkSelection] = useState<number | null>(
     greenSparkValue?.level || null
-  )
-  const [racesWonSelection, setRacesWonSelection] = useState<string[]>(
-    races || []
   )
 
   const commitIfComplete = (next: InternalSelectionState) => {
@@ -223,17 +168,14 @@ const UmaCard: React.FC<ExtendedUmaCardProps> = ({
   }
 
   const toggleRace = (race: string) => {
-    setRacesWonSelection(prev => {
-      const newSelection = prev.includes(race)
-        ? prev.filter(r => r !== race)
-        : [...prev, race]
+    if (!races) return
+    const newSelection = races.includes(race)
+      ? races.filter(r => r !== race)
+      : [...races, race]
 
-      if (onRacesWonChange) {
-        onRacesWonChange({ races: newSelection }, { level, position })
-      }
-
-      return newSelection
-    })
+    if (onRacesWonChange) {
+      onRacesWonChange({ races: newSelection }, { level, position })
+    }
   }
 
   const clearAllRaces = () => {
@@ -242,11 +184,52 @@ const UmaCard: React.FC<ExtendedUmaCardProps> = ({
     }
   }
 
-  // Dialog (shadcn) handles outside click & escape to close. We only manage selection.
+  const getAffinityIcon = (affinity: number) => {
+    if (affinity < 51) {
+      return <Triangle className="w-4 h-4 text-red-400" />
+    } else if (affinity < 151) {
+      return <Circle className="w-4 h-4 text-yellow-400" />
+    } else {
+      return <CircleDot className="w-4 h-4 text-green-400" />
+    }
+  }
+
+  const getAffinity = () => {
+    if (!uma || !treeData) {
+      return { total: 0, base: 0, race: 0 }
+    }
+    const baseAffinity = getBaseAffinity(treeData, {
+      level,
+      position,
+    })
+
+    const raceAffinity = getRaceAffinity(treeData, {
+      level,
+      position,
+    })
+    return {
+      total: baseAffinity + raceAffinity,
+      base: baseAffinity,
+      race: raceAffinity,
+    }
+  }
+
+  const affinity = getAffinity()
+
+  // Dynamic sizing based on level
+  const getCardSize = () => {
+    if (size === 'big') {
+      return 'min-h-48'
+    } else {
+      return 'min-h-32'
+    }
+  }
+
+  const isSmallSize = size === 'small'
 
   return (
     <Card
-      className={`${getCardSize()} transition-all duration-300 hover:scale-105 hover:shadow-lg group`}
+      className={`h-full ${getCardSize()} transition-all duration-300 hover:scale-105 hover:shadow-lg group`}
     >
       <CardHeader className="p-3 pb-2">
         <div className="flex justify-between items-start">
@@ -265,7 +248,7 @@ const UmaCard: React.FC<ExtendedUmaCardProps> = ({
                 )}
               </div>
               <span className="text-sm text-gray-800">
-                {renderUmaName(uma?.name)}
+                {renderUmaName(uma?.name)} {level}-{position}
               </span>
             </div>
           }
@@ -322,7 +305,7 @@ const UmaCard: React.FC<ExtendedUmaCardProps> = ({
               </div>
               <div className="flex gap-2">
                 {/* Stats Column */}
-                <div className="flex flex-col gap-1 w-1/2">
+                <div className="flex flex-col gap-1 w-3/4">
                   {stats.map(s => {
                     const active = blueSparkSelection.stat === s
                     return (
@@ -341,7 +324,7 @@ const UmaCard: React.FC<ExtendedUmaCardProps> = ({
                   className="mx-1 h-auto self-stretch"
                 />
                 {/* Levels Column */}
-                <div className="flex flex-col gap-1 w-1/2 items-stretch">
+                <div className="flex flex-col gap-1 w-1/4 items-stretch">
                   {starLevels.map(lvl => {
                     const active = blueSparkSelection.level === lvl
                     return (
@@ -406,21 +389,21 @@ const UmaCard: React.FC<ExtendedUmaCardProps> = ({
             </PopoverTrigger>
             <PopoverContent
               align="start"
-              className="p-3 w-72 max-w-none border-pink-200"
+              className="p-3 min-w-96 max-w-none border-pink-200"
             >
               <div className="text-[10px] uppercase tracking-wide font-semibold text-pink-600 mb-1">
                 Pink Spark
               </div>
               <div className="flex gap-2">
                 {/* Categories Column (two-column grid) */}
-                <div className="w-1/2 max-h-56 overflow-auto pr-1 grid grid-cols-2 gap-1 content-start">
+                <div className="w-3/4 max-h-56 overflow-auto pr-1 grid grid-cols-2 gap-1 content-start">
                   {pinkCategories.map(cat => {
                     const active = pinkSparkSelection.stat === cat
                     return (
                       <button
                         key={cat}
                         onClick={() => selectPinkStat(cat)}
-                        className={`min-w-0 text-xs rounded-full px-2 py-1 border transition-colors text-left truncate ${active ? 'bg-pink-600 text-white border-pink-600' : 'bg-pink-50 hover:bg-pink-100 border-pink-200 text-pink-700'}`}
+                        className={`min-w-0 text-xs rounded-full px-2 py-1 border transition-colors text-left ${active ? 'bg-pink-600 text-white border-pink-600' : 'bg-pink-50 hover:bg-pink-100 border-pink-200 text-pink-700'}`}
                       >
                         {cat}
                       </button>
@@ -432,7 +415,7 @@ const UmaCard: React.FC<ExtendedUmaCardProps> = ({
                   className="mx-1 h-auto self-stretch"
                 />
                 {/* Levels Column */}
-                <div className="flex flex-col gap-1 w-1/2 items-stretch">
+                <div className="flex flex-col gap-1 w-1/4 items-stretch">
                   {starLevels.map(lvl => {
                     const active = pinkSparkSelection.level === lvl
                     return (
@@ -539,7 +522,7 @@ const UmaCard: React.FC<ExtendedUmaCardProps> = ({
                 title="Set White Spark Races"
               >
                 <span className="flex items-center gap-0.5">
-                  <span>G1 wins ({racesWonSelection.length})</span>
+                  <span>G1 wins ({races.length})</span>
                 </span>
               </Badge>
             </PopoverTrigger>
@@ -558,7 +541,7 @@ const UmaCard: React.FC<ExtendedUmaCardProps> = ({
               <div className="max-h-64 overflow-auto pr-2">
                 <div className="grid grid-cols-1 gap-2">
                   {WHITE_SPARK_RACES.map(race => {
-                    const isSelected = racesWonSelection.includes(race)
+                    const isSelected = races.includes(race)
                     return (
                       <label
                         key={race}
@@ -574,18 +557,15 @@ const UmaCard: React.FC<ExtendedUmaCardProps> = ({
                   })}
                 </div>
               </div>
-              {racesWonSelection.length > 0 && (
-                <div className="mt-2 text-[10px] text-green-700 font-medium flex items-center gap-1">
-                  Selected: {racesWonSelection.length} race
-                  {racesWonSelection.length !== 1 ? 's' : ''}
-                </div>
-              )}
+              <div className="mt-2 text-[10px] text-green-700 font-medium flex items-center gap-1">
+                Selected: {races.length} race(s)
+              </div>
             </PopoverContent>
           </Popover>
           <Badge
-            className={`w-full justify-center bg-white text-black ${isSmallSize ? 'text-xs py-0.5' : ''}`}
+            className={`w-full justify-center bg-white text-black ${isSmallSize ? 'text-xs py-0.5' : ''} hover:bg-gray-400 text-black-800 cursor-pointer`}
           >
-            White Sparks {races}
+            White Sparks
           </Badge>
         </div>
         <Separator
@@ -597,8 +577,14 @@ const UmaCard: React.FC<ExtendedUmaCardProps> = ({
             Affinity
           </div>
           <div className="text-xs inline-flex gap-1">
-            <span>{getAffinity()}</span>
-            <span>{getAffinityIcon(getAffinity()) ?? null}</span>
+            <Tooltip
+              content={`From parents: ${affinity.base} | From races: ${affinity.race}`}
+            >
+              <span className="cursor-pointer font-bold underline">
+                {affinity.total}
+              </span>
+            </Tooltip>
+            <span>{getAffinityIcon(affinity.total) ?? null}</span>
           </div>
         </div>
       </CardContent>

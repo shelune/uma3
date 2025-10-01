@@ -1,7 +1,7 @@
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Trash2 } from 'lucide-react'
-import { useState, useCallback } from 'react'
+import { useState } from 'react'
 import { CharacterNameID } from '~/types/characterNameId'
 import UMA_LIST_WITH_ID from '../assets/home/chara_names_with_id.json'
 import type {
@@ -9,63 +9,23 @@ import type {
   GreenSparkSelection,
   PinkSparkSelection,
   RacesWonSelection,
-  Uma,
-  UmaParent,
 } from '../types/uma'
+import { useTreeData } from '../hooks/useTreeData'
 import UmaCard from './UmaCard'
 import UmaModal from './UmaModal'
+import { TreeSlot } from '../contexts/TreeDataContext'
 
 const umaList: CharacterNameID[] = UMA_LIST_WITH_ID
 
-export interface TreeSlot {
-  level: number | null
-  position: number | null
-}
-
-export interface TreeData {
-  [level: number]: {
-    [position: number]: Uma | null
-  }
-}
-
 const BreedingTree = () => {
-  // Initialize tree structure with levels 1-4 (up to 16 cards at bottom level)
-  const [treeData, setTreeData] = useState<TreeData>(() => {
-    const initialTree: TreeData = {}
-
-    for (let level = 1; level <= 4; level++) {
-      initialTree[level] = {}
-      const cardsInLevel = Math.pow(2, level - 1)
-      for (let position = 1; position <= cardsInLevel; position++) {
-        initialTree[level][position] = null
-      }
-    }
-    return initialTree
-  })
+  // Use TreeData context
+  const { treeData, updateTreeData, clearTree } = useTreeData()
 
   const [modalOpen, setModalOpen] = useState<boolean>(false)
   const [selectedSlot, setSelectedSlot] = useState<TreeSlot>({
     level: null,
     position: null,
   })
-
-  const updateTreeData = useCallback(
-    (level: number, position: number, updates: Partial<Uma> | null) => {
-      setTreeData(
-        prev =>
-          ({
-            ...prev,
-            [level]: {
-              ...prev[level],
-              [position]: prev[level][position]
-                ? { ...prev[level][position]!, ...updates }
-                : updates,
-            },
-          }) as TreeData
-      )
-    },
-    []
-  )
 
   const handleSelectUma = (level: number, position: number): void => {
     setSelectedSlot({ level, position })
@@ -83,16 +43,6 @@ const BreedingTree = () => {
       baseId: baseUmaId,
       name: umaList.find(uma => uma.chara_id === umaId)?.chara_name,
     })
-    if (level === 2) {
-      updateTreeData(1, 1, {
-        parents: {
-          [position % 2 ? '1' : '2']: {
-            id: baseUmaId,
-            races: treeData[2][1]?.races || [],
-          },
-        },
-      })
-    }
     setModalOpen(false)
   }
 
@@ -132,6 +82,7 @@ const BreedingTree = () => {
     value: RacesWonSelection,
     meta: { level: number; position: number }
   ) => {
+    console.log({ value })
     updateTreeData(meta.level, meta.position, { races: value.races })
   }
 
@@ -161,7 +112,7 @@ const BreedingTree = () => {
               className={`grid grid-cols-[repeat(auto-fit,minmax(100px,1fr))] auto-rows-auto gap-4 mx-auto justify-items-center items-center`}
             >
               {row.cards.map(({ position }) => (
-                <div key={`${level}-${position}`} className="relative">
+                <div key={`${level}-${position}`} className="relative h-full">
                   <UmaCard
                     uma={
                       treeData[level] && treeData[level][position]
@@ -186,21 +137,7 @@ const BreedingTree = () => {
     )
   }
 
-  const clearTree = (): void => {
-    setTreeData(() => {
-      const clearedTree: TreeData = {}
-      for (let level = 1; level <= 4; level++) {
-        clearedTree[level] = {}
-        const cardsInLevel = Math.pow(2, level - 1)
-        for (let position = 1; position <= cardsInLevel; position++) {
-          clearedTree[level][position] = null
-        }
-      }
-      return clearedTree
-    })
-  }
-
-  console.log('Tree Structure:', { treeData })
+  console.log({ treeData })
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 p-4">
       <Card className="max-w-8xl mx-auto">

@@ -76,7 +76,7 @@ const UmaModal = ({
           </div>
         </div>
 
-        <div className="flex-1 max-h-[500px] overflow-y-auto p-6 pt-4">
+        <div className="flex-1 h-[500px] overflow-y-auto p-6 pt-4">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {filteredUmas.map(uma => (
               <Card

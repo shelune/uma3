@@ -23,7 +23,7 @@ export interface Uma {
     stat: string
     level: number
   }
-  races?: string[]
+  races: string[]
 }
 // Blue spark stat/level selection for a given card position
 export interface BlueSparkSelection {
