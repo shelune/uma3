@@ -1,8 +1,8 @@
 import * as fs from "fs";
 import * as path from "path";
 
+import { CharacterNameID } from "../../types/characterNameId";
 import characterListJSON from "../home/chara_names_with_id.json";
-import { CharacterNameID } from "../types/characterNameId";
 
 // Output and make sure directory exists
 const outputDir = path.resolve(__dirname, "../home/images/characters");

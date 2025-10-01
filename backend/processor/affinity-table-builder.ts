@@ -1,6 +1,6 @@
 import fs from "fs";
 import path from "path";
-import { AffinityGroup, MemberInRelation, Relation } from "../types/relation";
+import { AffinityGroup, MemberInRelation, Relation } from "~/types/relation";
 
 // Load data
 const memberData: MemberInRelation[] = JSON.parse(

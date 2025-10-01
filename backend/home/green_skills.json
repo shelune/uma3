@@ -1,0 +1,324 @@
+[
+  {
+    "name_en": "Certain Victory",
+    "jpname": "絶対は、ボクだ",
+    "char": [100302],
+    "iconid": 20013,
+    "id": 110031
+  },
+  {
+    "name_en": "Legacy of the Strong",
+    "jpname": "最強の名を懸けて",
+    "char": [101302],
+    "iconid": 20013,
+    "id": 110131
+  },
+  {
+    "name_en": "Warning Shot!",
+    "jpname": "波乱注意砲！",
+    "char": [100701],
+    "iconid": 20013,
+    "id": 10071
+  },
+  {
+    "name_en": "Xceleration",
+    "jpname": "アクセルX",
+    "char": [100801],
+    "iconid": 20013,
+    "id": 10081
+  },
+  {
+    "name_en": "Red Ace",
+    "jpname": "レッドエース",
+    "char": [100901],
+    "iconid": 20013,
+    "id": 10091
+  },
+  {
+    "name_en": "Focused Mind",
+    "jpname": "精神一到",
+    "char": [101101],
+    "iconid": 20013,
+    "id": 10111
+  },
+  {
+    "name_en": "Corazón ☆ Ardiente",
+    "jpname": "熱血☆アミーゴ",
+    "char": [101401],
+    "iconid": 20013,
+    "id": 10141
+  },
+  {
+    "name_en": "Empress's Pride",
+    "jpname": "エンプレス・プライド",
+    "char": [101801],
+    "iconid": 20013,
+    "id": 10181
+  },
+  {
+    "name_en": "1st Place Kiss☆",
+    "jpname": "勝利のキッス☆",
+    "char": [102401],
+    "iconid": 20013,
+    "id": 10241
+  },
+  {
+    "name_en": "Feel the Burn!",
+    "jpname": "燃えろ筋肉！",
+    "char": [102701],
+    "iconid": 20043,
+    "id": 10271
+  },
+  {
+    "name_en": "Introduction to Physiology",
+    "jpname": "introduction：My body",
+    "char": [103201],
+    "iconid": 20023,
+    "id": 10321
+  },
+  {
+    "name_en": "V Is for Victory!",
+    "jpname": "全力Vサインッ！",
+    "char": [103501],
+    "iconid": 20013,
+    "id": 10351
+  },
+  {
+    "name_en": "Class Rep + Speed = Bakushin",
+    "jpname": "学級委員長+速さ＝バクシン",
+    "char": [104101],
+    "iconid": 20013,
+    "id": 10411
+  },
+  {
+    "name_en": "Clear Heart",
+    "jpname": "クリアハート",
+    "char": [104501],
+    "iconid": 20023,
+    "id": 10451
+  },
+  {
+    "name_en": "Super-Duper Stoked",
+    "jpname": "ワクワクよーいドン",
+    "char": [105201],
+    "iconid": 20023,
+    "id": 10521
+  },
+  {
+    "name_en": "Luck Be with Me!",
+    "jpname": "来てください来てください！",
+    "char": [105601],
+    "iconid": 20013,
+    "id": 10561
+  },
+  {
+    "name_en": "I Can Win Sometimes, Right?",
+    "jpname": "アタシもたまには、ね？",
+    "char": [106001],
+    "iconid": 20013,
+    "id": 10601
+  },
+  {
+    "name_en": "Call Me King",
+    "jpname": "Call me KING",
+    "char": [106101],
+    "iconid": 20013,
+    "id": 10611
+  },
+  {
+    "name_en": "Shooting Star",
+    "jpname": "シューティングスター",
+    "char": [100101],
+    "iconid": 20013,
+    "id": 100011
+  },
+  {
+    "name_en": "The View from the Lead Is Mine!",
+    "jpname": "先頭の景色は譲らない…！",
+    "char": [100201],
+    "iconid": 20013,
+    "id": 100021
+  },
+  {
+    "name_en": "Sky-High Teio Step",
+    "jpname": "究極テイオーステップ",
+    "char": [100301],
+    "iconid": 20013,
+    "id": 100031
+  },
+  {
+    "name_en": "Red Shift/LP1211-M",
+    "jpname": "紅焔ギア/LP1211-M",
+    "char": [100401],
+    "iconid": 20043,
+    "id": 100041
+  },
+  {
+    "name_en": "Triumphant Pulse",
+    "jpname": "勝利の鼓動",
+    "char": [100601],
+    "iconid": 20013,
+    "id": 100061
+  },
+  {
+    "name_en": "Anchors Aweigh!",
+    "jpname": "不沈艦、抜錨ォッ！",
+    "char": [100701],
+    "iconid": 20013,
+    "id": 100071
+  },
+  {
+    "name_en": "Cut and Drive!",
+    "jpname": "カッティング×DRIVE！",
+    "char": [100801],
+    "iconid": 20013,
+    "id": 100081
+  },
+  {
+    "name_en": "Resplendent Red Ace",
+    "jpname": "ブリリアント・レッドエース",
+    "char": [100901],
+    "iconid": 20013,
+    "id": 100091
+  },
+  {
+    "name_en": "Shooting for Victory!",
+    "jpname": "ヴィクトリーショット！",
+    "char": [101001],
+    "iconid": 20043,
+    "id": 100101
+  },
+  {
+    "name_en": "Where There's a Will, There's a Way",
+    "jpname": "精神一到何事か成らざらん",
+    "char": [101101],
+    "iconid": 20013,
+    "id": 100111
+  },
+  {
+    "name_en": "The Duty of Dignity Calls",
+    "jpname": "貴顕の使命を果たすべく",
+    "char": [101301],
+    "iconid": 20013,
+    "id": 100131
+  },
+  {
+    "name_en": "Victoria por plancha ☆",
+    "jpname": "プランチャ☆ガナドール",
+    "char": [101401],
+    "iconid": 20013,
+    "id": 100141
+  },
+  {
+    "name_en": "This Dance Is for Vittoria!",
+    "jpname": "ヴィットーリアに捧ぐ舞踏",
+    "char": [101501],
+    "iconid": 20013,
+    "id": 100151
+  },
+  {
+    "name_en": "Behold Thine Emperor's Divine Might",
+    "jpname": "汝、皇帝の神威を見よ",
+    "char": [101701],
+    "iconid": 20013,
+    "id": 100171
+  },
+  {
+    "name_en": "Blazing Pride",
+    "jpname": "ブレイズ・オブ・プライド",
+    "char": [101801],
+    "iconid": 20013,
+    "id": 100181
+  },
+  {
+    "name_en": "∴win Q.E.D.",
+    "jpname": "∴win Q.E.D.",
+    "char": [102301],
+    "iconid": 20013,
+    "id": 100231
+  },
+  {
+    "name_en": "Flashy☆Landing",
+    "jpname": "ひらめき☆ランディング",
+    "char": [102401],
+    "iconid": 20013,
+    "id": 100241
+  },
+  {
+    "name_en": "G00 1st. F∞;",
+    "jpname": "G00 1st.F∞;",
+    "char": [102601],
+    "iconid": 20013,
+    "id": 100261
+  },
+  {
+    "name_en": "Let's Pump Some Iron!",
+    "jpname": "レッツ・アナボリック！",
+    "char": [102701],
+    "iconid": 20043,
+    "id": 100271
+  },
+  {
+    "name_en": "Blue Rose Closer",
+    "jpname": "ブルーローズチェイサー",
+    "char": [103001],
+    "iconid": 20013,
+    "id": 100301
+  },
+  {
+    "name_en": "U=ma2",
+    "jpname": "U=ma2",
+    "char": [103201],
+    "iconid": 20023,
+    "id": 100321
+  },
+  {
+    "name_en": "Our Ticket to Win!",
+    "jpname": "勝利のチケットを、君にッ！",
+    "char": [103501],
+    "iconid": 20013,
+    "id": 100351
+  },
+  {
+    "name_en": "Genius x Bakushin = Victory",
+    "jpname": "優等生×バクシン＝大勝利ッ",
+    "char": [104101],
+    "iconid": 20013,
+    "id": 100411
+  },
+  {
+    "name_en": "Pure Heart",
+    "jpname": "ピュリティオブハート",
+    "char": [104501],
+    "iconid": 20023,
+    "id": 100451
+  },
+  {
+    "name_en": "Super-Duper Climax",
+    "jpname": "ワクワククライマックス",
+    "char": [105201],
+    "iconid": 20023,
+    "id": 100521
+  },
+  {
+    "name_en": "I See Victory in My Future!",
+    "jpname": "来ます来てます来させます！",
+    "char": [105601],
+    "iconid": 20013,
+    "id": 100561
+  },
+  {
+    "name_en": "Just a Little Farther!",
+    "jpname": "きっとその先へ…！",
+    "char": [106001],
+    "iconid": 20013,
+    "id": 100601
+  },
+  {
+    "name_en": "Prideful King",
+    "jpname": "Pride of KING",
+    "char": [106101],
+    "iconid": 20013,
+    "id": 100611
+  }
+]

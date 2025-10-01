@@ -1,8 +1,8 @@
 import * as fs from "fs";
 import * as path from "path";
-import { CharacterNameID } from "../types/characterNameId";
-import { DressData } from "../types/dressData";
-import { TextData } from "../types/textData";
+import { CharacterNameID } from "../../types/characterNameId";
+import { DressData } from "../../types/dressData";
+import { TextData } from "../../types/textData";
 
 const allTextsPath = path.resolve(__dirname, "../wild/all-texts.json");
 const dressDataPath = path.resolve(__dirname, "../home/dress_data.json");

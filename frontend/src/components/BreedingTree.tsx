@@ -1,105 +1,181 @@
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Trash2 } from 'lucide-react';
-import React, { useState } from 'react';
-import type { BlueSparkSelection, PinkSparkSelection, TreeData, TreeSlot, Uma } from '../types/uma';
-import UmaCard from './UmaCard';
-import UmaModal from './UmaModal';
+import { Button } from '@/components/ui/button'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Trash2 } from 'lucide-react'
+import { useState, useCallback } from 'react'
+import { CharacterNameID } from '~/types/characterNameId'
+import UMA_LIST_WITH_ID from '../assets/home/chara_names_with_id.json'
+import type {
+  BlueSparkSelection,
+  GreenSparkSelection,
+  PinkSparkSelection,
+  RacesWonSelection,
+  Uma,
+  UmaParent,
+} from '../types/uma'
+import UmaCard from './UmaCard'
+import UmaModal from './UmaModal'
 
-const BreedingTree: React.FC = () => {
-  // Initialize tree structure with levels 0-4 (up to 16 cards at bottom level)
+const umaList: CharacterNameID[] = UMA_LIST_WITH_ID
+
+export interface TreeSlot {
+  level: number | null
+  position: number | null
+}
+
+export interface TreeData {
+  [level: number]: {
+    [position: number]: Uma | null
+  }
+}
+
+const BreedingTree = () => {
+  // Initialize tree structure with levels 1-4 (up to 16 cards at bottom level)
   const [treeData, setTreeData] = useState<TreeData>(() => {
-    const initialTree: TreeData = {};
-    // Level 0: 1 card (top)
-    // Level 1: 2 cards
-    // Level 2: 4 cards
-    // Level 3: 8 cards
+    const initialTree: TreeData = {}
 
-    for (let level = 0; level <= 4; level++) {
-      initialTree[level] = [];
-      const cardsInLevel = Math.pow(2, level);
-      for (let position = 0; position < cardsInLevel; position++) {
-        initialTree[level][position] = null; // Empty slot
+    for (let level = 1; level <= 4; level++) {
+      initialTree[level] = {}
+      const cardsInLevel = Math.pow(2, level - 1)
+      for (let position = 1; position <= cardsInLevel; position++) {
+        initialTree[level][position] = null
       }
     }
-    return initialTree;
-  });
+    return initialTree
+  })
 
-  const [modalOpen, setModalOpen] = useState<boolean>(false);
-  const [blueSparkSelections, setBlueSparkSelections] = useState<Record<number, Record<number, BlueSparkSelection>>>({});
-  const [pinkSparkSelections, setPinkSparkSelections] = useState<Record<number, Record<number, PinkSparkSelection>>>({});
-  const [selectedSlot, setSelectedSlot] = useState<TreeSlot>({ level: null, position: null });
+  const [modalOpen, setModalOpen] = useState<boolean>(false)
+  const [selectedSlot, setSelectedSlot] = useState<TreeSlot>({
+    level: null,
+    position: null,
+  })
+
+  const updateTreeData = useCallback(
+    (level: number, position: number, updates: Partial<Uma> | null) => {
+      setTreeData(
+        prev =>
+          ({
+            ...prev,
+            [level]: {
+              ...prev[level],
+              [position]: prev[level][position]
+                ? { ...prev[level][position]!, ...updates }
+                : updates,
+            },
+          }) as TreeData
+      )
+    },
+    []
+  )
 
   const handleSelectUma = (level: number, position: number): void => {
-    setSelectedSlot({ level, position });
-    setModalOpen(true);
-  };
+    setSelectedSlot({ level, position })
+    setModalOpen(true)
+  }
 
-  const handleUmaSelection = (uma: Uma, level: number, position: number): void => {
-    setTreeData(prev => ({
-      ...prev,
-      [level]: [
-        ...prev[level].slice(0, position),
-        uma,
-        ...prev[level].slice(position + 1)
-      ]
-    }));
-    setModalOpen(false);
-  };
+  const handleUmaSelection = (
+    umaId: string,
+    baseUmaId: string,
+    level: number,
+    position: number
+  ): void => {
+    updateTreeData(level, position, {
+      id: umaId,
+      baseId: baseUmaId,
+      name: umaList.find(uma => uma.chara_id === umaId)?.chara_name,
+    })
+    if (level === 2) {
+      updateTreeData(1, 1, {
+        parents: {
+          [position % 2 ? '1' : '2']: {
+            id: baseUmaId,
+            races: treeData[2][1]?.races || [],
+          },
+        },
+      })
+    }
+    setModalOpen(false)
+  }
 
   const handleCloseModal = (): void => {
-    setModalOpen(false);
-    setSelectedSlot({ level: null, position: null });
-  };
+    setModalOpen(false)
+    setSelectedSlot({ level: null, position: null })
+  }
 
-  const handleBlueSparkChange = (value: BlueSparkSelection, meta: { level: number; position: number }) => {
-    setBlueSparkSelections(prev => ({
-      ...prev,
-      [meta.level]: {
-        ...(prev[meta.level] || {}),
-        [meta.position]: value
-      }
-    }));
-  };
+  const handleBlueSparkChange = (
+    value: BlueSparkSelection,
+    meta: { level: number; position: number }
+  ) => {
+    updateTreeData(meta.level, meta.position, {
+      blueSpark: value,
+    })
+  }
 
-  const handlePinkSparkChange = (value: PinkSparkSelection, meta: { level: number; position: number }) => {
-    setPinkSparkSelections(prev => ({
-      ...prev,
-      [meta.level]: {
-        ...(prev[meta.level] || {}),
-        [meta.position]: value
-      }
-    }));
-  };
+  const handlePinkSparkChange = (
+    value: PinkSparkSelection,
+    meta: { level: number; position: number }
+  ) => {
+    updateTreeData(meta.level, meta.position, {
+      pinkSpark: value,
+    })
+  }
+
+  const handleGreenSparkChange = (
+    value: GreenSparkSelection,
+    meta: { level: number; position: number }
+  ) => {
+    updateTreeData(meta.level, meta.position, {
+      greenSpark: value,
+    })
+  }
+
+  const handleRacesWonChange = (
+    value: RacesWonSelection,
+    meta: { level: number; position: number }
+  ) => {
+    updateTreeData(meta.level, meta.position, { races: value.races })
+  }
 
   const renderTreeLevel = (level: number) => {
-    const cardsInLevel = Math.pow(2, level);
-    const cards = treeData[level] || [];
+    const cardsInLevel = Math.pow(2, level - 1)
+    const levelData = treeData[level] || {}
+
+    // Create array of cards with their positions
+    const cards = Array.from({ length: cardsInLevel }, (_, idx) => ({
+      card: levelData[idx + 1] || null,
+      position: idx + 1,
+    }))
 
     // Split cards into rows of maximum 8 cards each
-    const rows = [];
+    const rows = []
     for (let i = 0; i < cardsInLevel; i += 8) {
-      const rowSize = Math.min(8, cardsInLevel - i);
-      rows.push({ cards: Array.from({ length: rowSize }, (_, idx) => ({ card: cards[i + idx], position: i + idx })), size: rowSize });
+      const rowSize = Math.min(8, cardsInLevel - i)
+      rows.push({ cards: cards.slice(i, i + rowSize), size: rowSize })
     }
 
     return (
       <div key={level} className="mb-12 relative">
         <div className="space-y-4">
           {rows.map((row, rowIndex) => (
-            <div key={`row-${rowIndex}`} className={`grid grid-cols-[repeat(auto-fit,minmax(100px,1fr))] auto-rows-auto gap-4 mx-auto justify-items-center items-center`}>
-              {row.cards.map(({ card, position }) => (
+            <div
+              key={`row-${rowIndex}`}
+              className={`grid grid-cols-[repeat(auto-fit,minmax(100px,1fr))] auto-rows-auto gap-4 mx-auto justify-items-center items-center`}
+            >
+              {row.cards.map(({ position }) => (
                 <div key={`${level}-${position}`} className="relative">
                   <UmaCard
-                    uma={card}
+                    uma={
+                      treeData[level] && treeData[level][position]
+                        ? treeData[level][position]
+                        : null
+                    }
                     onSelectUma={handleSelectUma}
                     level={level}
                     position={position}
-                    size={level >= 3 ? "small" : "big"}
-                    blueSparkValue={blueSparkSelections[level]?.[position]}
+                    size={level >= 3 ? 'small' : 'big'}
                     onBlueSparkChange={handleBlueSparkChange}
-                    pinkSparkValue={pinkSparkSelections[level]?.[position]}
                     onPinkSparkChange={handlePinkSparkChange}
+                    onRacesWonChange={handleRacesWonChange}
+                    onGreenSparkChange={handleGreenSparkChange}
                   />
                 </div>
               ))}
@@ -107,26 +183,24 @@ const BreedingTree: React.FC = () => {
           ))}
         </div>
       </div>
-    );
-  };
+    )
+  }
 
   const clearTree = (): void => {
     setTreeData(() => {
-      const clearedTree: TreeData = {};
-      for (let level = 0; level <= 4; level++) {
-        clearedTree[level] = [];
-        const cardsInLevel = Math.pow(2, level);
-        for (let position = 0; position < cardsInLevel; position++) {
-          clearedTree[level][position] = null;
+      const clearedTree: TreeData = {}
+      for (let level = 1; level <= 4; level++) {
+        clearedTree[level] = {}
+        const cardsInLevel = Math.pow(2, level - 1)
+        for (let position = 1; position <= cardsInLevel; position++) {
+          clearedTree[level][position] = null
         }
       }
-      return clearedTree;
-    });
-    setBlueSparkSelections({});
-  };
+      return clearedTree
+    })
+  }
 
-  console.log({ blueSparkSelections })
-  console.log({ pinkSparkSelections })
+  console.log('Tree Structure:', { treeData })
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 p-4">
       <Card className="max-w-8xl mx-auto">
@@ -149,11 +223,8 @@ const BreedingTree: React.FC = () => {
 
         <CardContent>
           <div className="space-y-8 overflow-x-auto overflow-y-auto p-4">
-            {[0, 1, 2, 3].map(level => (
-              <div key={level}>
-                {renderTreeLevel(level)}
-
-              </div>
+            {[1, 2, 3, 4].map(level => (
+              <div key={level}>{renderTreeLevel(level)}</div>
             ))}
           </div>
         </CardContent>
@@ -167,7 +238,7 @@ const BreedingTree: React.FC = () => {
         position={selectedSlot.position}
       />
     </div>
-  );
-};
+  )
+}
 
-export default BreedingTree;
+export default BreedingTree

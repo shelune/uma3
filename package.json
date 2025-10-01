@@ -20,7 +20,10 @@
   "devDependencies": {
     "@types/node": "^24.5.2",
     "concurrently": "^8.2.2",
-    "typescript": "^5.9.2",
-    "eslint": "^9.36.0"
+    "eslint": "^9.36.0",
+    "typescript": "^5.9.2"
+  },
+  "dependencies": {
+    "typescript-eslint": "^8.45.0"
   }
 }
