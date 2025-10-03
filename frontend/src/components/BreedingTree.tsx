@@ -5,10 +5,10 @@ import { useState } from 'react'
 import { CharacterNameID } from '~/types/characterNameId'
 import UMA_LIST_WITH_ID from '../assets/home/chara_names_with_id.json'
 import type {
-  BlueSparkSelection,
-  GreenSparkSelection,
-  PinkSparkSelection,
-  RacesWonSelection,
+  BlueSparkData,
+  GreenSparkData,
+  PinkSparkData,
+  RacesData,
 } from '../types/uma'
 import { useTreeData } from '../hooks/useTreeData'
 import UmaCard from './UmaCard'
@@ -52,7 +52,7 @@ const BreedingTree = () => {
   }
 
   const handleBlueSparkChange = (
-    value: BlueSparkSelection,
+    value: BlueSparkData,
     meta: { level: number; position: number }
   ) => {
     updateTreeData(meta.level, meta.position, {
@@ -61,7 +61,7 @@ const BreedingTree = () => {
   }
 
   const handlePinkSparkChange = (
-    value: PinkSparkSelection,
+    value: PinkSparkData,
     meta: { level: number; position: number }
   ) => {
     updateTreeData(meta.level, meta.position, {
@@ -70,7 +70,7 @@ const BreedingTree = () => {
   }
 
   const handleGreenSparkChange = (
-    value: GreenSparkSelection,
+    value: GreenSparkData,
     meta: { level: number; position: number }
   ) => {
     updateTreeData(meta.level, meta.position, {
@@ -79,7 +79,7 @@ const BreedingTree = () => {
   }
 
   const handleRacesWonChange = (
-    value: RacesWonSelection,
+    value: RacesData,
     meta: { level: number; position: number }
   ) => {
     console.log({ value })

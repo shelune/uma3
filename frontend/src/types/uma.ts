@@ -1,4 +1,23 @@
-export type AncestorData = { id: string; races: string[] } | null
+export type SparkData = {
+  stat: string
+  level: number
+}
+
+export type EnhanceSparkData = {
+  data: SparkData | SparkData[] | null
+  affinity: number
+  type: 'pinkSpark' | 'greenSpark' | 'whiteSpark' | 'raceSpark'
+}
+
+export type AncestorData = {
+  id: string
+  races: string[]
+  blueSpark?: SparkData
+  pinkSpark?: SparkData
+  greenSpark?: SparkData
+  whiteSpark?: SparkData[]
+} | null
+
 export type UmaParent = Record<string, AncestorData>
 export interface Uma {
   id: string
@@ -8,36 +27,19 @@ export interface Uma {
   parents?: UmaParent
   grandParents?: UmaParent
   affinity?: number
-  blueSpark?: {
-    stat: string
-    level: number
-  }
-  pinkSpark?: {
-    stat: string
-    level: number
-  }
-  greenSpark?: {
-    level: number
-  }
-  whiteSpark?: {
-    stat: string
-    level: number
-  }
+  blueSpark?: SparkData
+  pinkSpark?: SparkData
+  greenSpark?: SparkData
+  whiteSpark?: SparkData[]
+  raceSpark?: SparkData[]
   races: string[]
 }
-// Blue spark stat/level selection for a given card position
-export interface BlueSparkSelection {
-  stat: string // e.g. "Speed", "Stamina", "Power", "Guts", "Wits"
-  level: number // 1-3
-}
 
-// Pink spark selection (same shape) for aptitude/running style categories
-export type PinkSparkSelection = BlueSparkSelection
+export type BlueSparkData = SparkData
+export type PinkSparkData = SparkData
+export type WhiteSparkData = SparkData
+export type GreenSparkData = SparkData
 
-export interface GreenSparkSelection {
-  level: number
-}
-
-export interface RacesWonSelection {
+export interface RacesData {
   races: string[]
 }

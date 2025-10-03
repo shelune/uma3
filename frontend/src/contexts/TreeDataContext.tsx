@@ -74,7 +74,9 @@ export const TreeDataProvider: React.FC<TreeDataProviderProps> = ({
               blueSpark: {},
               pinkSpark: {},
               greenSpark: {},
-              whiteSpark: {},
+              whiteSpark: [],
+              raceSpark: [],
+              races: [],
               ...updates,
             } as Uma
           }

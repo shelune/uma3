@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { getImagePath } from '../utils'
+import { getImagePath } from '../utils/formatting'
 
 interface UmaImageProps {
   charaId: string
