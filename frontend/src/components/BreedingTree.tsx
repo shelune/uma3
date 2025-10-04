@@ -9,6 +9,7 @@ import type {
   GreenSparkData,
   PinkSparkData,
   RacesData,
+  WhiteSparkData,
 } from '../types/uma'
 import { useTreeData } from '../hooks/useTreeData'
 import UmaCard from './UmaCard'
@@ -22,9 +23,10 @@ const BreedingTree = () => {
   const { treeData, updateTreeData, clearTree } = useTreeData()
 
   const [modalOpen, setModalOpen] = useState<boolean>(false)
+  // level 0 and position 0 indicates no selection
   const [selectedSlot, setSelectedSlot] = useState<TreeSlot>({
-    level: null,
-    position: null,
+    level: 0,
+    position: 0,
   })
 
   const handleSelectUma = (level: number, position: number): void => {
@@ -48,40 +50,34 @@ const BreedingTree = () => {
 
   const handleCloseModal = (): void => {
     setModalOpen(false)
-    setSelectedSlot({ level: null, position: null })
+    setSelectedSlot({ level: 0, position: 0 })
   }
 
-  const handleBlueSparkChange = (
-    value: BlueSparkData,
-    meta: { level: number; position: number }
-  ) => {
+  const handleBlueSparkChange = (value: BlueSparkData, meta: TreeSlot) => {
     updateTreeData(meta.level, meta.position, {
       blueSpark: value,
     })
   }
 
-  const handlePinkSparkChange = (
-    value: PinkSparkData,
-    meta: { level: number; position: number }
-  ) => {
+  const handlePinkSparkChange = (value: PinkSparkData, meta: TreeSlot) => {
     updateTreeData(meta.level, meta.position, {
       pinkSpark: value,
     })
   }
 
-  const handleGreenSparkChange = (
-    value: GreenSparkData,
-    meta: { level: number; position: number }
-  ) => {
+  const handleGreenSparkChange = (value: GreenSparkData, meta: TreeSlot) => {
     updateTreeData(meta.level, meta.position, {
       greenSpark: value,
     })
   }
 
-  const handleRacesWonChange = (
-    value: RacesData,
-    meta: { level: number; position: number }
-  ) => {
+  const handleWhiteSparkChange = (value: WhiteSparkData[], meta: TreeSlot) => {
+    updateTreeData(meta.level, meta.position, {
+      whiteSpark: value,
+    })
+  }
+
+  const handleRacesWonChange = (value: RacesData, meta: TreeSlot) => {
     console.log({ value })
     updateTreeData(meta.level, meta.position, { races: value.races })
   }
@@ -127,6 +123,7 @@ const BreedingTree = () => {
                     onPinkSparkChange={handlePinkSparkChange}
                     onRacesWonChange={handleRacesWonChange}
                     onGreenSparkChange={handleGreenSparkChange}
+                    onWhiteSparkChange={handleWhiteSparkChange}
                   />
                 </div>
               ))}
@@ -171,8 +168,8 @@ const BreedingTree = () => {
         isOpen={modalOpen}
         onClose={handleCloseModal}
         onSelectUma={handleUmaSelection}
-        level={selectedSlot.level}
-        position={selectedSlot.position}
+        level={selectedSlot.level || 1}
+        position={selectedSlot.position || 1}
       />
     </div>
   )

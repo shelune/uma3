@@ -2,8 +2,8 @@ import React, { createContext, useState, useCallback, ReactNode } from 'react'
 import type { Uma } from '../types/uma'
 
 export interface TreeSlot {
-  level: number | null
-  position: number | null
+  level: number
+  position: number
 }
 
 export interface TreeData {
