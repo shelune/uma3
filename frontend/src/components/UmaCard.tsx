@@ -1,14 +1,10 @@
-import { Badge } from '@/components/ui/badge'
-import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardHeader } from '@/components/ui/card'
-import { Checkbox } from '@/components/ui/checkbox'
-import { Input } from '@/components/ui/input'
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from '@/components/ui/popover'
-import { Separator } from '@/components/ui/separator'
+import { Badge } from '@/ui/base/badge'
+import { Button } from '@/ui/base/button'
+import { Card, CardContent, CardHeader } from '@/ui/base/card'
+import { Checkbox } from '@/ui/base/checkbox'
+import { Input } from '@/ui/base/input'
+import { Popover, PopoverContent, PopoverTrigger } from '@/ui/base/popover'
+import { Separator } from '@/ui/base/separator'
 import { getBaseAffinity, getRaceAffinity } from '@/utils/affinity'
 import { getImagePath, renderUmaName, to2Decimal } from '@/utils/formatting'
 import {
@@ -33,7 +29,7 @@ import type {
   WhiteSparkData,
 } from '../types/uma'
 import { TreeDataContext } from '../contexts/TreeDataContext'
-import Tooltip from './ui/tooltip'
+import Tooltip from '../ui/base/tooltip'
 import { LOCALE_EN } from '../locale/en'
 import {
   buildSparks,

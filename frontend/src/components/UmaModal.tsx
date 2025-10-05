@@ -1,11 +1,11 @@
-import { Card, CardContent } from '@/components/ui/card'
+import { Card, CardContent } from '@/ui/base/card'
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
-} from '@/components/ui/dialog'
-import { Input } from '@/components/ui/input'
+} from '@/ui/base/dialog'
+import { Input } from '@/ui/base/input'
 import { Search } from 'lucide-react'
 import { useState } from 'react'
 
