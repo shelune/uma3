@@ -1,6 +1,10 @@
 import { TreeData, TreeSlot } from '../contexts/TreeDataContext'
 import { EnhanceSparkData, SparkData, Uma } from '../types/uma'
-import { getBaseAffinity, getFamilyPositionSet } from './affinity'
+import {
+  getBaseAffinity,
+  getFamilyPositionSet,
+  getRaceAffinity,
+} from './affinity'
 import { getUmaByPosition } from './uma'
 
 const BASE_CHANCE: Record<string, Record<number, number>> = {
@@ -19,7 +23,7 @@ export const getSparkChance = (
 ) => {
   const baseChance = BASE_CHANCE[type][spark.level]
   const result = Math.min(100, baseChance * (1 + affinity / 100))
-  return result.toFixed(2)
+  return result
 }
 
 const RELEVANT_SPARKS: (keyof Pick<
@@ -30,9 +34,10 @@ const RELEVANT_SPARKS: (keyof Pick<
 export const buildSparks = (treeData: TreeData, meta: TreeSlot) => {
   if (meta.level === null || meta.position === null) return []
   const umaFamilyPosition = getFamilyPositionSet(meta)
-  const affinitySet = getBaseAffinity(treeData, meta)
-  if (!umaFamilyPosition || !affinitySet) return []
-  console.log({ umaFamilyPosition, affinitySet })
+  const baseAffinitySet = getBaseAffinity(treeData, meta)
+  const raceAffinitySet = getRaceAffinity(treeData, meta)
+  if (!umaFamilyPosition || !baseAffinitySet) return []
+  console.log({ umaFamilyPosition, affinitySet: baseAffinitySet })
   const sparkSet = []
 
   for (const [side, group] of Object.entries(umaFamilyPosition)) {
@@ -40,10 +45,11 @@ export const buildSparks = (treeData: TreeData, meta: TreeSlot) => {
       const uma = getUmaByPosition(treeData, pos)
       if (!uma) continue
       for (const sparkName of RELEVANT_SPARKS) {
-        const affinity =
-          affinitySet[side as 'left' | 'right'][
+        const baseAffinity =
+          baseAffinitySet[side as 'left' | 'right'][
             relation as 'parent' | 'grandParentPos1' | 'grandParentPos2'
           ]
+        const affinity = baseAffinity + raceAffinitySet
         const data = uma[sparkName] ?? null
         const sparkData: EnhanceSparkData = { data, affinity, type: sparkName }
         if (
@@ -59,4 +65,74 @@ export const buildSparks = (treeData: TreeData, meta: TreeSlot) => {
   }
   console.log({ sparkSet })
   return sparkSet
+}
+
+export type SparkWithChance = {
+  stat: string
+  chancePerInspiration: number[]
+  type: string
+}
+
+export const groupSparks = (sparks: EnhanceSparkData[]): SparkWithChance[] => {
+  const sparkWithChanceMap = new Map<string, SparkWithChance>()
+
+  for (const enhanceSpark of sparks) {
+    const { data, affinity, type } = enhanceSpark
+
+    if (!data) continue
+
+    // Handle both single SparkData and array of SparkData
+    const sparkDataArray = Array.isArray(data) ? data : [data]
+
+    for (const sparkData of sparkDataArray) {
+      const { stat } = sparkData
+      const chancePerInspiration = getSparkChance(sparkData, affinity, type)
+
+      // If we already have this stat, add the chances together
+      const existing = sparkWithChanceMap.get(stat)
+      if (existing) {
+        existing.chancePerInspiration.push(chancePerInspiration)
+      } else {
+        sparkWithChanceMap.set(stat, {
+          stat,
+          chancePerInspiration: [chancePerInspiration],
+          type,
+        })
+      }
+    }
+  }
+
+  return Array.from(sparkWithChanceMap.values())
+}
+
+const getChanceNotHappenPerInspiration = (chance: number) => {
+  return 100 - chance
+}
+
+const getChanceNotHappenInTotal = (chances: number[]) => {
+  return chances.reduce(
+    (acc, chance) => (acc * getChanceNotHappenPerInspiration(chance)) / 100,
+    100
+  )
+}
+
+const getChanceHappenAtLeastOnce = (chances: number[]) => {
+  // two inspirations per career
+  return 100 - Math.pow(getChanceNotHappenInTotal(chances), 2) / 100
+}
+
+type SparkChanceResult = {
+  chanceAtLeastOnce: number
+  type: string
+}
+
+export const getSparkAtLeastOnceChances = (sparks: SparkWithChance[]) => {
+  const result: Record<string, SparkChanceResult> = {}
+  for (const spark of sparks) {
+    result[spark.stat] = {
+      chanceAtLeastOnce: getChanceHappenAtLeastOnce(spark.chancePerInspiration),
+      type: spark.type,
+    }
+  }
+  return result
 }

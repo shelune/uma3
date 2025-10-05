@@ -10,7 +10,7 @@ import {
 } from '@/components/ui/popover'
 import { Separator } from '@/components/ui/separator'
 import { getBaseAffinity, getRaceAffinity } from '@/utils/affinity'
-import { getImagePath, renderUmaName } from '@/utils/formatting'
+import { getImagePath, renderUmaName, to2Decimal } from '@/utils/formatting'
 import {
   Settings,
   Star,
@@ -35,7 +35,12 @@ import type {
 import { TreeDataContext } from '../contexts/TreeDataContext'
 import Tooltip from './ui/tooltip'
 import { LOCALE_EN } from '../locale/en'
-import { buildSparks, getSparkChance } from '../utils/inspiration'
+import {
+  buildSparks,
+  getSparkAtLeastOnceChances,
+  groupSparks,
+} from '../utils/inspiration'
+import { mergeTwClass } from '../lib/utils'
 
 export interface UmaCardProps {
   uma?: Uma | null
@@ -44,11 +49,6 @@ export interface UmaCardProps {
   size: 'big' | 'small'
   level: number
   position: number
-}
-
-interface InternalSelectionState {
-  stat: string | null
-  level: number | null
 }
 
 const stats = ['Speed', 'Stamina', 'Power', 'Guts', 'Wits']
@@ -67,17 +67,14 @@ const pinkCategories = [
 const starLevels = [1, 2, 3]
 
 interface ExtendedUmaCardProps extends UmaCardProps {
-  blueSparkValue?: BlueSparkData | null
   onBlueSparkChange?: (
     value: BlueSparkData,
     meta: { level: number; position: number }
   ) => void
-  pinkSparkValue?: PinkSparkData | null
   onPinkSparkChange?: (
     value: PinkSparkData,
     meta: { level: number; position: number }
   ) => void
-  greenSparkValue?: GreenSparkData | null
   onGreenSparkChange?: (
     value: GreenSparkData,
     meta: { level: number; position: number }
@@ -98,11 +95,8 @@ const UmaCard: React.FC<ExtendedUmaCardProps> = ({
   level,
   size = 'big',
   position,
-  blueSparkValue,
   onBlueSparkChange,
-  pinkSparkValue,
   onPinkSparkChange,
-  greenSparkValue,
   onGreenSparkChange,
   onRacesWonChange,
   onWhiteSparkChange,
@@ -110,21 +104,6 @@ const UmaCard: React.FC<ExtendedUmaCardProps> = ({
   const treeDataContext = useContext(TreeDataContext)
   const { treeData } = treeDataContext || {}
   const { blueSpark, pinkSpark, greenSpark, whiteSpark, races = [] } = uma || {}
-
-  // Selection states (handled by popovers)
-  const [blueSparkSelection, setBlueSparkSelection] = useState<BlueSparkData>({
-    stat: blueSparkValue?.stat ?? '',
-    level: blueSparkValue?.level ?? 0,
-  })
-  const [pinkSparkSelection, setPinkSparkSelection] = useState<PinkSparkData>({
-    stat: pinkSparkValue?.stat ?? '',
-    level: pinkSparkValue?.level ?? 0,
-  })
-  const [greenSparkSelection, setGreenSparkSelection] =
-    useState<GreenSparkData>({
-      stat: greenSparkValue?.stat ?? '',
-      level: greenSparkValue?.level ?? 0,
-    })
 
   const [showSparkProcPopover, setShowSparkProcPopover] = useState(false)
 
@@ -167,94 +146,58 @@ const UmaCard: React.FC<ExtendedUmaCardProps> = ({
   const getSparkProcContent = useCallback(() => {
     if (!showSparkProcPopover || !treeData) return null
     const sparkSet = buildSparks(treeData, { level, position })
-    return sparkSet.map(item => {
-      if (!item.data) return null
-      if (Array.isArray(item.data)) {
-        return item.data.map(spark => (
-          <div className="flex w-full gap-2 py-1 items-center text-xs font-medium">
-            <div className="flex-1/2">{spark.stat}</div>
-            <div className="flex-1/4">{item.type}</div>
-            <div className="flex-1/4">
-              {getSparkChance(spark, item.affinity, item.type)}%
-            </div>
-          </div>
-        ))
-      }
-      return (
-        <div className="flex w-full gap-2 py-1 items-center text-xs font-medium">
-          <div className="flex-1/2">{item.data.stat}</div>
-          <div className="flex-1/4">{item.type}</div>
+    const groupedSpark = groupSparks(sparkSet)
+    const sparkAtLeastOnceChances = getSparkAtLeastOnceChances(groupedSpark)
+    return Object.entries(sparkAtLeastOnceChances).map(
+      ([stat, sparkDetail]) => (
+        <div
+          key={stat}
+          className="flex w-full gap-2 py-1 items-center text-xs font-medium"
+        >
+          <div className="flex-1/2">{stat}</div>
+          <div className="flex-1/4">{sparkDetail.type}</div>
           <div className="flex-1/4">
-            {getSparkChance(item.data, item.affinity, item.type)}%
+            {to2Decimal(sparkDetail.chanceAtLeastOnce)}%
           </div>
         </div>
       )
-    })
+    )
   }, [level, position, showSparkProcPopover, treeData])
 
-  const commitBlueIfComplete = (next: InternalSelectionState) => {
-    if (next.stat && next.level && onBlueSparkChange) {
-      onBlueSparkChange(
-        { stat: next.stat, level: next.level },
-        { level, position }
-      )
-    }
-  }
-  const commitPinkIfComplete = (next: InternalSelectionState) => {
-    if (next.stat && next.level && onPinkSparkChange) {
-      onPinkSparkChange(
-        { stat: next.stat, level: next.level },
-        { level, position }
-      )
-    }
-  }
-  const commitGreenIfComplete = (next: InternalSelectionState) => {
-    if (next.stat && next.level && onGreenSparkChange) {
-      onGreenSparkChange(
-        { stat: next.stat, level: next.level },
-        { level, position }
-      )
-    }
+  const handleBlueSparkChange = (value: Partial<BlueSparkData>) => {
+    if (!onBlueSparkChange) return
+    onBlueSparkChange(
+      {
+        ...blueSpark,
+        stat: value.stat ?? blueSpark?.stat ?? '',
+        level: value.level ?? blueSpark?.level ?? 0,
+      },
+      { level, position }
+    )
   }
 
-  const selectStat = (s: string) => {
-    setBlueSparkSelection(prev => {
-      const next = { ...prev, stat: s }
-      commitBlueIfComplete(next)
-      return next
-    })
+  const handlePinkSparkChange = (value: Partial<PinkSparkData>) => {
+    if (!onPinkSparkChange) return
+    onPinkSparkChange(
+      {
+        ...pinkSpark,
+        stat: value.stat ?? pinkSpark?.stat ?? '',
+        level: value.level ?? pinkSpark?.level ?? 0,
+      },
+      { level, position }
+    )
   }
 
-  const selectLevel = (lvl: number) => {
-    setBlueSparkSelection(prev => {
-      const next = { ...prev, level: lvl }
-      commitBlueIfComplete(next)
-      return next
-    })
-  }
-
-  const selectPinkStat = (s: string) => {
-    setPinkSparkSelection(prev => {
-      const next = { ...prev, stat: s }
-      commitPinkIfComplete(next)
-      return next
-    })
-  }
-
-  const selectPinkLevel = (lvl: number) => {
-    setPinkSparkSelection(prev => {
-      const next = { ...prev, level: lvl }
-      commitPinkIfComplete(next)
-      return next
-    })
-  }
-
-  const selectGreenLevel = (stat: string, lvl: number) => {
-    setGreenSparkSelection(prev => {
-      const next = { ...prev, level: lvl, stat }
-      commitGreenIfComplete(next)
-      return next
-    })
+  const handleGreenSparkChange = (value: Partial<GreenSparkData>) => {
+    if (!onGreenSparkChange) return
+    onGreenSparkChange(
+      {
+        ...greenSpark,
+        stat: value.stat ?? greenSpark?.stat ?? '',
+        level: value.level ?? greenSpark?.level ?? 0,
+      },
+      { level, position }
+    )
   }
 
   const toggleRace = (race: string) => {
@@ -420,18 +363,16 @@ const UmaCard: React.FC<ExtendedUmaCardProps> = ({
                 className={`${isSmallSize ? 'text-xs px-1' : 'text-xs'} w-full justify-center bg-blue-50 border-blue-200 cursor-pointer select-none`}
                 title="Set Blue Spark Stat & Level"
               >
-                {blueSparkSelection.stat && blueSparkSelection.level ? (
+                {blueSpark?.stat && blueSpark?.level ? (
                   <span className="flex items-center gap-0.5">
-                    <span>{blueSparkSelection.stat}</span>
+                    <span>{blueSpark?.stat}</span>
                     <span className="flex">
-                      {Array.from({ length: blueSparkSelection.level }).map(
-                        (_, i) => (
-                          <Star
-                            key={i}
-                            className="w-3 h-3 fill-blue-400 text-blue-400"
-                          />
-                        )
-                      )}
+                      {Array.from({ length: blueSpark?.level }).map((_, i) => (
+                        <Star
+                          key={i}
+                          className="w-3 h-3 fill-blue-400 text-blue-400"
+                        />
+                      ))}
                     </span>
                   </span>
                 ) : (
@@ -450,11 +391,11 @@ const UmaCard: React.FC<ExtendedUmaCardProps> = ({
                 {/* Stats Column */}
                 <div className="flex flex-col gap-1 w-3/4">
                   {stats.map(s => {
-                    const active = blueSparkSelection.stat === s
+                    const active = blueSpark?.stat === s
                     return (
                       <button
                         key={s}
-                        onClick={() => selectStat(s)}
+                        onClick={() => handleBlueSparkChange({ stat: s })}
                         className={`text-xs rounded-full px-2 py-1 border transition-colors text-left truncate ${active ? 'bg-blue-600 text-white border-blue-600' : 'bg-blue-50 hover:bg-blue-100 border-blue-200 text-blue-700'}`}
                       >
                         {s}
@@ -469,11 +410,11 @@ const UmaCard: React.FC<ExtendedUmaCardProps> = ({
                 {/* Levels Column */}
                 <div className="flex flex-col gap-1 w-1/4 items-stretch">
                   {starLevels.map(lvl => {
-                    const active = blueSparkSelection.level === lvl
+                    const active = blueSpark?.level === lvl
                     return (
                       <button
                         key={lvl}
-                        onClick={() => selectLevel(lvl)}
+                        onClick={() => handleBlueSparkChange({ level: lvl })}
                         className={`text-xs rounded-full px-2 py-1 border flex items-center justify-center gap-0.5 transition-colors ${active ? 'bg-amber-500 text-white border-amber-500' : 'bg-amber-50 hover:bg-amber-100 border-amber-200 text-amber-800'}`}
                       >
                         {Array.from({ length: lvl }).map((_, i) => (
@@ -487,11 +428,13 @@ const UmaCard: React.FC<ExtendedUmaCardProps> = ({
                   })}
                 </div>
               </div>
-              {blueSparkSelection.stat && blueSparkSelection.level && (
-                <div className="mt-1 text-[10px] text-green-700 font-medium flex items-center gap-1">
-                  Set: {blueSparkSelection.stat} – {blueSparkSelection.level}★
-                </div>
-              )}
+              <div className="mt-1 text-[10px] text-green-700 font-medium flex items-center gap-1">
+                {blueSpark && blueSpark.stat && blueSpark.level ? (
+                  <span>
+                    Set: {blueSpark.stat} – {blueSpark.level}★
+                  </span>
+                ) : null}
+              </div>
             </PopoverContent>
           </Popover>
         </div>
@@ -507,22 +450,16 @@ const UmaCard: React.FC<ExtendedUmaCardProps> = ({
                 className={`${isSmallSize ? 'text-xs px-1' : 'text-xs'} w-full justify-center bg-pink-50 border-pink-200 cursor-pointer select-none`}
                 title="Set Pink Spark Category & Level"
               >
-                {pinkSparkSelection.stat && pinkSparkSelection.level ? (
+                {pinkSpark && pinkSpark.stat && pinkSpark.level ? (
                   <span className="flex items-center gap-0.5">
-                    <span>
-                      {pinkSparkSelection.stat.length > 6
-                        ? pinkSparkSelection.stat.slice(0, 6) + '…'
-                        : pinkSparkSelection.stat}
-                    </span>
+                    <span>{pinkSpark.stat}</span>
                     <span className="flex">
-                      {Array.from({ length: pinkSparkSelection.level }).map(
-                        (_, i) => (
-                          <Star
-                            key={i}
-                            className="w-3 h-3 fill-pink-400 text-pink-400"
-                          />
-                        )
-                      )}
+                      {Array.from({ length: pinkSpark.level }).map((_, i) => (
+                        <Star
+                          key={i}
+                          className="w-3 h-3 fill-pink-400 text-pink-400"
+                        />
+                      ))}
                     </span>
                   </span>
                 ) : (
@@ -541,11 +478,11 @@ const UmaCard: React.FC<ExtendedUmaCardProps> = ({
                 {/* Categories Column (two-column grid) */}
                 <div className="w-3/4 max-h-56 overflow-auto pr-1 grid grid-cols-2 gap-1 content-start">
                   {pinkCategories.map(cat => {
-                    const active = pinkSparkSelection.stat === cat
+                    const active = pinkSpark && pinkSpark.stat === cat
                     return (
                       <button
                         key={cat}
-                        onClick={() => selectPinkStat(cat)}
+                        onClick={() => handlePinkSparkChange({ stat: cat })}
                         className={`min-w-0 text-xs rounded-full px-2 py-1 border transition-colors text-left ${active ? 'bg-pink-600 text-white border-pink-600' : 'bg-pink-50 hover:bg-pink-100 border-pink-200 text-pink-700'}`}
                       >
                         {cat}
@@ -559,15 +496,15 @@ const UmaCard: React.FC<ExtendedUmaCardProps> = ({
                 />
                 {/* Levels Column */}
                 <div className="flex flex-col gap-1 w-1/4 items-stretch">
-                  {starLevels.map(lvl => {
-                    const active = pinkSparkSelection.level === lvl
+                  {starLevels.map(level => {
+                    const active = pinkSpark && pinkSpark.level === level
                     return (
                       <button
-                        key={lvl}
-                        onClick={() => selectPinkLevel(lvl)}
+                        key={level}
+                        onClick={() => handlePinkSparkChange({ level })}
                         className={`text-xs rounded-full px-2 py-1 border flex items-center justify-center gap-0.5 transition-colors ${active ? 'bg-amber-500 text-white border-amber-500' : 'bg-amber-50 hover:bg-amber-100 border-amber-200 text-amber-800'}`}
                       >
-                        {Array.from({ length: lvl }).map((_, i) => (
+                        {Array.from({ length: level }).map((_, i) => (
                           <Star
                             key={i}
                             className="w-3 h-3 fill-amber-400 text-amber-400"
@@ -578,11 +515,13 @@ const UmaCard: React.FC<ExtendedUmaCardProps> = ({
                   })}
                 </div>
               </div>
-              {pinkSparkSelection.stat && pinkSparkSelection.level && (
+              {pinkSpark && pinkSpark.stat && pinkSpark.level ? (
                 <div className="mt-1 text-[10px] text-green-700 font-medium flex items-center gap-1">
-                  Set: {pinkSparkSelection.stat} – {pinkSparkSelection.level}★
+                  <span>
+                    Set: {pinkSpark.stat} – {pinkSpark.level}★
+                  </span>
                 </div>
-              )}
+              ) : null}
             </PopoverContent>
           </Popover>
         </div>
@@ -598,18 +537,16 @@ const UmaCard: React.FC<ExtendedUmaCardProps> = ({
                 className={`${isSmallSize ? 'text-xs px-1' : 'text-xs'} w-full justify-center bg-green-50 border-green-200 cursor-pointer select-none`}
                 title="Set Green Spark Level"
               >
-                {greenSparkSelection ? (
+                {greenSpark ? (
                   <span className="flex items-center gap-0.5">
                     <span>Unique Skill</span>
                     <span className="flex">
-                      {Array.from({ length: greenSparkSelection.level }).map(
-                        (_, i) => (
-                          <Star
-                            key={i}
-                            className="w-3 h-3 fill-green-400 text-green-400"
-                          />
-                        )
-                      )}
+                      {Array.from({ length: greenSpark.level }).map((_, i) => (
+                        <Star
+                          key={i}
+                          className="w-3 h-3 fill-green-400 text-green-400"
+                        />
+                      ))}
                     </span>
                   </span>
                 ) : (
@@ -626,14 +563,26 @@ const UmaCard: React.FC<ExtendedUmaCardProps> = ({
               </div>
               <div className="flex flex-col gap-1 items-stretch">
                 {starLevels.map(lvl => {
-                  const active = greenSparkSelection.level === lvl
+                  const active = greenSpark && greenSpark.level === lvl
+                  const disabled = !uma || !uma.baseId
                   return (
                     <button
                       key={lvl}
                       onClick={() =>
-                        uma ? selectGreenLevel(uma?.id, lvl) : void 0
+                        uma
+                          ? handleGreenSparkChange({ stat: uma.id, level: lvl })
+                          : undefined
                       }
-                      className={`text-xs rounded-full px-2 py-1 border flex items-center justify-center gap-0.5 transition-colors ${active ? 'bg-amber-500 text-white border-amber-500' : 'bg-amber-50 hover:bg-amber-100 border-amber-200 text-amber-800'}`}
+                      className={mergeTwClass(
+                        `text-xs rounded-full px-2 py-1 border flex items-center justify-center gap-0.5 transition-colors`,
+                        active
+                          ? 'bg-amber-500 text-white border-amber-500'
+                          : 'bg-amber-50 hover:bg-amber-100 border-amber-200 text-amber-800',
+                        disabled
+                          ? 'bg-gray-200 text-gray-400 border-gray-200 cursor-not-allowed hover:bg-gray-200 hover:text-gray-400'
+                          : ''
+                      )}
+                      disabled={disabled}
                     >
                       {Array.from({ length: lvl }).map((_, i) => (
                         <Star
@@ -644,8 +593,13 @@ const UmaCard: React.FC<ExtendedUmaCardProps> = ({
                     </button>
                   )
                 })}
+                {!uma || !uma.baseId ? (
+                  <div className="text-[10px] text-red-600 font-medium flex items-center gap-1">
+                    Select a character first
+                  </div>
+                ) : null}
               </div>
-              {greenSparkSelection.level ? (
+              {greenSpark && greenSpark.level ? (
                 <div className="mt-1 text-[10px] text-green-700 font-medium flex items-center gap-1">
                   Set: Unique Skill
                 </div>

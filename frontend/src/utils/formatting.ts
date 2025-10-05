@@ -16,3 +16,7 @@ export const getImagePath = (charaId: string): string => {
     return `https://placehold.co/256x256?text=404`
   }
 }
+
+export const to2Decimal = (num: number): string => {
+  return num.toFixed(2)
+}
