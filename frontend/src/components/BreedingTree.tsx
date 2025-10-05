@@ -137,9 +137,19 @@ const BreedingTree = () => {
   console.log({ treeData })
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 p-4">
-      <Card className="max-w-8xl mx-auto">
+      <Card
+        className="max-w-8xl mx-auto"
+        style={{
+          backgroundImage: `
+                linear-gradient(to right, rgba(59, 130, 246, 0.1) 0, rgba(59, 130, 246, 0.1) 2px, transparent 2px),
+                linear-gradient(to bottom, rgba(59, 130, 246, 0.1) 0, rgba(59, 130, 246, 0.1) 2px, transparent 2px)
+              `,
+          backgroundSize: '60px 60px',
+          backgroundColor: '#fefefe',
+        }}
+      >
         <CardHeader className="text-center">
-          <CardTitle className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+          <CardTitle className="text-4xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
             Uma Musume Breeding Tree
           </CardTitle>
           <div className="flex justify-center items-center gap-4 mt-4">
@@ -156,7 +166,7 @@ const BreedingTree = () => {
         </CardHeader>
 
         <CardContent>
-          <div className="space-y-8 overflow-x-auto overflow-y-auto p-4">
+          <div className="space-y-8 overflow-x-auto overflow-y-auto p-4 min-h-[600px]">
             {[1, 2, 3, 4].map(level => (
               <div key={level}>{renderTreeLevel(level)}</div>
             ))}

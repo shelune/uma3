@@ -871,7 +871,7 @@ const UmaCard: React.FC<ExtendedUmaCardProps> = ({
                 style={{ maxHeight: '220px', overflowY: 'auto' }}
               >
                 <div className="text-xs font-semibold mb-2">
-                  Inspiration Chance List
+                  Inspiration Chance List (per career)
                 </div>
                 <div className="flex gap-2 text-xs font-bold uppercase border-b pb-1 mb-1">
                   <span className="flex-1/2">Name</span>
