@@ -1,5 +1,5 @@
 import React from 'react'
-import BreedingTree from './components/BreedingTree'
+import BreedingTree from './ui/composite/BreedingTree'
 import { TreeDataProvider } from './contexts/TreeDataContext'
 
 const App: React.FC = () => {

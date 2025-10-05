@@ -3,18 +3,18 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/ui/base/card'
 import { Trash2 } from 'lucide-react'
 import { useState } from 'react'
 import { CharacterNameID } from '~/types/characterNameId'
-import UMA_LIST_WITH_ID from '../assets/home/chara_names_with_id.json'
+import UMA_LIST_WITH_ID from '../../assets/home/chara_names_with_id.json'
 import type {
   BlueSparkData,
   GreenSparkData,
   PinkSparkData,
   RacesData,
   WhiteSparkData,
-} from '../types/uma'
-import { useTreeData } from '../hooks/useTreeData'
-import UmaCard from './UmaCard'
+} from '../../types/uma'
+import { useTreeData } from '../../hooks/useTreeData'
+import UmaCard from '../components/UmaCard'
 import UmaModal from './UmaModal'
-import { TreeSlot } from '../contexts/TreeDataContext'
+import { TreeSlot } from '../../contexts/TreeDataContext'
 
 const umaList: CharacterNameID[] = UMA_LIST_WITH_ID
 

@@ -11,7 +11,7 @@ import { useState } from 'react'
 
 import { CharacterNameID } from '~/types/characterNameId'
 import UMA_LIST_WITH_ID from '../assets/home/chara_names_with_id.json'
-import UmaImage from './UmaImage'
+import UmaImage from '../ui/components/UmaImage'
 
 const umaWithIdList: CharacterNameID[] = UMA_LIST_WITH_ID
 

@@ -18,7 +18,10 @@ import {
   X,
 } from 'lucide-react'
 import React, { useCallback, useContext, useState } from 'react'
-import { WHITE_SPARK_RACES, WHITE_SPARK_SKILLS } from '../assets/white-sparks'
+import {
+  WHITE_SPARK_RACES,
+  WHITE_SPARK_SKILLS,
+} from '../../assets/white-sparks'
 import type {
   BlueSparkData,
   GreenSparkData,
@@ -27,16 +30,16 @@ import type {
   SparkData,
   Uma,
   WhiteSparkData,
-} from '../types/uma'
-import { TreeDataContext } from '../contexts/TreeDataContext'
-import Tooltip from '../ui/base/tooltip'
-import { LOCALE_EN } from '../locale/en'
+} from '../../types/uma'
+import { TreeDataContext } from '../../contexts/TreeDataContext'
+import Tooltip from '../base/tooltip'
+import { LOCALE_EN } from '../../locale/en'
 import {
   buildSparks,
   getSparkAtLeastOnceChances,
   groupSparks,
-} from '../utils/inspiration'
-import { mergeTwClass } from '../lib/utils'
+} from '../../utils/inspiration'
+import { mergeTwClass } from '../../lib/utils'
 
 export interface UmaCardProps {
   uma?: Uma | null
