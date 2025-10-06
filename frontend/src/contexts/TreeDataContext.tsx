@@ -18,10 +18,12 @@ interface TreeDataContextType {
   updateTreeData: (
     level: number,
     position: number,
-    updates: Partial<Uma> | null
+    updates: Partial<Uma> | null,
+    override?: boolean
   ) => void
   clearTree: () => void
   clearTreeData: () => void
+  setTree: (data: TreeData) => void
   getUmaAtPosition: (position: string | TreeSlot) => Uma | null
 }
 
@@ -51,9 +53,16 @@ export const TreeDataProvider: React.FC<TreeDataProviderProps> = ({
   }, [removeTreeData])
 
   const updateTreeData = useCallback(
-    (level: number, position: number, updates: Partial<Uma> | null) => {
+    (
+      level: number,
+      position: number,
+      updates: Partial<Uma> | null,
+      override: boolean = false
+    ) => {
       setTreeData(prev => {
         const newTree = { ...prev }
+
+        console.log({ prev, newTree, updates, level, position })
 
         if (!newTree[level]) {
           newTree[level] = {}
@@ -70,11 +79,23 @@ export const TreeDataProvider: React.FC<TreeDataProviderProps> = ({
         } else {
           // Add or update the Uma
           const existingUma = newTree[level][position]
-          if (existingUma) {
+
+          if (existingUma || override) {
             // Update existing Uma
-            newTree[level][position] = { ...existingUma, ...updates }
+            newTree[level][position] = {
+              ...(existingUma ? existingUma : {}),
+              ...(updates as Uma),
+            }
+            console.log({ newTree })
           } else {
             // Create new Uma with defaults
+            console.log('huh', {
+              existingUma,
+              override,
+              updates,
+              level,
+              position,
+            })
             newTree[level][position] = {
               id: '',
               baseId: '',
@@ -114,6 +135,7 @@ export const TreeDataProvider: React.FC<TreeDataProviderProps> = ({
     clearTree,
     clearTreeData,
     updateTreeData,
+    setTree: setTreeData,
     getUmaAtPosition,
   }
 

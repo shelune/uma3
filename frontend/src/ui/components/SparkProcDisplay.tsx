@@ -47,24 +47,25 @@ export default function SparkProcDisplay({
     const groupedSpark = groupSparks(sparkSet)
     const sparkAtLeastOnceChances = getSparkAtLeastOnceChances(groupedSpark)
     console.log({ sparkAtLeastOnceChances })
-    return Object.entries(sparkAtLeastOnceChances).map(
-      ([stat, sparkDetail]) => (
-        <div
-          key={stat}
-          className="flex w-full gap-2 py-1 items-center text-xs font-medium"
-        >
-          <div className="flex-1/2">
-            {sparkDetail.type === 'greenSpark' ? renderUmaNameById(stat) : stat}
-          </div>
-          <div className="flex-1/4">
-            {getBadgeBySpark(sparkDetail.type ?? '')}
-          </div>
-          <div className="flex-1/4">
-            {to2Decimal(sparkDetail.chanceAtLeastOnce)}%
-          </div>
-        </div>
-      )
+    const sortedSparks = Object.entries(sparkAtLeastOnceChances).sort(
+      ([, a], [, b]) => b.chanceAtLeastOnce - a.chanceAtLeastOnce
     )
+    return sortedSparks.map(([stat, sparkDetail]) => (
+      <div
+        key={stat}
+        className="flex w-full gap-2 py-1 items-center text-xs font-medium"
+      >
+        <div className="flex-1/2">
+          {sparkDetail.type === 'greenSpark' ? renderUmaNameById(stat) : stat}
+        </div>
+        <div className="flex-1/4">
+          {getBadgeBySpark(sparkDetail.type ?? '')}
+        </div>
+        <div className="flex-1/4">
+          {to2Decimal(sparkDetail.chanceAtLeastOnce)}%
+        </div>
+      </div>
+    ))
   }, [level, position, showSparkProcPopover, treeData])
 
   return (

@@ -13,6 +13,7 @@ export function useTreeDataWithStorage() {
     clearTree,
     clearTreeData,
     getUmaAtPosition,
+    setTree,
   } = useTreeData()
 
   /**
@@ -26,28 +27,28 @@ export function useTreeDataWithStorage() {
    * Import tree data from JSON string
    */
   const importTreeData = useCallback(
-    (jsonData: string): boolean => {
+    (jsonData: string, override: boolean = false): boolean => {
       try {
         const parsedData: TreeData = JSON.parse(jsonData)
-
         // Validate the structure
         if (typeof parsedData !== 'object' || parsedData === null) {
           throw new Error('Invalid tree data format')
         }
 
         clearTree()
+        setTree(parsedData)
 
-        Object.entries(parsedData).forEach(([levelStr, levelData]) => {
-          const level = parseInt(levelStr, 10)
-          if (typeof levelData === 'object' && levelData !== null) {
-            Object.entries(levelData).forEach(([positionStr, uma]) => {
-              const position = parseInt(positionStr, 10)
-              if (uma && typeof uma === 'object') {
-                updateTreeData(level, position, uma as Uma)
-              }
-            })
-          }
-        })
+        // Object.entries(parsedData).forEach(([levelStr, levelData]) => {
+        //   const level = parseInt(levelStr, 10)
+        //   if (typeof levelData === 'object' && levelData !== null) {
+        //     Object.entries(levelData).forEach(([positionStr, uma]) => {
+        //       const position = parseInt(positionStr, 10)
+        //       if (uma && typeof uma === 'object') {
+        //         updateTreeData(level, position, uma as Uma, override)
+        //       }
+        //     })
+        //   }
+        // })
 
         return true
       } catch (error) {
@@ -55,7 +56,7 @@ export function useTreeDataWithStorage() {
         return false
       }
     },
-    [clearTree, updateTreeData]
+    [clearTree, setTree]
   )
 
   /**

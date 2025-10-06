@@ -1,6 +1,6 @@
 import { Button } from '@/ui/base/button'
 import { Card, CardContent, CardHeader } from '@/ui/base/card'
-import { getImagePath, renderUmaName } from '@/utils/formatting'
+import { getImagePath, renderUmaNameById } from '@/utils/formatting'
 import { Settings, User } from 'lucide-react'
 import React from 'react'
 import type {
@@ -141,7 +141,7 @@ const UmaCard: React.FC<ExtendedUmaCardProps> = ({
                 )}
               </div>
               <span className="text-sm text-gray-800">
-                {renderUmaName(uma?.name)}
+                {renderUmaNameById(uma?.id || '', false)}
               </span>
             </div>
           }

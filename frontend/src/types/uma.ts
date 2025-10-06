@@ -24,9 +24,6 @@ export interface Uma {
   id: string
   baseId: string
   name?: string
-  image?: string
-  parents?: UmaParent
-  grandParents?: UmaParent
   affinity?: number
   blueSpark?: SparkData
   pinkSpark?: SparkData
