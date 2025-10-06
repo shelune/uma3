@@ -1,6 +1,6 @@
 import { Button } from '@/ui/base/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/ui/base/card'
-import { Trash2 } from 'lucide-react'
+import { Trash2, Save } from 'lucide-react'
 import { useState } from 'react'
 import { CharacterNameID } from '@/types/characterNameId'
 import UMA_LIST_WITH_ID from '../../assets/home/chara_names_with_id.json'
@@ -15,15 +15,18 @@ import { useTreeData } from '../../hooks/useTreeData'
 import UmaCard from './UmaCard'
 import UmaModal from '../components/UmaModal'
 import TreeDataManager from '../components/TreeDataManager'
-import { TreeSlot } from '../../contexts/TreeDataContext'
+import SaveTreeModal from '../components/SaveTreeModal'
+import SavedTreesModal from '../components/SavedTreesModal'
+import { TreeSlot, TreeData } from '../../contexts/TreeDataContext'
 
 const umaList: CharacterNameID[] = UMA_LIST_WITH_ID
 
 const BreedingTree = () => {
   // Use TreeData context
-  const { treeData, updateTreeData, clearTree } = useTreeData()
+  const { treeData, updateTreeData, clearTree, setTree } = useTreeData()
 
   const [modalOpen, setModalOpen] = useState<boolean>(false)
+  const [saveTreeModalOpen, setSaveTreeModalOpen] = useState<boolean>(false)
   // level 0 and position 0 indicates no selection
   const [selectedSlot, setSelectedSlot] = useState<TreeSlot>({
     level: 0,
@@ -81,6 +84,14 @@ const BreedingTree = () => {
   const handleRacesWonChange = (value: RacesData, meta: TreeSlot) => {
     console.log({ value })
     updateTreeData(meta.level, meta.position, { races: value.races })
+  }
+
+  const handleSaveTree = () => {
+    setSaveTreeModalOpen(true)
+  }
+
+  const handleLoadTree = (newTreeData: TreeData) => {
+    setTree(newTreeData)
   }
 
   const renderTreeLevel = (level: number) => {
@@ -155,6 +166,16 @@ const BreedingTree = () => {
           </CardTitle>
           <div className="flex justify-center items-center gap-4 mt-4">
             <Button
+              variant="outline"
+              size="sm"
+              onClick={handleSaveTree}
+              className="flex items-center gap-2"
+            >
+              <Save className="w-4 h-4" />
+              Save Tree
+            </Button>
+            <SavedTreesModal onLoadTree={handleLoadTree} />
+            <Button
               variant="destructive"
               size="sm"
               onClick={clearTree}
@@ -182,6 +203,12 @@ const BreedingTree = () => {
         onSelectUma={handleUmaSelection}
         level={selectedSlot.level || 1}
         position={selectedSlot.position || 1}
+      />
+
+      <SaveTreeModal
+        isOpen={saveTreeModalOpen}
+        onClose={() => setSaveTreeModalOpen(false)}
+        treeData={treeData}
       />
     </div>
   )

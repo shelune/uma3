@@ -1,4 +1,5 @@
 import { useState, useCallback, useEffect } from 'react'
+import { localStorageEvents } from './localStorageEvents'
 
 /**
  * Custom hook for managing localStorage with TypeScript support
@@ -36,6 +37,8 @@ export function useLocalStorage<T>(
         setStoredValue(valueToStore)
         // Save to local storage
         window.localStorage.setItem(key, JSON.stringify(valueToStore))
+        // Emit event to notify other hook instances
+        localStorageEvents.emit(key, valueToStore)
       } catch (error) {
         // A more advanced implementation would handle the error case
         console.error(`Error setting localStorage key "${key}":`, error)
@@ -49,6 +52,8 @@ export function useLocalStorage<T>(
     try {
       window.localStorage.removeItem(key)
       setStoredValue(initialValue)
+      // Emit event to notify other hook instances
+      localStorageEvents.emit(key, initialValue)
     } catch (error) {
       console.error(`Error removing localStorage key "${key}":`, error)
     }
@@ -71,6 +76,18 @@ export function useLocalStorage<T>(
 
     window.addEventListener('storage', handleStorageChange)
     return () => window.removeEventListener('storage', handleStorageChange)
+  }, [key])
+
+  // Listen for internal localStorage changes from other hook instances
+  useEffect(() => {
+    const handleInternalChange = (_key: string, newValue: unknown) => {
+      if (_key === key) {
+        setStoredValue(newValue as T)
+      }
+    }
+
+    const unsubscribe = localStorageEvents.subscribe(key, handleInternalChange)
+    return unsubscribe
   }, [key])
 
   return [storedValue, setValue, removeValue]
