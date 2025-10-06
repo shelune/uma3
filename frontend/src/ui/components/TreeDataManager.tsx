@@ -35,7 +35,7 @@ export default function TreeDataManager({
             disabled
           >
             <Database className="w-4 h-4" />
-            Storage
+            Storage (coming later)
             <MoreVertical className="w-3 h-3" />
           </Button>
         </PopoverTrigger>

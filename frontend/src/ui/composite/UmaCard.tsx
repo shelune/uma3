@@ -1,26 +1,8 @@
-import { Badge } from '@/ui/base/badge'
 import { Button } from '@/ui/base/button'
 import { Card, CardContent, CardHeader } from '@/ui/base/card'
-import { Popover, PopoverContent, PopoverTrigger } from '@/ui/base/popover'
-import { Separator } from '@/ui/base/separator'
-import { getBaseAffinity, getRaceAffinity } from '@/utils/affinity'
-import {
-  getImagePath,
-  pickBadgeColorBySparkType,
-  renderSparkType,
-  renderUmaName,
-  renderUmaNameById,
-  to2Decimal,
-} from '@/utils/formatting'
-import {
-  Settings,
-  User,
-  CircleDot,
-  Circle,
-  Triangle,
-  SquareArrowUpRightIcon,
-} from 'lucide-react'
-import React, { useCallback, useContext, useState } from 'react'
+import { getImagePath, renderUmaName } from '@/utils/formatting'
+import { Settings, User } from 'lucide-react'
+import React from 'react'
 import type {
   BlueSparkData,
   GreenSparkData,
@@ -29,18 +11,13 @@ import type {
   Uma,
   WhiteSparkData,
 } from '../../types/uma'
-import { TreeDataContext } from '../../contexts/TreeDataContext'
-import Tooltip from '../base/tooltip'
-import { LOCALE_EN } from '../../locale/en'
-import {
-  buildSparks,
-  getSparkAtLeastOnceChances,
-  groupSparks,
-} from '../../utils/inspiration'
 import BlueSparkSelector from '../components/BlueSparkSelector'
 import PinkSparkSelector from '../components/PinkSparkSelector'
 import GreenSparkSelector from '../components/GreenSparkSelector'
 import WhiteSparkSelector from '../components/WhiteSparkSelector'
+import RaceSparkSelector from '../components/RaceSparkSelector'
+import AffinityDisplay from '../components/AffinityDisplay'
+import SparkProcDisplay from '../components/SparkProcDisplay'
 
 export interface UmaCardProps {
   uma?: Uma | null
@@ -86,37 +63,7 @@ const UmaCard: React.FC<ExtendedUmaCardProps> = ({
   onRacesWonChange,
   onWhiteSparkChange,
 }) => {
-  const treeDataContext = useContext(TreeDataContext)
-  const { treeData } = treeDataContext || {}
   const { blueSpark, pinkSpark, greenSpark, whiteSpark, races = [] } = uma || {}
-
-  const [showSparkProcPopover, setShowSparkProcPopover] = useState(false)
-
-  const getSparkProcContent = useCallback(() => {
-    if (!showSparkProcPopover || !treeData) return null
-    const sparkSet = buildSparks(treeData, { level, position })
-    const groupedSpark = groupSparks(sparkSet)
-    const sparkAtLeastOnceChances = getSparkAtLeastOnceChances(groupedSpark)
-    console.log({ sparkAtLeastOnceChances })
-    return Object.entries(sparkAtLeastOnceChances).map(
-      ([stat, sparkDetail]) => (
-        <div
-          key={stat}
-          className="flex w-full gap-2 py-1 items-center text-xs font-medium"
-        >
-          <div className="flex-1/2">
-            {sparkDetail.type === 'greenSpark' ? renderUmaNameById(stat) : stat}
-          </div>
-          <div className="flex-1/4">
-            {getBadgeBySpark(sparkDetail.type ?? '')}
-          </div>
-          <div className="flex-1/4">
-            {to2Decimal(sparkDetail.chanceAtLeastOnce)}%
-          </div>
-        </div>
-      )
-    )
-  }, [level, position, showSparkProcPopover, treeData])
 
   const handleBlueSparkChange = (value: Partial<BlueSparkData>) => {
     if (!onBlueSparkChange) return
@@ -162,40 +109,6 @@ const UmaCard: React.FC<ExtendedUmaCardProps> = ({
     onRacesWonChange?.(value, { level, position })
   }
 
-  const getAffinityIcon = (affinity: number) => {
-    if (affinity < 51) {
-      return <Triangle className="w-4 h-4 text-red-400" />
-    } else if (affinity < 151) {
-      return <Circle className="w-4 h-4 text-yellow-400" />
-    } else {
-      return <CircleDot className="w-4 h-4 text-green-400" />
-    }
-  }
-
-  const getAffinity = () => {
-    if (!uma || !treeData) {
-      return { total: 0, base: 0, race: 0 }
-    }
-    const baseAffinity =
-      getBaseAffinity(treeData, {
-        level,
-        position,
-      })?.total ?? 0
-
-    const raceAffinity = getRaceAffinity(treeData, {
-      level,
-      position,
-    })
-
-    return {
-      total: baseAffinity + raceAffinity,
-      base: baseAffinity,
-      race: raceAffinity,
-    }
-  }
-
-  const affinity = getAffinity()
-
   // Dynamic sizing based on level
   const getCardSize = () => {
     if (size === 'big') {
@@ -206,17 +119,6 @@ const UmaCard: React.FC<ExtendedUmaCardProps> = ({
   }
 
   const isSmallSize = size === 'small'
-
-  const getBadgeBySpark = (sparkType: string) => {
-    return (
-      <Badge
-        variant="secondary"
-        className={`text-[10px] px-1 py-0 ${pickBadgeColorBySparkType(sparkType ?? '')}`}
-      >
-        {renderSparkType(sparkType)}
-      </Badge>
-    )
-  }
 
   return (
     <Card
@@ -258,12 +160,15 @@ const UmaCard: React.FC<ExtendedUmaCardProps> = ({
       <CardContent
         className={`${isSmallSize ? 'p-2 pt-0' : 'p-3 pt-0'} space-y-2`}
       >
+        {/* BLUE SPARK SECTION */}
         <div className={`grid ${isSmallSize ? 'gap-0.5' : 'gap-1'} relative`}>
           <BlueSparkSelector
             blueSpark={blueSpark}
             onBlueSparkChange={handleBlueSparkChange}
           />
         </div>
+
+        {/* PINK SPARK SECTION */}
         <div
           className={`grid grid-cols-1 ${isSmallSize ? 'gap-0.5' : 'gap-1'} relative`}
         >
@@ -272,7 +177,8 @@ const UmaCard: React.FC<ExtendedUmaCardProps> = ({
             onPinkSparkChange={handlePinkSparkChange}
           />
         </div>
-        {/* GREEN SPARK SECTOR */}
+
+        {/* GREEN SPARK SECTION */}
         <div
           className={`grid grid-cols-1 ${isSmallSize ? 'gap-0.5' : 'gap-1'}`}
         >
@@ -282,74 +188,24 @@ const UmaCard: React.FC<ExtendedUmaCardProps> = ({
             uma={uma}
           />
         </div>
+        {/* WHITE SPARK SECTION */}
+        <div className={`grid grid-cols-2 gap-0.5`}>
+          <RaceSparkSelector
+            races={races}
+            onRacesWonChange={handleRacesWonChange}
+          />
+          <WhiteSparkSelector
+            whiteSpark={whiteSpark}
+            onWhiteSparkChange={handleWhiteSparkChange}
+            isSmallSize={isSmallSize}
+          />
+        </div>
 
-        {/* WHITE SPARK SECTOR */}
-        <WhiteSparkSelector
-          whiteSpark={whiteSpark}
-          races={races}
-          onWhiteSparkChange={handleWhiteSparkChange}
-          onRacesWonChange={handleRacesWonChange}
-          isSmallSize={isSmallSize}
-        />
-        {/* AFFINITY SECTOR */}
-        <Separator
-          orientation="horizontal"
-          className="my-4 w-auto self-stretch"
-        />
-        <div className="flex justify-between">
-          <div className="text-xs uppercase tracking-wide font-semibold text-gray-600 mb-2">
-            {LOCALE_EN.AFFINITY}
-          </div>
-          <div className="text-xs inline-flex gap-1">
-            <Tooltip
-              content={`From parents: ${affinity.base} | From races: ${affinity.race}`}
-            >
-              <span className="cursor-pointer font-bold underline">
-                {affinity.total}
-              </span>
-            </Tooltip>
-            <span>{getAffinityIcon(affinity.total) ?? null}</span>
-          </div>
-        </div>
-        {/* INSPIRATION CHANCE SECTOR */}
-        <Separator
-          orientation="horizontal"
-          className="my-2 w-auto self-stretch"
-        />
-        <div className="flex justify-between">
-          <div className="text-xs uppercase tracking-wide font-semibold text-gray-600">
-            {LOCALE_EN.SPARK_PROCS}
-          </div>
-          <div className="text-xs inline-flex gap-1">
-            <Popover
-              open={showSparkProcPopover}
-              onOpenChange={setShowSparkProcPopover}
-            >
-              <PopoverTrigger asChild>
-                <span className="cursor-pointer flex items-center gap-1">
-                  <SquareArrowUpRightIcon className="w-4 h-4" />
-                </span>
-              </PopoverTrigger>
-              <PopoverContent
-                sideOffset={16}
-                side="right"
-                align="end"
-                className="p-3 w-min-[300px] w-[600px] max-w-none"
-                style={{ maxHeight: '220px', overflowY: 'auto' }}
-              >
-                <div className="text-xs font-semibold mb-2">
-                  Inspiration Chance List (per career)
-                </div>
-                <div className="flex gap-2 text-xs font-bold uppercase border-b pb-1 mb-1">
-                  <span className="flex-1/2">Name</span>
-                  <span className="flex-1/4">Type</span>
-                  <span className="flex-1/4">Chance</span>
-                </div>
-                <div className="divide-y">{getSparkProcContent()}</div>
-              </PopoverContent>
-            </Popover>
-          </div>
-        </div>
+        {/* AFFINITY SECTION */}
+        <AffinityDisplay uma={uma} level={level} position={position} />
+
+        {/* INSPIRATION CHANCE SECTION */}
+        <SparkProcDisplay level={level} position={position} />
       </CardContent>
     </Card>
   )
