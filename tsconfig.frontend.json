@@ -16,9 +16,10 @@
     "jsx": "react-jsx",
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["frontend/src/*"],
+      "~/*": ["types/*"]
     }
   },
-  "include": ["src"],
+  "include": ["frontend/src", "types"],
   "exclude": ["node_modules", "dist"]
 }
