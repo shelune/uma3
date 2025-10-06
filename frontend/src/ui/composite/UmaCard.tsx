@@ -1,8 +1,6 @@
 import { Badge } from '@/ui/base/badge'
 import { Button } from '@/ui/base/button'
 import { Card, CardContent, CardHeader } from '@/ui/base/card'
-import { Checkbox } from '@/ui/base/checkbox'
-import { Input } from '@/ui/base/input'
 import { Popover, PopoverContent, PopoverTrigger } from '@/ui/base/popover'
 import { Separator } from '@/ui/base/separator'
 import { getBaseAffinity, getRaceAffinity } from '@/utils/affinity'
@@ -16,25 +14,18 @@ import {
 } from '@/utils/formatting'
 import {
   Settings,
-  Star,
   User,
   CircleDot,
   Circle,
   Triangle,
   SquareArrowUpRightIcon,
-  X,
 } from 'lucide-react'
 import React, { useCallback, useContext, useState } from 'react'
-import {
-  WHITE_SPARK_RACES,
-  WHITE_SPARK_SKILLS,
-} from '../../assets/white-sparks'
 import type {
   BlueSparkData,
   GreenSparkData,
   PinkSparkData,
   RacesData,
-  SparkData,
   Uma,
   WhiteSparkData,
 } from '../../types/uma'
@@ -49,6 +40,7 @@ import {
 import BlueSparkSelector from '../components/BlueSparkSelector'
 import PinkSparkSelector from '../components/PinkSparkSelector'
 import GreenSparkSelector from '../components/GreenSparkSelector'
+import WhiteSparkSelector from '../components/WhiteSparkSelector'
 
 export interface UmaCardProps {
   uma?: Uma | null
@@ -58,8 +50,6 @@ export interface UmaCardProps {
   level: number
   position: number
 }
-
-const starLevels = [1, 2, 3]
 
 interface ExtendedUmaCardProps extends UmaCardProps {
   onBlueSparkChange?: (
@@ -101,42 +91,6 @@ const UmaCard: React.FC<ExtendedUmaCardProps> = ({
   const { blueSpark, pinkSpark, greenSpark, whiteSpark, races = [] } = uma || {}
 
   const [showSparkProcPopover, setShowSparkProcPopover] = useState(false)
-
-  // White spark state
-  const [whiteSparkSelection, setWhiteSparkSelection] = useState<SparkData[]>(
-    whiteSpark || []
-  )
-  const [whiteSparkSearch, setWhiteSparkSearch] = useState('')
-  const [currentWhiteSpark, setWhiteSparkEditingState] = useState<{
-    spark: SparkData | null
-    level: number
-  }>({
-    spark: null,
-    level: 1,
-  })
-
-  // Create white spark data array
-  const ALL_WHITE_SPARKS = React.useMemo(() => {
-    const raceData: SparkData[] = WHITE_SPARK_RACES.map(race => ({
-      stat: race,
-      level: 1,
-      isRace: true,
-    }))
-    const skillData: SparkData[] = WHITE_SPARK_SKILLS.map(skill => ({
-      stat: skill,
-      level: 1,
-      isRace: false,
-    }))
-    return [...raceData, ...skillData]
-  }, [])
-
-  // Filter white spark data based on search
-  const filteredWhiteSparkData = React.useMemo(() => {
-    if (!whiteSparkSearch.trim()) return ALL_WHITE_SPARKS
-    return ALL_WHITE_SPARKS.filter(spark =>
-      spark.stat.toLowerCase().includes(whiteSparkSearch.toLowerCase())
-    )
-  }, [ALL_WHITE_SPARKS, whiteSparkSearch])
 
   const getSparkProcContent = useCallback(() => {
     if (!showSparkProcPopover || !treeData) return null
@@ -200,62 +154,12 @@ const UmaCard: React.FC<ExtendedUmaCardProps> = ({
     )
   }
 
-  const toggleRace = (race: string) => {
-    const newSelection = races.includes(race)
-      ? races.filter(r => r !== race)
-      : [...races, race]
-
-    if (onRacesWonChange) {
-      onRacesWonChange({ races: newSelection }, { level, position })
-    }
+  const handleWhiteSparkChange = (value: WhiteSparkData[]) => {
+    onWhiteSparkChange?.(value, { level, position })
   }
 
-  const clearAllRaces = () => {
-    if (onRacesWonChange) {
-      onRacesWonChange({ races: [] }, { level, position })
-    }
-  }
-
-  const selectWhiteSpark = (spark: SparkData) => {
-    setWhiteSparkEditingState({
-      spark,
-      level: currentWhiteSpark.level,
-    })
-  }
-
-  const selectWhiteSparkLevel = (level: number) => {
-    setWhiteSparkEditingState(prev => ({
-      ...prev,
-      level,
-    }))
-  }
-
-  const addWhiteSpark = () => {
-    if (!currentWhiteSpark.spark) return
-
-    // Remove any existing spark with same stat and type
-    const filteredSelection = whiteSparkSelection.filter(
-      s => !(s.stat === currentWhiteSpark.spark!.stat)
-    )
-    const newSpark: SparkData = {
-      ...currentWhiteSpark.spark,
-      level: currentWhiteSpark.level,
-    }
-
-    setWhiteSparkSelection([...filteredSelection, newSpark])
-
-    // Reset editing state
-    setWhiteSparkEditingState({ spark: null, level: 1 })
-    onWhiteSparkChange?.([...filteredSelection, newSpark], { level, position })
-  }
-
-  const removeWhiteSpark = (spark: SparkData) => {
-    setWhiteSparkSelection(prev => prev.filter(s => !(s.stat === spark.stat)))
-  }
-
-  const clearAllWhiteSparks = () => {
-    setWhiteSparkSelection([])
-    setWhiteSparkEditingState({ spark: null, level: 1 })
+  const handleRacesWonChange = (value: RacesData) => {
+    onRacesWonChange?.(value, { level, position })
   }
 
   const getAffinityIcon = (affinity: number) => {
@@ -380,216 +284,13 @@ const UmaCard: React.FC<ExtendedUmaCardProps> = ({
         </div>
 
         {/* WHITE SPARK SECTOR */}
-        <div
-          className={`grid grid-cols-2 ${isSmallSize ? 'gap-0.5' : 'gap-1'}`}
-        >
-          <Popover>
-            <PopoverTrigger asChild>
-              <Badge
-                variant="outline"
-                role="button"
-                className={`${isSmallSize ? 'text-xs px-1' : 'text-xs'} w-full justify-center cursor-pointer select-none bg-yellow-500 hover:bg-yellow-600 text-yellow-900`}
-                title="Set White Spark Races"
-              >
-                <span className="flex items-center gap-0.5">
-                  <span>
-                    {LOCALE_EN.G1_WINS} ({races.length})
-                  </span>
-                </span>
-              </Badge>
-            </PopoverTrigger>
-            <PopoverContent align="start" className="p-3 w-80 max-w-none">
-              <div className="flex justify-between items-center">
-                <div className="text-xs uppercase tracking-wide font-semibold text-gray-600 mb-2">
-                  Races Won
-                </div>
-                <button
-                  className="cursor-pointer text-xs uppercase tracking-wide font-semibold text-red-600 mb-2"
-                  onClick={clearAllRaces}
-                >
-                  Clear All
-                </button>
-              </div>
-              <div className="max-h-64 overflow-auto pr-2">
-                <div className="grid grid-cols-1 gap-2">
-                  {WHITE_SPARK_RACES.map(race => {
-                    const isSelected = races.includes(race)
-                    return (
-                      <label
-                        key={race}
-                        className="flex items-center space-x-2 cursor-pointer hover:bg-gray-50 p-1 rounded text-xs"
-                      >
-                        <Checkbox
-                          checked={isSelected}
-                          onCheckedChange={() => toggleRace(race)}
-                        />
-                        <span className="text-xs leading-tight">{race}</span>
-                      </label>
-                    )
-                  })}
-                </div>
-              </div>
-              <div className="mt-2 text-[10px] text-green-700 font-medium flex items-center gap-1">
-                Selected: {races.length} race(s)
-              </div>
-            </PopoverContent>
-          </Popover>
-          <Popover>
-            <PopoverTrigger asChild>
-              <Badge
-                variant="outline"
-                role="button"
-                className={`${isSmallSize ? 'text-xs px-1' : 'text-xs'} w-full justify-center cursor-pointer select-none bg-gray-50 hover:bg-gray-100 border-gray-200`}
-                title="Set White Spark Skills/Races"
-              >
-                {whiteSparkSelection.length > 0 ? (
-                  <span className="flex items-center gap-0.5 truncate">
-                    <span className="truncate">White Sparks</span>
-                    <span className="text-[10px] bg-gray-200 px-1 rounded">
-                      {whiteSparkSelection.length}
-                    </span>
-                  </span>
-                ) : (
-                  <span>{LOCALE_EN.WHITE_SPARKS}</span>
-                )}
-              </Badge>
-            </PopoverTrigger>
-            <PopoverContent align="start" className="p-3 w-[520px] max-w-none">
-              <div className="flex justify-between items-center mb-2">
-                <div className="text-xs uppercase tracking-wide font-semibold text-gray-600">
-                  White Sparks
-                </div>
-                <button
-                  className="cursor-pointer text-xs uppercase tracking-wide font-semibold text-red-600"
-                  onClick={clearAllWhiteSparks}
-                >
-                  Clear All
-                </button>
-              </div>
-
-              {/* Selection Section */}
-              <div className="flex gap-2 mb-3">
-                {/* Sparks Column */}
-                <div className="w-2/3">
-                  <div className="mb-2">
-                    <Input
-                      placeholder="Race / Skill Name"
-                      value={whiteSparkSearch}
-                      onChange={e => setWhiteSparkSearch(e.target.value)}
-                      className="text-xs h-8"
-                    />
-                  </div>
-                  <div className="max-h-48 overflow-auto pr-1">
-                    <div className="grid grid-cols-1 gap-1">
-                      {filteredWhiteSparkData.map(spark => {
-                        const active =
-                          currentWhiteSpark.spark?.stat === spark.stat
-                        const disabled = whiteSparkSelection.some(
-                          selection => selection.stat === spark.stat
-                        )
-                        return (
-                          <button
-                            key={`${spark.stat}`}
-                            onClick={() => selectWhiteSpark(spark)}
-                            className={`flex items-center gap-2 p-1 rounded text-xs transition-colors text-left ${active ? 'bg-gray-600 text-white' : 'hover:bg-gray-100'} ${disabled ? 'bg-gray-200 text-gray-600 opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}
-                            disabled={disabled}
-                          >
-                            <span className="flex-1 truncate">
-                              {spark.stat}
-                            </span>
-                            {getBadgeBySpark(
-                              spark.isRace ? 'raceSpark' : 'whiteSpark'
-                            )}
-                          </button>
-                        )
-                      })}
-                    </div>
-                    {filteredWhiteSparkData.length === 0 && (
-                      <div className="text-xs text-gray-500 text-center py-4">
-                        No sparks found matching "{whiteSparkSearch}"
-                      </div>
-                    )}
-                  </div>
-                </div>
-
-                <Separator
-                  orientation="vertical"
-                  className="mx-1 h-auto self-stretch"
-                />
-
-                {/* Levels Column */}
-                <div className="w-1/3">
-                  <div className="text-[10px] text-gray-600 mb-2">Level</div>
-                  <div className="flex flex-col gap-1">
-                    {starLevels.map(lvl => {
-                      const active = currentWhiteSpark.level === lvl
-                      return (
-                        <button
-                          key={lvl}
-                          onClick={() => selectWhiteSparkLevel(lvl)}
-                          className={`text-xs rounded-full px-2 py-1 border flex items-center justify-center gap-0.5 transition-colors ${active ? 'bg-amber-500 text-white border-amber-500' : 'bg-amber-50 hover:bg-amber-100 border-amber-200 text-amber-800'}`}
-                        >
-                          {Array.from({ length: lvl }).map((_, i) => (
-                            <Star
-                              key={i}
-                              className="w-3 h-3 fill-amber-400 text-amber-400"
-                            />
-                          ))}
-                        </button>
-                      )
-                    })}
-                  </div>
-                  <button
-                    onClick={addWhiteSpark}
-                    disabled={!currentWhiteSpark.spark}
-                    className="w-full mt-2 text-xs bg-green-600 hover:bg-green-700 disabled:bg-gray-300 text-white px-2 py-1 rounded transition-colors"
-                  >
-                    Add
-                  </button>
-                </div>
-              </div>
-
-              {/* Selected Sparks Display */}
-              {whiteSparkSelection.length > 0 && (
-                <div className="border-t pt-2">
-                  <div className="text-[10px] text-gray-600 mb-1">
-                    Selected ({whiteSparkSelection.length}):
-                  </div>
-                  <div className="flex flex-wrap gap-1 max-h-20 overflow-auto">
-                    {whiteSparkSelection.map((spark, index) => (
-                      <Badge
-                        key={`selected-${spark.stat}-${index}`}
-                        variant="outline"
-                        className="text-[10px] px-1 py-0.5 flex items-center gap-1 cursor-pointer hover:bg-red-50"
-                        onClick={() => removeWhiteSpark(spark)}
-                      >
-                        <span className="truncate max-w-20">{spark.stat}</span>
-                        <span className="flex">
-                          {Array.from({ length: spark.level }).map((_, i) => (
-                            <Star
-                              key={i}
-                              className="w-2 h-2 fill-amber-400 text-amber-400"
-                            />
-                          ))}
-                        </span>
-                        <span className="text-red-500 hover:text-red-700">
-                          <X className="w-3 h-3" />
-                        </span>
-                      </Badge>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              {currentWhiteSpark.spark && currentWhiteSpark.level && (
-                <div className="mt-2 text-[10px] text-green-700 font-medium flex items-center gap-1">
-                  Ready to add: {currentWhiteSpark.spark.stat} –{' '}
-                  {currentWhiteSpark.level}★
-                </div>
-              )}
-            </PopoverContent>
-          </Popover>
-        </div>
+        <WhiteSparkSelector
+          whiteSpark={whiteSpark}
+          races={races}
+          onWhiteSparkChange={handleWhiteSparkChange}
+          onRacesWonChange={handleRacesWonChange}
+          isSmallSize={isSmallSize}
+        />
         {/* AFFINITY SECTOR */}
         <Separator
           orientation="horizontal"
