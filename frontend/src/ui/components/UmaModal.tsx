@@ -15,11 +15,7 @@ import UMA_LIST_WITH_ID from '../../assets/home/chara_names_with_id.json'
 import UmaImage from '../../ui/components/UmaImage'
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/ui/base/tabs'
 import { SavedUma, useSavedUmas } from '@/hooks/useSavedUmas'
-import { useAffinitySorting, UmaWithAffinity } from '@/hooks/useAffinitySorting'
-import {
-  getUmaBasicsById,
-  getUmaNameById as getUmaNameById,
-} from '../../utils/formatting'
+import { getUmaNameById as getUmaNameById } from '../../utils/formatting'
 import { useTreeData } from '../../hooks'
 import { convertSavedUmaToUma } from '../../utils/uma'
 

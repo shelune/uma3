@@ -1,5 +1,4 @@
 import { Popover, PopoverContent, PopoverTrigger } from '@/ui/base/popover'
-import { Separator } from '@/ui/base/separator'
 import {
   pickBadgeColorBySparkType,
   renderSparkType,

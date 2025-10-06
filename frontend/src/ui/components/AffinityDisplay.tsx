@@ -1,4 +1,3 @@
-import { Separator } from '@/ui/base/separator'
 import { getBaseAffinity, getRaceAffinity } from '@/utils/affinity'
 import { CircleDot, Circle, Triangle } from 'lucide-react'
 import { useContext } from 'react'

@@ -7,7 +7,7 @@ import {
   DialogTitle,
   DialogFooter,
 } from '@/ui/base/dialog'
-import { Save, Trash2 } from 'lucide-react'
+import { Save } from 'lucide-react'
 import { useState } from 'react'
 import type { Uma } from '../../types/uma'
 import { useSavedUmas } from '../../hooks/useSavedUmas'
@@ -21,7 +21,7 @@ export default function SaveUmaButton({
   uma,
   className = '',
 }: SaveUmaButtonProps) {
-  const { saveUma, isUmaSaved, isNicknameTaken } = useSavedUmas()
+  const { saveUma, isNicknameTaken } = useSavedUmas()
   const [showNicknameModal, setShowNicknameModal] = useState(false)
   const [nickname, setNickname] = useState('')
   const [error, setError] = useState('')
@@ -39,14 +39,16 @@ export default function SaveUmaButton({
       setError('Nickname is required')
       return
     }
-
     if (nickname.length > 60) {
       setError('Nickname must be 60 characters or less')
       return
     }
-
     if (isNicknameTaken(nickname)) {
       setError('This nickname is already taken')
+      return
+    }
+    if (!uma) {
+      setError('No Uma data to save')
       return
     }
 
