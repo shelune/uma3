@@ -16,8 +16,8 @@
   skip_processing = false
 
 [build.environment]
-  # Use Node.js 18+ for better compatibility
-  NODE_VERSION = "18"
+  # Use Node.js 22+ for better compatibility
+  NODE_VERSION = "22"
   
   # Ensure we're building in production mode
   NODE_ENV = "production"
