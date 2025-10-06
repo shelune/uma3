@@ -158,8 +158,13 @@ const UmaCard: React.FC<ExtendedUmaCardProps> = ({
                   )}
                 </Button>
               </div>
-              <span className="text-sm text-gray-800">
-                {getUmaNameById(uma?.id || '', false)}
+              <span
+                className="text-sm text-gray-800 cursor-pointer"
+                onClick={() => onSelectUma(level, position)}
+              >
+                {uma?.id
+                  ? getUmaNameById(uma.id, false)
+                  : 'Click to select Uma'}
               </span>
             </div>
           }

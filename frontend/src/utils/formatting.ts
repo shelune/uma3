@@ -13,7 +13,7 @@ const SPARK_TYPE_MAPPING: Record<string, string> = {
 }
 
 export const renderUmaName = (input: string | undefined): string => {
-  if (!input) return '-'
+  if (!input) return ''
   const match = input.match(/\[.*?\]\s*(.*)$/)
   return match ? match[1] : input
 }
@@ -44,7 +44,7 @@ export const getUmaNameById = (
   input: string,
   isUniqueSkill: boolean = true
 ) => {
-  if (!input) return '-'
+  if (!input) return ''
   const uma = getUmaBasicsById(input)
   return uma
     ? `${renderUmaName(uma.chara_name)}${isUniqueSkill ? "'s Unique" : ''}`

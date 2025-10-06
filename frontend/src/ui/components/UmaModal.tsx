@@ -100,9 +100,13 @@ const UmaModal = ({
               id="sort-affinity"
               checked={sortByAffinity}
               onCheckedChange={setSortByAffinity}
+              disabled
             />
-            <label htmlFor="sort-affinity" className="text-sm font-medium">
-              Sort by affinity
+            <label
+              htmlFor="sort-affinity"
+              className="text-sm font-medium text-gray-400"
+            >
+              Sort by affinity (coming soon)
             </label>
           </div>
 
