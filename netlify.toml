@@ -21,6 +21,10 @@
   
   # Ensure we're building in production mode
   NODE_ENV = "production"
+  
+  # Install dev dependencies so TypeScript type packages are available
+  NPM_CONFIG_PRODUCTION = "false"
+  NPM_FLAGS = "--include=dev --include-workspace-root"
 
 # Redirect rules for SPA routing
 [[redirects]]

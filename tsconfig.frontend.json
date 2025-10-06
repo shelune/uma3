@@ -19,6 +19,7 @@
       "@/*": ["frontend/src/*"]
     }
   },
-  "include": ["frontend/src", "types"],
-  "exclude": ["node_modules", "dist"]
+  "include": ["frontend/src"],
+  "exclude": ["node_modules", "dist"],
+  "typeRoots": ["../node_modules/@types", "./node_modules/@types"]
 }

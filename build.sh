@@ -12,16 +12,8 @@ cd "$SCRIPT_DIR"
 echo "📁 Working directory: $(pwd)"
 
 # Install dependencies from root (needed for monorepo setup)
-echo "📦 Installing root dependencies..."
-npm install
-
-# Install frontend dependencies
-echo "📦 Installing frontend dependencies..."
-cd frontend
-npm install
-
-# Go back to root for build (needed for types access)
-cd ..
+echo "📦 Installing root dependencies (including dev + workspaces)..."
+npm ci --include=dev --include-workspace-root
 
 # Build the frontend (this runs from root and builds frontend)
 echo "🔨 Building frontend..."
