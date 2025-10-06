@@ -3,7 +3,7 @@ import { Separator } from '@/ui/base/separator'
 import {
   pickBadgeColorBySparkType,
   renderSparkType,
-  renderUmaNameById,
+  getUmaNameById,
   to2Decimal,
 } from '@/utils/formatting'
 import { SquareArrowUpRightIcon } from 'lucide-react'
@@ -56,7 +56,7 @@ export default function SparkProcDisplay({
         className="flex w-full gap-2 py-1 items-center text-xs font-medium"
       >
         <div className="flex-1/2">
-          {sparkDetail.type === 'greenSpark' ? renderUmaNameById(stat) : stat}
+          {sparkDetail.type === 'greenSpark' ? getUmaNameById(stat) : stat}
         </div>
         <div className="flex-1/4">
           {getBadgeBySpark(sparkDetail.type ?? '')}
@@ -70,11 +70,6 @@ export default function SparkProcDisplay({
 
   return (
     <>
-      {/* INSPIRATION CHANCE SECTION */}
-      <Separator
-        orientation="horizontal"
-        className="my-2 w-auto self-stretch"
-      />
       <div className="flex justify-between">
         <div className="text-xs uppercase tracking-wide font-semibold text-gray-600">
           {LOCALE_EN.SPARK_PROCS}

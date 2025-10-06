@@ -3,7 +3,7 @@ import { useCallback } from 'react'
 import { useTreeDataWithStorage } from './useTreeDataWithStorage'
 import type { TreeData } from '../contexts/TreeDataContext'
 import type { Uma, WhiteSparkData } from '../types/uma'
-import { renderUmaNameById } from '../utils/formatting'
+import { getUmaNameById } from '../utils/formatting'
 
 /**
  * Hook for sharing tree data via URL parameters
@@ -124,7 +124,7 @@ export function useUrlSharing() {
               const uma: Uma = {
                 id: data.i || '',
                 baseId: data.b || data.i || '',
-                name: renderUmaNameById(data.i, false),
+                name: getUmaNameById(data.i, false),
                 races: data.r || [],
               }
 

@@ -35,12 +35,17 @@ export const to2Decimal = (num: number): string => {
   return num.toFixed(2)
 }
 
-export const renderUmaNameById = (
+export const getUmaBasicsById = (id: string): CharacterNameID | null => {
+  const uma = umaWithIdList.find(uma => uma.chara_id === id)
+  return uma || null
+}
+
+export const getUmaNameById = (
   input: string,
   isUniqueSkill: boolean = true
 ) => {
   if (!input) return '-'
-  const uma = umaWithIdList.find(uma => uma.chara_id === input)
+  const uma = getUmaBasicsById(input)
   return uma
     ? `${renderUmaName(uma.chara_name)}${isUniqueSkill ? "'s Unique" : ''}`
     : input

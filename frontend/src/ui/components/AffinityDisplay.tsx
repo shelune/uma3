@@ -57,13 +57,8 @@ export default function AffinityDisplay({
 
   return (
     <>
-      {/* AFFINITY SECTOR */}
-      <Separator
-        orientation="horizontal"
-        className="my-4 w-auto self-stretch"
-      />
       <div className="flex justify-between">
-        <div className="text-xs uppercase tracking-wide font-semibold text-gray-600 mb-2">
+        <div className="text-xs uppercase tracking-wide font-semibold text-gray-600">
           {LOCALE_EN.AFFINITY}
         </div>
         <div className="text-xs inline-flex gap-1">

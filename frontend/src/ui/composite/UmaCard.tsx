@@ -1,8 +1,9 @@
 import { Button } from '@/ui/base/button'
 import { Card, CardContent, CardHeader } from '@/ui/base/card'
-import { getImagePath, renderUmaNameById } from '@/utils/formatting'
-import { Settings, User } from 'lucide-react'
+import { getImagePath, getUmaNameById } from '@/utils/formatting'
+import { User, Trash2 } from 'lucide-react'
 import React from 'react'
+import { useTreeData } from '../../hooks/useTreeData'
 import type {
   BlueSparkData,
   GreenSparkData,
@@ -18,6 +19,8 @@ import WhiteSparkSelector from '../components/WhiteSparkSelector'
 import RaceSparkSelector from '../components/RaceSparkSelector'
 import AffinityDisplay from '../components/AffinityDisplay'
 import SparkProcDisplay from '../components/SparkProcDisplay'
+import SaveUmaButton from '../components/SaveUmaButton'
+import { Separator } from '../base/separator'
 
 export interface UmaCardProps {
   uma?: Uma | null
@@ -109,10 +112,17 @@ const UmaCard: React.FC<ExtendedUmaCardProps> = ({
     onRacesWonChange?.(value, { level, position })
   }
 
+  const { updateTreeData } = useTreeData()
+
+  const handleClearData = () => {
+    // Clear all data for this specific level/position
+    updateTreeData(level, position, null, true)
+  }
+
   // Dynamic sizing based on level
   const getCardSize = () => {
     if (size === 'big') {
-      return 'min-h-48'
+      return 'min-h-48 min-w-[180px]'
     } else {
       return 'min-h-32'
     }
@@ -125,35 +135,34 @@ const UmaCard: React.FC<ExtendedUmaCardProps> = ({
       className={`h-full ${getCardSize()} transition-all duration-300 hover:scale-105 hover:shadow-lg group`}
     >
       <CardHeader className="p-3 pb-2">
-        <div className="flex justify-between items-start">
+        <div className="flex justify-between items-center">
           {
             <div className="flex items-center gap-2 flex-1 mr-2">
               <div className="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center">
-                {uma?.id ? (
-                  <img
-                    src={getImagePath(uma.id)}
-                    alt={uma?.name || 'Uma Musume'}
-                    className="w-8 h-8 rounded-full object-cover bg-gray-100"
-                    style={{ width: 32, height: 32 }}
-                  />
-                ) : (
-                  <User className="w-8 h-8 text-gray-400" />
-                )}
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="h-6 w-6 p-0 transition-opacity cursor-pointer"
+                  onClick={() => onSelectUma(level, position)}
+                  title="Select Uma"
+                >
+                  {uma?.id ? (
+                    <img
+                      src={getImagePath(uma.id)}
+                      alt={uma?.name || 'Uma Musume'}
+                      className="w-8 h-8 rounded-full object-cover"
+                      style={{ width: 32, height: 32 }}
+                    />
+                  ) : (
+                    <User className="w-8 h-8 text-gray-400" />
+                  )}
+                </Button>
               </div>
               <span className="text-sm text-gray-800">
-                {renderUmaNameById(uma?.id || '', false)}
+                {getUmaNameById(uma?.id || '', false)}
               </span>
             </div>
           }
-          <Button
-            variant="ghost"
-            size="sm"
-            className="h-6 w-6 p-0 opacity-70 group-hover:opacity-100 transition-opacity cursor-pointer"
-            onClick={() => onSelectUma(level, position)}
-            title="Select Uma"
-          >
-            <Settings className="h-3 w-3" />
-          </Button>
         </div>
       </CardHeader>
 
@@ -200,12 +209,36 @@ const UmaCard: React.FC<ExtendedUmaCardProps> = ({
             isSmallSize={isSmallSize}
           />
         </div>
-
+        <Separator
+          orientation="horizontal"
+          className="my-2 w-auto self-stretch"
+        />
         {/* AFFINITY SECTION */}
         <AffinityDisplay uma={uma} level={level} position={position} />
-
+        <Separator
+          orientation="horizontal"
+          className="my-2 w-auto self-stretch"
+        />
         {/* INSPIRATION CHANCE SECTION */}
         <SparkProcDisplay level={level} position={position} />
+        <Separator
+          orientation="horizontal"
+          className="my-2 w-auto self-stretch"
+        />
+        {/* DELETE / SAVE BUTTONS */}
+        <div className={`flex gap-2 justify-between`}>
+          <SaveUmaButton className="w-1/2" uma={uma} />
+          <Button
+            onClick={handleClearData}
+            variant="outline"
+            size="sm"
+            className="flex items-center gap-2 text-red-600 hover:text-red-700 hover:bg-red-50 border-red-200 hover:border-red-300 w-1/2"
+            title="Clear all data for this position"
+          >
+            <Trash2 className="w-4 h-4" />
+            <span>Clear</span>
+          </Button>
+        </div>
       </CardContent>
     </Card>
   )
