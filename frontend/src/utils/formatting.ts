@@ -31,6 +31,16 @@ export const getImagePath = (charaId: string): string => {
   }
 }
 
+export const loadGenericImage = (path: string): string => {
+  try {
+    // Try to get the image from assets using Vite's URL constructor
+    return new URL(`../assets/home/images/${path}`, import.meta.url).href
+  } catch {
+    // Fallback to public directory path
+    return `https://placehold.co/256x256?text=404`
+  }
+}
+
 export const to2Decimal = (num: number): string => {
   return num.toFixed(2)
 }
