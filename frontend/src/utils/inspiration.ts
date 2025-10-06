@@ -7,7 +7,7 @@ import {
 } from './affinity'
 import { getUmaByPosition } from './uma'
 
-const BASE_CHANCE: Record<string, Record<number, number>> = {
+export const BASE_CHANCE: Record<string, Record<number, number>> = {
   blueSpark: { 1: 70, 2: 80, 3: 90 },
   pinkSpark: { 1: 1, 2: 3, 3: 5 },
   greenSpark: { 1: 5, 2: 10, 3: 15 },
@@ -83,10 +83,15 @@ export const groupSparks = (sparks: EnhanceSparkData[]): SparkWithChance[] => {
 
     // Handle both single SparkData and array of SparkData
     const sparkDataArray = Array.isArray(data) ? data : [data]
-
+    console.log({ sparkDataArray })
     for (const sparkData of sparkDataArray) {
-      const { stat } = sparkData
-      const chancePerInspiration = getSparkChance(sparkData, affinity, type)
+      const { stat, isRace } = sparkData
+      const innerType = type === 'whiteSpark' && isRace ? 'raceSpark' : type
+      const chancePerInspiration = getSparkChance(
+        sparkData,
+        affinity,
+        innerType
+      )
 
       // If we already have this stat, add the chances together
       const existing = sparkWithChanceMap.get(stat)
@@ -96,7 +101,7 @@ export const groupSparks = (sparks: EnhanceSparkData[]): SparkWithChance[] => {
         sparkWithChanceMap.set(stat, {
           stat,
           chancePerInspiration: [chancePerInspiration],
-          type,
+          type: innerType,
         })
       }
     }

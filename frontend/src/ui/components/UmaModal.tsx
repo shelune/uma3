@@ -10,8 +10,8 @@ import { Search } from 'lucide-react'
 import { useState } from 'react'
 
 import { CharacterNameID } from '~/types/characterNameId'
-import UMA_LIST_WITH_ID from '../assets/home/chara_names_with_id.json'
-import UmaImage from '../ui/components/UmaImage'
+import UMA_LIST_WITH_ID from '../../assets/home/chara_names_with_id.json'
+import UmaImage from '../../ui/components/UmaImage'
 
 const umaWithIdList: CharacterNameID[] = UMA_LIST_WITH_ID
 
@@ -47,11 +47,6 @@ const UmaModal = ({
       setSearchTerm('')
       onClose()
     }
-  }
-
-  const handleClose = (): void => {
-    setSearchTerm('')
-    onClose()
   }
 
   return (

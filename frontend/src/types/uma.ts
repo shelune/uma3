@@ -1,7 +1,7 @@
 export type SparkData = {
   stat: string
   level: number
-  type?: 'race' | 'skill'
+  isRace?: boolean
 }
 
 export type EnhanceSparkData = {

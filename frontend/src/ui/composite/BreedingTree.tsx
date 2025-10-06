@@ -12,8 +12,8 @@ import type {
   WhiteSparkData,
 } from '../../types/uma'
 import { useTreeData } from '../../hooks/useTreeData'
-import UmaCard from '../components/UmaCard'
-import UmaModal from './UmaModal'
+import UmaCard from './UmaCard'
+import UmaModal from '../components/UmaModal'
 import { TreeSlot } from '../../contexts/TreeDataContext'
 
 const umaList: CharacterNameID[] = UMA_LIST_WITH_ID
@@ -138,7 +138,7 @@ const BreedingTree = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 p-4">
       <Card
-        className="max-w-8xl mx-auto"
+        className="max-w-8xl mx-auto rounded-none shadow-none border-none"
         style={{
           backgroundImage: `
                 linear-gradient(to right, rgba(59, 130, 246, 0.1) 0, rgba(59, 130, 246, 0.1) 2px, transparent 2px),
