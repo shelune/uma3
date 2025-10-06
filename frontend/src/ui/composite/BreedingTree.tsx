@@ -14,6 +14,7 @@ import type {
 import { useTreeData } from '../../hooks/useTreeData'
 import UmaCard from './UmaCard'
 import UmaModal from '../components/UmaModal'
+import TreeDataManager from '../components/TreeDataManager'
 import { TreeSlot } from '../../contexts/TreeDataContext'
 
 const umaList: CharacterNameID[] = UMA_LIST_WITH_ID
@@ -162,6 +163,7 @@ const BreedingTree = () => {
               <Trash2 className="w-4 h-4" />
               Clear Tree
             </Button>
+            <TreeDataManager />
           </div>
         </CardHeader>
 

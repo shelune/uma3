@@ -335,7 +335,7 @@ const UmaCard: React.FC<ExtendedUmaCardProps> = ({
                 )}
               </div>
               <span className="text-sm text-gray-800">
-                {renderUmaName(uma?.name)} {level}-{position}
+                {renderUmaName(uma?.name)}
               </span>
             </div>
           }

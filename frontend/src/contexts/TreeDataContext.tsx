@@ -1,5 +1,6 @@
-import React, { createContext, useState, useCallback, ReactNode } from 'react'
+import React, { createContext, useCallback, ReactNode } from 'react'
 import type { Uma } from '../types/uma'
+import { useLocalStorage } from '../hooks/useLocalStorage'
 
 export interface TreeSlot {
   level: number
@@ -20,6 +21,7 @@ interface TreeDataContextType {
     updates: Partial<Uma> | null
   ) => void
   clearTree: () => void
+  clearTreeData: () => void
   getUmaAtPosition: (position: string | TreeSlot) => Uma | null
 }
 
@@ -35,11 +37,18 @@ interface TreeDataProviderProps {
 export const TreeDataProvider: React.FC<TreeDataProviderProps> = ({
   children,
 }) => {
-  const [treeData, setTreeData] = useState<TreeData>({})
+  const [treeData, setTreeData, removeTreeData] = useLocalStorage<TreeData>(
+    'uma-breeding-tree-data',
+    {}
+  )
 
   const clearTree = useCallback(() => {
     setTreeData({})
-  }, [])
+  }, [setTreeData])
+
+  const clearTreeData = useCallback(() => {
+    removeTreeData()
+  }, [removeTreeData])
 
   const updateTreeData = useCallback(
     (level: number, position: number, updates: Partial<Uma> | null) => {
@@ -85,7 +94,7 @@ export const TreeDataProvider: React.FC<TreeDataProviderProps> = ({
         return newTree
       })
     },
-    []
+    [setTreeData]
   )
 
   const getUmaAtPosition = useCallback(
@@ -103,6 +112,7 @@ export const TreeDataProvider: React.FC<TreeDataProviderProps> = ({
   const value: TreeDataContextType = {
     treeData,
     clearTree,
+    clearTreeData,
     updateTreeData,
     getUmaAtPosition,
   }
