@@ -1,4 +1,4 @@
-import { CharacterNameID } from '../../../types/characterNameId'
+import { CharacterNameID } from '../types/characterNameId'
 import UMA_LIST_WITH_ID from '../assets/home/chara_names_with_id.json'
 import { BASE_CHANCE } from './inspiration'
 

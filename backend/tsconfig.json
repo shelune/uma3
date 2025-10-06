@@ -8,6 +8,14 @@
       "~/*": ["../*"]
     }
   },
-  "include": ["**/*.ts", "**/*.js", "../types/**/*.ts"],
+  "include": [
+    "**/*.ts",
+    "**/*.js",
+    "../types/**/*.ts",
+    "../frontend/src/types/characterNameId.ts",
+    "../frontend/src/types/dressData.ts",
+    "../frontend/src/types/relation.ts",
+    "../frontend/src/types/textData.ts"
+  ],
   "exclude": ["node_modules", "dist"]
 }

@@ -10,7 +10,7 @@ import { Checkbox } from '@/ui/base/checkbox'
 import { Search, Heart, BookMarkedIcon } from 'lucide-react'
 import { useState } from 'react'
 
-import { CharacterNameID } from '~/types/characterNameId'
+import { CharacterNameID } from '@/types/characterNameId'
 import UMA_LIST_WITH_ID from '../../assets/home/chara_names_with_id.json'
 import UmaImage from '../../ui/components/UmaImage'
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/ui/base/tabs'

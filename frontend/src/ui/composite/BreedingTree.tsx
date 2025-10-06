@@ -2,7 +2,7 @@ import { Button } from '@/ui/base/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/ui/base/card'
 import { Trash2 } from 'lucide-react'
 import { useState } from 'react'
-import { CharacterNameID } from '~/types/characterNameId'
+import { CharacterNameID } from '@/types/characterNameId'
 import UMA_LIST_WITH_ID from '../../assets/home/chara_names_with_id.json'
 import type {
   BlueSparkData,

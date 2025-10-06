@@ -16,8 +16,7 @@
     "jsx": "react-jsx",
     "baseUrl": ".",
     "paths": {
-      "@/*": ["frontend/src/*"],
-      "~/*": ["types/*"]
+      "@/*": ["frontend/src/*"]
     }
   },
   "include": ["frontend/src", "types"],
