@@ -46,12 +46,16 @@ export default function TreeDataManager({
   } = useSavedUmas()
   const {
     generateShareUrl,
+    generateShortShareUrl,
     copyShareUrl,
+    copyLongShareUrl,
     loadFromUrl,
     hasUrlData,
     clearUrlData,
   } = useUrlSharing()
   const [shareUrl, setShareUrl] = useState('')
+  const [shortShareUrl, setShortShareUrl] = useState('')
+  const [isGeneratingShortUrl, setIsGeneratingShortUrl] = useState(false)
   const [copied, setCopied] = useState(false)
   const [isOpen, setIsOpen] = useState(false)
   const [notification, setNotification] = useState('')
@@ -111,29 +115,51 @@ export default function TreeDataManager({
     }
   }, [hasUrlData, loadFromUrl, clearUrlData])
 
-  // Generate share URL when popover opens
+  // Generate share URLs when popover opens
   useEffect(() => {
     if (isOpen && hasTreeData()) {
       const url = generateShareUrl()
       setShareUrl(url)
-    }
-  }, [isOpen, hasTreeData, generateShareUrl])
 
-  const handleCopyUrl = async () => {
+      // Generate short URL asynchronously
+      setIsGeneratingShortUrl(true)
+      generateShortShareUrl()
+        .then(shortUrl => {
+          setShortShareUrl(shortUrl)
+          setIsGeneratingShortUrl(false)
+        })
+        .catch(() => {
+          setShortShareUrl(url) // Fallback to long URL
+          setIsGeneratingShortUrl(false)
+        })
+    }
+  }, [isOpen, hasTreeData, generateShareUrl, generateShortShareUrl])
+
+  const handleCopyShortUrl = async () => {
     const success = await copyShareUrl()
     if (success) {
       setCopied(true)
-      setNotification('URL copied to clipboard')
+      setNotification('Short URL copied to clipboard')
       setTimeout(() => setCopied(false), 2000)
       setTimeout(() => setNotification(''), 3000)
     } else {
-      setNotification('Failed to copy URL to clipboard')
+      setNotification('Failed to copy short URL to clipboard')
       setTimeout(() => setNotification(''), 3000)
     }
   }
 
-  const urlLength = shareUrl.length
-  const isUrlTooLong = urlLength > 2000 // Conservative limit for URLs
+  const handleCopyLongUrl = async () => {
+    const success = await copyLongShareUrl()
+    if (success) {
+      setCopied(true)
+      setNotification('Full URL copied to clipboard')
+      setTimeout(() => setCopied(false), 2000)
+      setTimeout(() => setNotification(''), 3000)
+    } else {
+      setNotification('Failed to copy full URL to clipboard')
+      setTimeout(() => setNotification(''), 3000)
+    }
+  }
 
   return (
     <div className={`flex items-center gap-2 ${className}`}>
@@ -176,45 +202,82 @@ export default function TreeDataManager({
             {hasTreeData() ? (
               <div className="space-y-3">
                 {/* URL Sharing Section */}
-                <div className="space-y-2">
+                <div className="space-y-3">
                   <div className="flex items-center gap-2">
                     <Share2 className="w-4 h-4" />
-                    <span className="text-sm font-medium">Share URL</span>
+                    <span className="text-sm font-medium">Share URLs</span>
                   </div>
 
+                  {/* Short URL Section */}
+                  <div className="space-y-2">
+                    <div className="flex items-center gap-2">
+                      <span className="text-sm font-medium text-green-600 dark:text-green-400">
+                        Short URL (Recommended)
+                      </span>
+                    </div>
+
+                    {isGeneratingShortUrl ? (
+                      <div className="p-2 bg-muted rounded text-xs text-center">
+                        Generating short URL...
+                      </div>
+                    ) : shortShareUrl ? (
+                      <div className="space-y-2">
+                        <div className="p-2 bg-muted rounded text-xs font-mono break-all">
+                          {shortShareUrl}
+                        </div>
+                        <Button
+                          onClick={handleCopyShortUrl}
+                          size="sm"
+                          className="w-full"
+                          variant={copied ? 'default' : 'outline'}
+                        >
+                          {copied ? (
+                            <>
+                              <Check className="w-4 h-4 mr-2" />
+                              Copied!
+                            </>
+                          ) : (
+                            <>
+                              <Copy className="w-4 h-4 mr-2" />
+                              Copy Short URL
+                            </>
+                          )}
+                        </Button>
+                      </div>
+                    ) : null}
+                  </div>
+
+                  {/* Full URL Section */}
                   {shareUrl && (
                     <div className="space-y-2">
+                      <div className="flex items-center gap-2">
+                        <span className="text-sm font-medium text-gray-600 dark:text-gray-400">
+                          Full URL
+                        </span>
+                      </div>
+
                       <div className="p-2 bg-muted rounded text-xs font-mono break-all max-h-20 overflow-y-auto">
                         {shareUrl}
                       </div>
 
                       <div className="flex items-center justify-between text-xs text-muted-foreground">
-                        <span>Length: {urlLength} chars</span>
-                        {isUrlTooLong && (
+                        <span>Length: {shareUrl.length} chars</span>
+                        {shareUrl.length > 2000 && (
                           <div className="flex items-center gap-1 text-amber-600">
                             <AlertCircle className="w-3 h-3" />
-                            <span>URL might be too long</span>
+                            <span>Could be too long</span>
                           </div>
                         )}
                       </div>
 
                       <Button
-                        onClick={handleCopyUrl}
+                        onClick={handleCopyLongUrl}
                         size="sm"
                         className="w-full"
-                        variant={copied ? 'default' : 'outline'}
+                        variant="outline"
                       >
-                        {copied ? (
-                          <>
-                            <Check className="w-4 h-4 mr-2" />
-                            Copied!
-                          </>
-                        ) : (
-                          <>
-                            <Copy className="w-4 h-4 mr-2" />
-                            Copy URL
-                          </>
-                        )}
+                        <Copy className="w-4 h-4 mr-2" />
+                        Copy Full URL
                       </Button>
                     </div>
                   )}

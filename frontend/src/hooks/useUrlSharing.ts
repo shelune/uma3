@@ -172,6 +172,32 @@ export function useUrlSharing() {
   )
 
   /**
+   * Create a shortened URL using TinyURL service
+   */
+  const createShortUrl = useCallback(
+    async (longUrl: string): Promise<string> => {
+      try {
+        const response = await fetch(
+          `https://tinyurl.com/api-create.php?url=${encodeURIComponent(longUrl)}`
+        )
+        const shortUrl = await response.text()
+
+        // Validate that we got a proper TinyURL back
+        if (shortUrl.startsWith('https://tinyurl.com/')) {
+          return shortUrl
+        } else {
+          console.warn('TinyURL API returned unexpected response:', shortUrl)
+          return longUrl // Fallback to original URL
+        }
+      } catch (error) {
+        console.warn('Failed to create short URL:', error)
+        return longUrl // Fallback to original URL
+      }
+    },
+    []
+  )
+
+  /**
    * Generate a shareable URL with current tree data
    */
   const generateShareUrl = useCallback((): string => {
@@ -182,6 +208,14 @@ export function useUrlSharing() {
     url.searchParams.set('data', encodedData)
     return url.toString()
   }, [treeData, encodeTreeDataForUrl])
+
+  /**
+   * Generate a shortened shareable URL
+   */
+  const generateShortShareUrl = useCallback(async (): Promise<string> => {
+    const longUrl = generateShareUrl()
+    return await createShortUrl(longUrl)
+  }, [generateShareUrl, createShortUrl])
 
   /**
    * Load tree data from URL parameter if present
@@ -200,9 +234,23 @@ export function useUrlSharing() {
   }, [decodeTreeDataFromUrl, importTreeData])
 
   /**
-   * Copy share URL to clipboard
+   * Copy share URL to clipboard (with URL shortening)
    */
   const copyShareUrl = useCallback(async (): Promise<boolean> => {
+    try {
+      const shareUrl = await generateShortShareUrl()
+      await navigator.clipboard.writeText(shareUrl)
+      return true
+    } catch (error) {
+      console.error('Error copying URL to clipboard:', error)
+      return false
+    }
+  }, [generateShortShareUrl])
+
+  /**
+   * Copy regular (non-shortened) share URL to clipboard
+   */
+  const copyLongShareUrl = useCallback(async (): Promise<boolean> => {
     try {
       const shareUrl = generateShareUrl()
       await navigator.clipboard.writeText(shareUrl)
@@ -232,8 +280,10 @@ export function useUrlSharing() {
 
   return {
     generateShareUrl,
+    generateShortShareUrl,
     loadFromUrl,
     copyShareUrl,
+    copyLongShareUrl,
     hasUrlData,
     clearUrlData,
     encodeTreeDataForUrl,

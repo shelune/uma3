@@ -155,57 +155,8 @@ const CompactUmaCard: React.FC<CompactUmaCardProps> = ({
           </div>
         </div>
 
-        {/* Simple expandable details */}
-        <div className="space-y-2 py-2">
-          <div
-            className="flex justify-between items-center cursor-pointer text-xs"
-            onClick={() => setIsExpanded(!isExpanded)}
-          >
-            <span>Details & Sparks</span>
-            <ChevronDown
-              className={`w-3 h-3 transition-transform ${isExpanded ? 'rotate-180' : ''}`}
-            />
-          </div>
-
-          {isExpanded && (
-            <div className="space-y-2 mt-2">
-              <div className="grid grid-cols-1 gap-2 text-xs">
-                <BlueSparkSelector
-                  blueSpark={blueSpark}
-                  onBlueSparkChange={handleBlueSparkChange}
-                />
-                <PinkSparkSelector
-                  pinkSpark={pinkSpark}
-                  onPinkSparkChange={handlePinkSparkChange}
-                />
-                <GreenSparkSelector
-                  greenSpark={greenSpark}
-                  onGreenSparkChange={handleGreenSparkChange}
-                  uma={uma}
-                />
-                <RaceSparkSelector
-                  races={races}
-                  onRacesWonChange={value =>
-                    onRacesWonChange?.(value, { level, position })
-                  }
-                />
-                <WhiteSparkSelector
-                  whiteSpark={whiteSpark}
-                  onWhiteSparkChange={handleWhiteSparkChange}
-                />
-              </div>
-
-              {/* Affinity and proc displays */}
-              <div className="grid grid-cols-2 gap-2">
-                <AffinityDisplay level={level} position={position} />
-                <SparkProcDisplay level={level} position={position} />
-              </div>
-            </div>
-          )}
-        </div>
-
         {/* Family Section */}
-        <div className="space-y-2 pb-2">
+        <div className="space-y-2 py-2">
           <div
             className="flex justify-between items-center cursor-pointer text-xs"
             onClick={() => setIsFamilyExpanded(!isFamilyExpanded)}
@@ -258,6 +209,55 @@ const CompactUmaCard: React.FC<CompactUmaCardProps> = ({
               </div>
             </div>
           )}
+
+          {/* Simple expandable details */}
+          <div className="space-y-2 py-2">
+            <div
+              className="flex justify-between items-center cursor-pointer text-xs"
+              onClick={() => setIsExpanded(!isExpanded)}
+            >
+              <span>Details & Sparks</span>
+              <ChevronDown
+                className={`w-3 h-3 transition-transform ${isExpanded ? 'rotate-180' : ''}`}
+              />
+            </div>
+
+            {isExpanded && (
+              <div className="space-y-2 mt-2">
+                <div className="grid grid-cols-1 gap-2 text-xs">
+                  <BlueSparkSelector
+                    blueSpark={blueSpark}
+                    onBlueSparkChange={handleBlueSparkChange}
+                  />
+                  <PinkSparkSelector
+                    pinkSpark={pinkSpark}
+                    onPinkSparkChange={handlePinkSparkChange}
+                  />
+                  <GreenSparkSelector
+                    greenSpark={greenSpark}
+                    onGreenSparkChange={handleGreenSparkChange}
+                    uma={uma}
+                  />
+                  <RaceSparkSelector
+                    races={races}
+                    onRacesWonChange={value =>
+                      onRacesWonChange?.(value, { level, position })
+                    }
+                  />
+                  <WhiteSparkSelector
+                    whiteSpark={whiteSpark}
+                    onWhiteSparkChange={handleWhiteSparkChange}
+                  />
+                </div>
+
+                {/* Affinity and proc displays */}
+                <div className="grid grid-cols-2 gap-2">
+                  <AffinityDisplay level={level} position={position} />
+                  <SparkProcDisplay level={level} position={position} />
+                </div>
+              </div>
+            )}
+          </div>
         </div>
       </CardContent>
       <CardFooter className="p-2 space-y-2">
