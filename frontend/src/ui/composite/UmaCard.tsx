@@ -21,6 +21,7 @@ import AffinityDisplay from '../components/AffinityDisplay'
 import SparkProcDisplay from '../components/SparkProcDisplay'
 import SaveUmaButton from '../components/SaveUmaButton'
 import { Separator } from '../base/separator'
+import { getUmaBasicInfoById } from '../../utils/uma'
 
 export interface UmaCardProps {
   uma?: Uma | null
@@ -128,11 +129,16 @@ const UmaCard: React.FC<ExtendedUmaCardProps> = ({
     }
   }
 
+  const basicInfo = uma ? getUmaBasicInfoById(uma.id) : null
+
   const isSmallSize = size === 'small'
 
   return (
     <Card
-      className={`h-full ${getCardSize()} transition-all duration-300 hover:scale-105 hover:shadow-lg group bg-white dark:bg-gray-900 border-gray-200 dark:border-gray-700`}
+      className={`h-full ${getCardSize()} transition-all duration-300 hover:scale-105 hover:shadow-lg group bg-white dark:bg-gray-900 border-2`}
+      style={{
+        borderColor: basicInfo?.dress_color_main ?? '#000000',
+      }}
     >
       <CardHeader className="p-3 pb-2">
         <div className="flex justify-between items-center">

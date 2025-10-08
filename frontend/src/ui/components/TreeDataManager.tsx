@@ -234,19 +234,6 @@ export default function TreeDataManager({
                       <FileArchive className="w-4 h-4 mr-2" />
                       Migrate saved umas
                     </Button>
-                    <Button
-                      size="sm"
-                      variant="outline"
-                      onClick={() => setSavedUmasDialogOpen(true)}
-                    >
-                      <Heart className="w-4 h-4 mr-2" />
-                      Manage Saved Umas
-                      {savedUmasStats.hasAny && (
-                        <Badge variant="secondary" className="ml-2">
-                          {savedUmasStats.total}
-                        </Badge>
-                      )}
-                    </Button>
                   </div>
                 </div>
               </div>

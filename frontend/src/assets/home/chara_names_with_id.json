@@ -2,196 +2,235 @@
   {
     "chara_id": "100101",
     "chara_name": "[Special Dreamer] Special Week",
-    "chara_id_base": "1001"
+    "chara_id_base": "1001",
+    "dress_color_main": "#EE6DCB"
   },
   {
     "chara_id": "100201",
     "chara_name": "[Innocent Silence] Silence Suzuka",
-    "chara_id_base": "1002"
+    "chara_id_base": "1002",
+    "dress_color_main": "#29BD70"
   },
   {
     "chara_id": "100301",
     "chara_name": "[Peak Joy] Tokai Teio",
-    "chara_id_base": "1003"
+    "chara_id_base": "1003",
+    "dress_color_main": "#3376D2"
   },
   {
     "chara_id": "100302",
     "chara_name": "[Beyond the Horizon] Tokai Teio",
-    "chara_id_base": "1003"
+    "chara_id_base": "1003",
+    "dress_color_main": "#3376D2"
   },
   {
     "chara_id": "100401",
     "chara_name": "[Formula R] Maruzensky",
-    "chara_id_base": "1004"
+    "chara_id_base": "1004",
+    "dress_color_main": "#EA504A"
   },
   {
     "chara_id": "100601",
     "chara_name": "[Starlight Beat] Oguri Cap",
-    "chara_id_base": "1006"
+    "chara_id_base": "1006",
+    "dress_color_main": "#3A7AD2"
   },
   {
     "chara_id": "100701",
     "chara_name": "[Red Strife] Gold Ship",
-    "chara_id_base": "1007"
+    "chara_id_base": "1007",
+    "dress_color_main": "#DA3C57"
   },
   {
     "chara_id": "100801",
     "chara_name": "[Wild Top Gear] Vodka",
-    "chara_id_base": "1008"
+    "chara_id_base": "1008",
+    "dress_color_main": "#D4C200"
   },
   {
     "chara_id": "100901",
     "chara_name": "[Peak Blue] Daiwa Scarlet",
-    "chara_id_base": "1009"
+    "chara_id_base": "1009",
+    "dress_color_main": "#4F64D8"
   },
   {
     "chara_id": "101001",
     "chara_name": "[Wild Frontier] Taiki Shuttle",
-    "chara_id_base": "1010"
+    "chara_id_base": "1010",
+    "dress_color_main": "#73C032"
   },
   {
     "chara_id": "101101",
     "chara_name": "[Stone-Piercing Blue] Grass Wonder",
-    "chara_id_base": "1011"
+    "chara_id_base": "1011",
+    "dress_color_main": "#3A34AC"
   },
   {
     "chara_id": "101201",
     "chara_name": "[Azure Amazon] Hishi Amazon",
-    "chara_id_base": "1012"
+    "chara_id_base": "1012",
+    "dress_color_main": "#2185D0"
   },
   {
     "chara_id": "101301",
     "chara_name": "[Frontline Elegance] Mejiro McQueen",
-    "chara_id_base": "1013"
+    "chara_id_base": "1013",
+    "dress_color_main": "#00B5BE"
   },
   {
     "chara_id": "101302",
     "chara_name": "[End of the Skies] Mejiro McQueen",
-    "chara_id_base": "1013"
+    "chara_id_base": "1013",
+    "dress_color_main": "#00B5BE"
   },
   {
     "chara_id": "101401",
     "chara_name": "[El☆Número 1] El Condor Pasa",
-    "chara_id_base": "1014"
+    "chara_id_base": "1014",
+    "dress_color_main": "#DD4E31"
   },
   {
     "chara_id": "101501",
     "chara_name": "[O Sole Suo!] T.M. Opera O",
-    "chara_id_base": "1015"
+    "chara_id_base": "1015",
+    "dress_color_main": "#F271C4"
   },
   {
     "chara_id": "101601",
     "chara_name": "[Maverick] Narita Brian",
-    "chara_id_base": "1016"
+    "chara_id_base": "1016",
+    "dress_color_main": "#75358C"
   },
   {
     "chara_id": "101701",
     "chara_name": "[Emperor's Path] Symboli Rudolf",
-    "chara_id_base": "1017"
+    "chara_id_base": "1017",
+    "dress_color_main": "#1C7763"
   },
   {
     "chara_id": "101801",
     "chara_name": "[Empress Road] Air Groove",
-    "chara_id_base": "1018"
+    "chara_id_base": "1018",
+    "dress_color_main": "#0092CB"
   },
   {
     "chara_id": "102001",
     "chara_name": "[Reeling in the Big One] Seiun Sky",
-    "chara_id_base": "1020"
+    "chara_id_base": "1020",
+    "dress_color_main": "#65D283"
   },
   {
     "chara_id": "102301",
     "chara_name": "[pf. Winning Equation...] Biwa Hayahide",
-    "chara_id_base": "1023"
+    "chara_id_base": "1023",
+    "dress_color_main": "#B03D81"
   },
   {
     "chara_id": "102401",
     "chara_name": "[Scramble☆Zone] Mayano Top Gun",
-    "chara_id_base": "1024"
+    "chara_id_base": "1024",
+    "dress_color_main": "#F57D38"
   },
   {
     "chara_id": "102601",
     "chara_name": "[MB-19890425] Mihono Bourbon",
-    "chara_id_base": "1026"
+    "chara_id_base": "1026",
+    "dress_color_main": "#EE60A1"
   },
   {
     "chara_id": "102701",
     "chara_name": "[Down the Line] Mejiro Ryan",
-    "chara_id_base": "1027"
+    "chara_id_base": "1027",
+    "dress_color_main": "#14BAAE"
   },
   {
     "chara_id": "103001",
     "chara_name": "[Rosy Dreams] Rice Shower",
-    "chara_id_base": "1030"
+    "chara_id_base": "1030",
+    "dress_color_main": "#384A86"
   },
   {
     "chara_id": "103201",
     "chara_name": "[Tach-nology] Agnes Tachyon",
-    "chara_id_base": "1032"
+    "chara_id_base": "1032",
+    "dress_color_main": "#35B2B6"
   },
   {
     "chara_id": "103501",
     "chara_name": "[Get to Winning!] Winning Ticket",
-    "chara_id_base": "1035"
+    "chara_id_base": "1035",
+    "dress_color_main": "#DD3D5B"
   },
   {
     "chara_id": "103701",
     "chara_name": "[Meisterschaft] Eishin Flash",
-    "chara_id_base": "1037"
+    "chara_id_base": "1037",
+    "dress_color_main": "#3D3B3A"
   },
   {
     "chara_id": "103801",
     "chara_name": "[Fille Éclair] Curren Chan",
-    "chara_id_base": "1038"
+    "chara_id_base": "1038",
+    "dress_color_main": "#F86669"
   },
   {
     "chara_id": "104001",
     "chara_name": "[Authentic / 1928] Gold City",
-    "chara_id_base": "1040"
+    "chara_id_base": "1040",
+    "dress_color_main": "#245099"
   },
   {
     "chara_id": "104101",
     "chara_name": "[Blossom in Learning] Sakura Bakushin O",
-    "chara_id_base": "1041"
+    "chara_id_base": "1041",
+    "dress_color_main": "#EE6FAB"
   },
   {
     "chara_id": "104501",
     "chara_name": "[Murmuring Stream] Super Creek",
-    "chara_id_base": "1045"
+    "chara_id_base": "1045",
+    "dress_color_main": "#5693DA"
   },
   {
     "chara_id": "104601",
     "chara_name": "[LOVE☆4EVER] Smart Falcon",
-    "chara_id_base": "1046"
+    "chara_id_base": "1046",
+    "dress_color_main": "#F8587B"
   },
   {
     "chara_id": "105001",
     "chara_name": "[Nevertheless] Narita Taishin",
-    "chara_id_base": "1050"
+    "chara_id_base": "1050",
+    "dress_color_main": "#E575CE"
   },
   {
     "chara_id": "105201",
     "chara_name": "[Bestest Prize ♪] Haru Urara",
-    "chara_id_base": "1052"
+    "chara_id_base": "1052",
+    "dress_color_main": "#FA7395"
   },
   {
     "chara_id": "105601",
     "chara_name": "[Rising☆Fortune] Matikanefukukitaru",
-    "chara_id_base": "1056"
+    "chara_id_base": "1056",
+    "dress_color_main": "#3D89E9"
   },
   {
     "chara_id": "105801",
     "chara_name": "[Turbulent Blue] Meisho Doto",
-    "chara_id_base": "1058"
+    "chara_id_base": "1058",
+    "dress_color_main": "#46449B"
   },
   {
     "chara_id": "106001",
     "chara_name": "[Poinsettia Ribbon] Nice Nature",
-    "chara_id_base": "1060"
+    "chara_id_base": "1060",
+    "dress_color_main": "#28A959"
   },
   {
     "chara_id": "106101",
     "chara_name": "[King of Emeralds] King Halo",
-    "chara_id_base": "1061"
+    "chara_id_base": "1061",
+    "dress_color_main": "#0E9451"
   }
 ]

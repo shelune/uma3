@@ -191,3 +191,20 @@ export const getRaceAffinity = (treeData: TreeData, meta: TreeSlot): number => {
 
   return parentsSharedRaces + parentsLeftSideRaces + parentsRightSideRaces
 }
+
+export const getParentAffinityCombosById = (id: string, sorted = true) => {
+  const combos = Object.entries(umaAffinityTable)
+    .filter(([key]) => key.includes(id) && !/^(\d+),(\d+),(\d+)$/.test(key))
+    .map(([key, affinity]) => ({
+      id: key.replace(id, '').replace(',', ''),
+      affinity,
+    }))
+    .reduce(
+      (acc, curr) => {
+        acc[curr.id] = curr.affinity
+        return acc
+      },
+      {} as Record<string, number>
+    )
+  return combos
+}

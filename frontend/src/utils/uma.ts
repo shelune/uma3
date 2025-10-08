@@ -1,7 +1,10 @@
 import { TreeData, TreeSlot } from '../contexts/TreeDataContext'
 import { SavedUma } from '../hooks/useSavedUmas'
 import { Uma } from '../types/uma'
+import UMA_LIST_WITH_ID from '../assets/home/chara_names_with_id.json'
+import { CharacterNameID } from '../types/characterNameId'
 
+const umaListWithId: CharacterNameID[] = UMA_LIST_WITH_ID
 export const getUmaByPosition = (
   data: TreeData,
   position: string | TreeSlot
@@ -27,4 +30,19 @@ export const convertSavedUmaToUma = (savedUma: SavedUma): Uma | null => {
     raceSpark: savedUma.raceSpark || [],
     races: savedUma.races || [],
   }
+}
+
+export const getChildByPosition = (
+  treeData: TreeData,
+  meta: TreeSlot
+): Uma | null => {
+  const { level, position } = meta
+  if (level === null || position === null || level === 1) return null
+  const childLevel = level - 1
+  const childPos = Math.max(1, Math.floor((position + 1) / 2))
+  return treeData[childLevel]?.[childPos] || null
+}
+
+export const getUmaBasicInfoById = (id: string) => {
+  return umaListWithId.find(uma => uma.chara_id === id) || null
 }

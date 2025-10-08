@@ -17,7 +17,12 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/ui/base/tabs'
 import { SavedUma, useSavedUmas } from '@/hooks/useSavedUmas'
 import { getUmaNameById as getUmaNameById } from '../../utils/formatting'
 import { useTreeData } from '../../hooks'
-import { convertSavedUmaToUma } from '../../utils/uma'
+import {
+  convertSavedUmaToUma,
+  getChildByPosition,
+  getUmaBasicInfoById,
+} from '../../utils/uma'
+import { getParentAffinityCombosById } from '../../utils/affinity'
 
 const umaWithIdList: CharacterNameID[] = UMA_LIST_WITH_ID
 
@@ -30,8 +35,8 @@ interface UmaModalProps {
     level: number,
     position: number
   ) => void
-  level: number | null
-  position: number | null
+  level: number
+  position: number
 }
 
 const UmaModal = ({
@@ -41,15 +46,37 @@ const UmaModal = ({
   level,
   position,
 }: UmaModalProps) => {
-  const { updateTreeData } = useTreeData()
+  const { updateTreeData, treeData } = useTreeData()
   const [searchTerm, setSearchTerm] = useState<string>('')
   const [activeTab, setActiveTab] = useState<'all' | 'saved'>('all')
-  const [sortByAffinity, setSortByAffinity] = useState<boolean>(false)
+  const [sortByAffinity, setSortByAffinity] = useState<boolean>(true)
   const { savedUmas } = useSavedUmas()
+
+  const child = getChildByPosition(treeData, { level, position })
 
   const filteredUmas = umaWithIdList.filter(uma =>
     uma.chara_name.toLowerCase().includes(searchTerm.toLowerCase())
   )
+
+  const sortedFilteredParentUmas = useMemo(() => {
+    if (!sortByAffinity) return filteredUmas
+    const child = getChildByPosition(treeData, { level, position })
+    if (!child) return filteredUmas
+    const parentAffinityCombos = getParentAffinityCombosById(child.baseId)
+    // Sort filteredUmas by the order and value of parentAffinityCombos
+    const affinityComboMap = new Map<string, number>()
+    Object.entries(parentAffinityCombos).forEach(([id, value]) => {
+      affinityComboMap.set(id, value)
+    })
+    const sorted = [...filteredUmas].sort((a, b) => {
+      const aValue = affinityComboMap.get(a.chara_id_base) ?? -Infinity
+      const bValue = affinityComboMap.get(b.chara_id_base) ?? -Infinity
+      // Higher val§ue first, then fallback to name
+      if (aValue !== bValue) return bValue - aValue
+      return a.chara_name.localeCompare(b.chara_name)
+    })
+    return sorted
+  }, [sortByAffinity, filteredUmas, treeData, level, position])
 
   const savedUmasList = useMemo(() => {
     return savedUmas.filter(uma => {
@@ -102,13 +129,12 @@ const UmaModal = ({
               id="sort-affinity"
               checked={sortByAffinity}
               onCheckedChange={setSortByAffinity}
-              disabled
             />
             <label
               htmlFor="sort-affinity"
-              className="text-sm font-medium text-gray-400 dark:text-gray-500"
+              className="text-sm font-medium text-gray-400 dark:text-gray-50"
             >
-              Sort by affinity (coming soon)
+              Sort by affinity
             </label>
           </div>
 
@@ -133,8 +159,24 @@ const UmaModal = ({
 
             <TabsContent isActive={activeTab === 'all'}>
               <div className="h-[400px] overflow-y-auto">
+                {child ? (
+                  <h3 className="font-semibold mb-2 text-lg leading-tight">
+                    As Parent for
+                    <span
+                      className="text-bold"
+                      style={{
+                        color:
+                          getUmaBasicInfoById(child.id)?.dress_color_main ||
+                          '#000000',
+                      }}
+                    >
+                      {' '}
+                      {getUmaNameById(child?.id, false)}
+                    </span>
+                  </h3>
+                ) : null}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                  {filteredUmas.sort().map(uma => (
+                  {sortedFilteredParentUmas.map(uma => (
                     <Card
                       key={uma.chara_id}
                       className="cursor-pointer transition-all hover:shadow-md"
@@ -148,7 +190,7 @@ const UmaModal = ({
                             className="w-16 h-20 object-cover rounded-lg border-1 border-amber-200 flex-shrink-0"
                           />
                           <div className="flex-1 space-y-2">
-                            <h3 className="font-semibold text-lg leading-tight">
+                            <h3 className="font-semibold text-md leading-tight">
                               {uma.chara_name}
                             </h3>
                           </div>
