@@ -1,7 +1,7 @@
 import { Badge } from '@/ui/base/badge'
 import { Checkbox } from '@/ui/base/checkbox'
 import { Popover, PopoverContent, PopoverTrigger } from '@/ui/base/popover'
-import { WHITE_SPARK_RACES } from '../../assets/white-sparks'
+import { RaceWithDate, WHITE_SPARK_RACES } from '../../assets/white-sparks'
 import type { RacesData } from '../../types/uma'
 import { LOCALE_EN } from '../../locale/en'
 
@@ -63,21 +63,26 @@ export default function RaceSparkSelector({
         </div>
         <div className="max-h-64 overflow-auto pr-2">
           <div className="grid grid-cols-1 gap-2">
-            {WHITE_SPARK_RACES.map((race: string) => {
-              const isSelected = races.includes(race)
-              return (
-                <label
-                  key={race}
-                  className="flex items-center space-x-2 cursor-pointer hover:bg-gray-50 p-1 rounded text-xs"
-                >
-                  <Checkbox
-                    checked={isSelected}
-                    onCheckedChange={() => toggleRace(race)}
-                  />
-                  <span className="text-xs leading-tight">{race}</span>
-                </label>
-              )
-            })}
+            {Object.entries(WHITE_SPARK_RACES).map(([month, raceList]) => (
+              <div key={month}>
+                <span className="text-[10px] text-bold">{month}</span>
+                {raceList.map((race: RaceWithDate) => {
+                  const isSelected = races.includes(race.name)
+                  return (
+                    <label
+                      key={race.name}
+                      className="flex items-center space-x-2 cursor-pointer hover:bg-gray-50 p-1 rounded text-xs dark:hover:bg-gray-400"
+                    >
+                      <Checkbox
+                        checked={isSelected}
+                        onCheckedChange={() => toggleRace(race.name)}
+                      />
+                      <span className="text-xs leading-tight">{race.name}</span>
+                    </label>
+                  )
+                })}
+              </div>
+            ))}
           </div>
         </div>
         <div className="mt-2 text-[10px] text-green-700 font-medium flex items-center gap-1">

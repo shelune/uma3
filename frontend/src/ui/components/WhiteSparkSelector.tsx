@@ -6,7 +6,8 @@ import { pickBadgeColorBySparkType, renderSparkType } from '@/utils/formatting'
 import { Star, X } from 'lucide-react'
 import React, { useState } from 'react'
 import {
-  WHITE_SPARK_RACES,
+  BASE_WHITE_SPARK_RACES,
+  WHITE_SPARK_SCENARIOS,
   WHITE_SPARK_SKILLS,
 } from '../../assets/white-sparks'
 import type { SparkData, WhiteSparkData } from '../../types/uma'
@@ -36,12 +37,17 @@ export default function WhiteSparkSelector({
 
   // Create white spark data array (skills only)
   const ALL_WHITE_SPARKS = React.useMemo(() => {
-    const raceData: SparkData[] = WHITE_SPARK_RACES.map((race: string) => ({
-      stat: race,
-      level: 1,
-      isRace: true,
-    }))
-    const skillData: SparkData[] = WHITE_SPARK_SKILLS.map((skill: string) => ({
+    const raceData: SparkData[] = BASE_WHITE_SPARK_RACES.map(
+      (race: string) => ({
+        stat: race,
+        level: 1,
+        isRace: true,
+      })
+    )
+    const skillData: SparkData[] = [
+      ...WHITE_SPARK_SKILLS,
+      ...WHITE_SPARK_SCENARIOS,
+    ].map((skill: string) => ({
       stat: skill,
       level: 1,
       isRace: false,
