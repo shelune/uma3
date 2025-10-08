@@ -7,14 +7,14 @@ import {
   MoreVertical,
   Share2,
   Copy,
-  Download,
-  Upload,
+  FileArchive,
   AlertCircle,
   Check,
 } from 'lucide-react'
 import { useState, useEffect } from 'react'
 import { useTreeDataWithStorage } from '../../hooks/useTreeDataWithStorage'
 import { useUrlSharing } from '../../hooks/useUrlSharing'
+import { useSavedUmas } from '../../hooks/useSavedUmas'
 
 interface TreeDataManagerProps {
   className?: string
@@ -24,6 +24,7 @@ export default function TreeDataManager({
   className = '',
 }: TreeDataManagerProps) {
   const { hasTreeData, getTreeStats } = useTreeDataWithStorage()
+  const { doMigration } = useSavedUmas()
   const {
     generateShareUrl,
     copyShareUrl,
@@ -172,20 +173,12 @@ export default function TreeDataManager({
                     <span className="text-sm font-medium">Local Storage</span>
                   </div>
 
-                  <div className="grid grid-cols-2 gap-2">
-                    <Button size="sm" variant="outline" disabled>
-                      <Download className="w-4 h-4 mr-2" />
-                      Export
-                    </Button>
-                    <Button size="sm" variant="outline" disabled>
-                      <Upload className="w-4 h-4 mr-2" />
-                      Import
+                  <div className="grid">
+                    <Button size="sm" onClick={doMigration}>
+                      <FileArchive className="w-4 h-4 mr-2" />
+                      Migrate saved umas
                     </Button>
                   </div>
-
-                  <p className="text-xs text-muted-foreground">
-                    Export/Import features coming soon
-                  </p>
                 </div>
               </div>
             ) : (

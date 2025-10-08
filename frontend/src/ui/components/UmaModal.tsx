@@ -8,7 +8,7 @@ import {
 import { Input } from '@/ui/base/input'
 import { Checkbox } from '@/ui/base/checkbox'
 import { Search, Heart, BookMarkedIcon } from 'lucide-react'
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 
 import { CharacterNameID } from '@/types/characterNameId'
 import UMA_LIST_WITH_ID from '../../assets/home/chara_names_with_id.json'
@@ -51,10 +51,12 @@ const UmaModal = ({
     uma.chara_name.toLowerCase().includes(searchTerm.toLowerCase())
   )
 
-  const savedUmasList = savedUmas.filter(uma => {
-    const name = getUmaNameById(uma.id, false)
-    return name?.toLowerCase().includes(searchTerm.toLowerCase())
-  })
+  const savedUmasList = useMemo(() => {
+    return savedUmas.filter(uma => {
+      const name = getUmaNameById(uma.id, false)
+      return name?.toLowerCase().includes(searchTerm.toLowerCase())
+    })
+  }, [searchTerm, savedUmas])
 
   const handleSelectUma = (uma: CharacterNameID): void => {
     if (level !== null && position !== null) {
