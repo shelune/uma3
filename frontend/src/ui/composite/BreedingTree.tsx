@@ -106,18 +106,6 @@ const BreedingTree = () => {
     setTree(newTreeData)
   }
 
-  const handleShare = () => {
-    // Get current URL and copy to clipboard
-    if (navigator.share) {
-      navigator.share({
-        title: 'Uma Musume Breeding Tree',
-        url: window.location.href,
-      })
-    } else {
-      navigator.clipboard.writeText(window.location.href)
-    }
-  }
-
   // Mobile swipe handlers
   const swipeHandlers = useSwipeable({
     onSwipedLeft: () => {
@@ -221,11 +209,11 @@ const BreedingTree = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 p-4">
+    <div className="min-h-screen bg-purple-50 dark:bg-gray-900 p-4">
       <Card className="max-w-8xl mx-auto rounded-none shadow-none border-none bg-gray-50 dark:bg-gray-800 grid-pattern-light dark:grid-pattern-dark">
         <CardHeader className="text-center">
           <CardTitle
-            className={`${isMobile ? 'text-2xl' : 'text-4xl'} font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent`}
+            className={`${isMobile ? 'text-2xl' : 'text-4xl'} font-bold text-[#DA3C57]`}
           >
             Uma Musume Breeding Tree
           </CardTitle>
@@ -281,7 +269,6 @@ const BreedingTree = () => {
           onSaveTree={handleSaveTree}
           onOpenSavedTrees={() => setSavedTreesModalOpen(true)}
           onOpenSavedUmas={() => setSavedUmasModalOpen(true)}
-          onShare={handleShare}
           onClearTree={clearTree}
         />
       )}

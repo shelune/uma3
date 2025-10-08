@@ -4,6 +4,9 @@ import { getUmaByPosition } from './uma'
 
 const umaAffinityTable: Record<string, number> = UMA_AFFINITY_MAPPING
 
+const MAX_TREE_LEVEL = 4
+const MAX_TREE_WIDTH = 2 ** (MAX_TREE_LEVEL - 1)
+
 type FamilyTreePosition = {
   parent: string
   grandParentPos1: string
@@ -235,4 +238,43 @@ export const getGrandparentAffinityCombosByIds = (
       {} as Record<string, number>
     )
   return combos
+}
+
+type FamilyPositionAroundSelf = {
+  parent: {
+    left?: string
+    right?: string
+  }
+  grandchild?: string
+  child?: string
+}
+
+export const getBasicFamilyAroundPosition = (
+  meta: TreeSlot
+): FamilyPositionAroundSelf | null => {
+  const { level, position } = meta
+  if (level === null || position === null) return null
+  const result: FamilyPositionAroundSelf = { parent: {} }
+  const familyTreePositionSet = getFamilyPositionSet(meta)
+  if (
+    familyTreePositionSet &&
+    level < MAX_TREE_LEVEL &&
+    position <= MAX_TREE_WIDTH
+  ) {
+    result.parent.left = familyTreePositionSet.left.parent
+    result.parent.right = familyTreePositionSet.right.parent
+  }
+  // child
+  const childLevel = level - 1
+  const childPos = Math.max(1, Math.floor((position + 1) / 2))
+  if (childLevel > 1) {
+    result.child = `${childLevel}-${childPos}`
+  }
+  // grandchild
+  const grandchildLevel = level - 2
+  const grandchildPos = Math.max(1, Math.floor((position + 3) / 4))
+  if (grandchildLevel > 1) {
+    result.grandchild = `${grandchildLevel}-${grandchildPos}`
+  }
+  return result
 }

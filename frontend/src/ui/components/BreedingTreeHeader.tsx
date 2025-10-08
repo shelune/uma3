@@ -65,10 +65,9 @@ const BreedingTreeHeader: React.FC<BreedingTreeHeaderProps> = ({
             Saved Trees ({total})
           </Button>
           <Button
-            variant="destructive"
             size="sm"
             onClick={onClearTree}
-            className="flex items-center gap-2 text-white"
+            className="flex items-center gap-2 text-white bg-red-600"
           >
             <Trash2 className="w-4 h-4" />
             Clear Tree

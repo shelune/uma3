@@ -21,6 +21,7 @@ import SparkProcDisplay from '../components/SparkProcDisplay'
 import SaveUmaButton from '../components/SaveUmaButton'
 import UmaImage from '../components/UmaImage'
 import { getUmaNameById } from '../../utils/formatting'
+import { getBasicFamilyAroundPosition } from '../../utils/affinity'
 
 interface CompactUmaCardProps {
   uma?: Uma | null
@@ -62,7 +63,9 @@ const CompactUmaCard: React.FC<CompactUmaCardProps> = ({
 }) => {
   const { updateTreeData } = useTreeData()
   const [isExpanded, setIsExpanded] = useState(true)
+  const [isFamilyExpanded, setIsFamilyExpanded] = useState(true)
   const { blueSpark, pinkSpark, greenSpark, whiteSpark, races = [] } = uma || {}
+  const familyPosAroundSelf = getBasicFamilyAroundPosition({ level, position })
 
   const handleClearUma = () => {
     updateTreeData(level, position, null)
@@ -111,7 +114,12 @@ const CompactUmaCard: React.FC<CompactUmaCardProps> = ({
 
   if (!uma?.id) {
     return (
-      <Card className="p-2 border-dashed border-2 border-gray-300">
+      <Card className="p-2 border-dashed border-2 border-gray-300 relative">
+        {/* Position Label */}
+        <div className="absolute top-0 right-0 bg-gray-200 dark:bg-gray-700 text-gray-500 dark:text-gray-400 text-xs px-1.5 py-0.5 rounded-tr-lg rounded-bl-sm font-medium z-10">
+          {level}-{position}
+        </div>
+
         <CardContent className="p-2">
           <Button
             variant="ghost"
@@ -127,7 +135,12 @@ const CompactUmaCard: React.FC<CompactUmaCardProps> = ({
   }
 
   return (
-    <Card className="p-2">
+    <Card className="p-2 relative">
+      {/* Position Label */}
+      <div className="absolute top-0 right-0 bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-300 text-xs px-1.5 py-0.5 rounded-tr-lg rounded-bl-sm font-medium z-10">
+        {level}-{position}
+      </div>
+
       <CardContent className="p-2 space-y-2">
         {/* Compact header with key info */}
         <div className="flex items-center gap-2">
@@ -143,18 +156,16 @@ const CompactUmaCard: React.FC<CompactUmaCardProps> = ({
         </div>
 
         {/* Simple expandable details */}
-        <div className="space-y-2">
-          <Button
-            variant="ghost"
-            size="sm"
-            className="w-full justify-between text-xs"
+        <div className="space-y-2 py-2">
+          <div
+            className="flex justify-between items-center cursor-pointer text-xs"
             onClick={() => setIsExpanded(!isExpanded)}
           >
             <span>Details & Sparks</span>
             <ChevronDown
               className={`w-3 h-3 transition-transform ${isExpanded ? 'rotate-180' : ''}`}
             />
-          </Button>
+          </div>
 
           {isExpanded && (
             <div className="space-y-2 mt-2">
@@ -188,6 +199,62 @@ const CompactUmaCard: React.FC<CompactUmaCardProps> = ({
               <div className="grid grid-cols-2 gap-2">
                 <AffinityDisplay level={level} position={position} />
                 <SparkProcDisplay level={level} position={position} />
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* Family Section */}
+        <div className="space-y-2 pb-2">
+          <div
+            className="flex justify-between items-center cursor-pointer text-xs"
+            onClick={() => setIsFamilyExpanded(!isFamilyExpanded)}
+          >
+            <span>Family</span>
+            <ChevronDown
+              className={`w-3 h-3 transition-transform ${isFamilyExpanded ? 'rotate-180' : ''}`}
+            />
+          </div>
+
+          {isFamilyExpanded && (
+            <div className="text-xs text-gray-600 dark:text-gray-400 space-y-1 mt-2">
+              <div className="flex items-center gap-1">
+                {familyPosAroundSelf?.parent ? (
+                  <>
+                    <span className="text-gray-500 dark:text-gray-500">
+                      Child of:
+                    </span>
+                    <span className="font-bold">
+                      {familyPosAroundSelf?.parent?.left}
+                      {' & '}
+                      {familyPosAroundSelf?.parent?.right}
+                    </span>
+                  </>
+                ) : null}
+              </div>
+              <div className="flex items-center gap-1">
+                {familyPosAroundSelf?.child ? (
+                  <>
+                    <span className="text-gray-500 dark:text-gray-500">
+                      Parent of:
+                    </span>
+                    <span className="font-bold">
+                      {familyPosAroundSelf?.child}
+                    </span>
+                  </>
+                ) : null}
+              </div>
+              <div className="flex items-center gap-1">
+                {familyPosAroundSelf?.grandchild ? (
+                  <>
+                    <span className="text-gray-500 dark:text-gray-500">
+                      Grandparent of:
+                    </span>
+                    <span className="font-bold">
+                      {familyPosAroundSelf?.grandchild}
+                    </span>
+                  </>
+                ) : null}
               </div>
             </div>
           )}
