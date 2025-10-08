@@ -67,7 +67,7 @@ const racesWithDate: RaceWithDate[] = [
   { name: 'JBC Classic', date: '2-11-1' },
   { name: "JBC Ladies' Classic", date: '2-11-1' },
   { name: 'JBC Sprint', date: '2-11-1' },
-  { name: 'Queen Elizabeth II Cup', date: '2-11-11' },
+  { name: 'Queen Elizabeth II Cup', date: '2-11-1' },
   { name: 'Japan Cup', date: '2-11-2' },
   { name: 'Mile Championship', date: '2-11-2' },
   { name: 'Champions Cup', date: '2-12-1' },
