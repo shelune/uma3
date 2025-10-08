@@ -1,6 +1,4 @@
-import { Button } from '@/ui/base/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/ui/base/card'
-import { Trash2, Save } from 'lucide-react'
 import { useState } from 'react'
 import { useSwipeable } from 'react-swipeable'
 import { CharacterNameID } from '@/types/characterNameId'
@@ -21,6 +19,7 @@ import SaveTreeModal from '../components/SaveTreeModal'
 import SavedTreesModal from '../components/SavedTreesModal'
 import MobileActionsBar from '../components/MobileActionsBar'
 import MobileLevelNavigator from '../components/MobileLevelNavigator'
+import BreedingTreeHeader from '../components/BreedingTreeHeader'
 import { TreeSlot, TreeData } from '../../contexts/TreeDataContext'
 import UMA_LIST_WITH_ID from '../../assets/home/chara_names_with_id.json'
 
@@ -228,27 +227,16 @@ const BreedingTree = () => {
             Uma Musume Breeding Tree
           </CardTitle>
 
-          {/* Desktop header actions */}
+          <BreedingTreeHeader
+            isMobile={isMobile}
+            onSaveTree={handleSaveTree}
+            onClearTree={clearTree}
+            onLoadTree={handleLoadTree}
+          />
+
+          {/* Keep additional desktop actions */}
           {!isMobile && (
-            <div className="flex justify-center items-center gap-4 mt-4">
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={handleSaveTree}
-                className="flex items-center gap-2"
-              >
-                <Save className="w-4 h-4" />
-                Save Tree
-              </Button>
-              <SavedTreesModal onLoadTree={handleLoadTree} />
-              <Button
-                size="sm"
-                onClick={clearTree}
-                className="flex items-center gap-2 text-white bg-red-600"
-              >
-                <Trash2 className="w-4 h-4" />
-                Clear Tree
-              </Button>
+            <div className="flex justify-center items-center gap-4 mt-2">
               <TreeDataManager />
             </div>
           )}
@@ -309,7 +297,7 @@ const BreedingTree = () => {
       {/* Mobile SavedTreesModal */}
       {isMobile && savedTreesModalOpen && (
         <SavedTreesModal
-          onLoadTree={data => {
+          onLoadTree={(data: TreeData) => {
             handleLoadTree(data)
             setSavedTreesModalOpen(false)
           }}

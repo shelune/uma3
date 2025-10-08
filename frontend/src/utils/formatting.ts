@@ -1,6 +1,7 @@
 import { CharacterNameID } from '../types/characterNameId'
 import UMA_LIST_WITH_ID from '../assets/home/chara_names_with_id.json'
 import { BASE_CHANCE } from './inspiration'
+import { SparkData } from '../types/uma'
 
 const umaWithIdList: CharacterNameID[] = UMA_LIST_WITH_ID
 
@@ -72,4 +73,9 @@ export const pickBadgeColorBySparkType = (type: string): string => {
   if (type === 'whiteSpark') return 'bg-gray-100 text-gray-700'
   if (type === 'raceSpark') return 'bg-yellow-100 text-yellow-700'
   return 'bg-gray-100 text-gray-700'
+}
+
+export const renderSparkInfo = (spark: SparkData | undefined) => {
+  if (!spark) return ''
+  return `${spark.stat}: ${spark.level}★`
 }
