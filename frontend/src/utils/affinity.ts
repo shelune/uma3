@@ -192,12 +192,40 @@ export const getRaceAffinity = (treeData: TreeData, meta: TreeSlot): number => {
   return parentsSharedRaces + parentsLeftSideRaces + parentsRightSideRaces
 }
 
-export const getParentAffinityCombosById = (id: string, sorted = true) => {
+export const getParentAffinityCombosById = (id: string) => {
   const combos = Object.entries(umaAffinityTable)
     .filter(([key]) => key.includes(id) && !/^(\d+),(\d+),(\d+)$/.test(key))
     .map(([key, affinity]) => ({
       id: key.replace(id, '').replace(',', ''),
       affinity,
+    }))
+    .reduce(
+      (acc, curr) => {
+        acc[curr.id] = curr.affinity
+        return acc
+      },
+      {} as Record<string, number>
+    )
+  return combos
+}
+
+export const getGrandparentAffinityCombosByIds = (
+  parent: string,
+  grandparent: string
+) => {
+  if (!parent || !grandparent) return {}
+  const combos = Object.entries(umaAffinityTable)
+    .filter(
+      ([key]) =>
+        key.includes(parent) &&
+        key.includes(grandparent) &&
+        /^(\d+),(\d+),(\d+)$/.test(key)
+    )
+    .map(([key, affinity]) => ({
+      id: key
+        .replace(new RegExp(`${parent}|${grandparent}`, 'g'), '')
+        .replace(/,/g, ''),
+      affinity: affinity ?? 0,
     }))
     .reduce(
       (acc, curr) => {

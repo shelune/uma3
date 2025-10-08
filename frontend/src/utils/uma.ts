@@ -43,6 +43,17 @@ export const getChildByPosition = (
   return treeData[childLevel]?.[childPos] || null
 }
 
+export const getGrandchildByPosition = (
+  treeData: TreeData,
+  meta: TreeSlot
+): Uma | null => {
+  const { level, position } = meta
+  if (level === null || position === null || level < 3) return null
+  const grandchildLevel = level - 2
+  const grandchildPos = Math.max(1, Math.floor((position + 3) / 4))
+  return treeData[grandchildLevel]?.[grandchildPos] || null
+}
+
 export const getUmaBasicInfoById = (id: string) => {
   return umaListWithId.find(uma => uma.chara_id === id) || null
 }

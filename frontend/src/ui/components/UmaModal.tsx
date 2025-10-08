@@ -20,9 +20,13 @@ import { useTreeData } from '../../hooks'
 import {
   convertSavedUmaToUma,
   getChildByPosition,
+  getGrandchildByPosition,
   getUmaBasicInfoById,
 } from '../../utils/uma'
-import { getParentAffinityCombosById } from '../../utils/affinity'
+import {
+  getGrandparentAffinityCombosByIds,
+  getParentAffinityCombosById,
+} from '../../utils/affinity'
 
 const umaWithIdList: CharacterNameID[] = UMA_LIST_WITH_ID
 
@@ -53,6 +57,7 @@ const UmaModal = ({
   const { savedUmas } = useSavedUmas()
 
   const child = getChildByPosition(treeData, { level, position })
+  const grandChild = getGrandchildByPosition(treeData, { level, position })
 
   const filteredUmas = umaWithIdList.filter(uma =>
     uma.chara_name.toLowerCase().includes(searchTerm.toLowerCase())
@@ -72,6 +77,30 @@ const UmaModal = ({
       const aValue = affinityComboMap.get(a.chara_id_base) ?? -Infinity
       const bValue = affinityComboMap.get(b.chara_id_base) ?? -Infinity
       // Higher val§ue first, then fallback to name
+      if (aValue !== bValue) return bValue - aValue
+      return a.chara_name.localeCompare(b.chara_name)
+    })
+    return sorted
+  }, [sortByAffinity, filteredUmas, treeData, level, position])
+
+  const sortedFilteredGrandParentUmas = useMemo(() => {
+    if (!sortByAffinity) return filteredUmas
+    const grandchild = getGrandchildByPosition(treeData, { level, position })
+    const child = getChildByPosition(treeData, { level, position })
+    if (!child || !grandchild) return []
+    const grandparentAffinityCombos = getGrandparentAffinityCombosByIds(
+      child.baseId,
+      grandchild.baseId
+    )
+    console.log({ grandparentAffinityCombos })
+    // Sort filteredUmas by the order and value of parentAffinityCombos
+    const affinityComboMap = new Map<string, number>()
+    Object.entries(grandparentAffinityCombos).forEach(([id, value]) => {
+      affinityComboMap.set(id, value)
+    })
+    const sorted = [...filteredUmas].sort((a, b) => {
+      const aValue = affinityComboMap.get(a.chara_id_base) ?? -Infinity
+      const bValue = affinityComboMap.get(b.chara_id_base) ?? -Infinity
       if (aValue !== bValue) return bValue - aValue
       return a.chara_name.localeCompare(b.chara_name)
     })
@@ -159,45 +188,117 @@ const UmaModal = ({
 
             <TabsContent isActive={activeTab === 'all'}>
               <div className="h-[400px] overflow-y-auto">
-                {child ? (
-                  <h3 className="font-semibold mb-2 text-lg leading-tight">
-                    As Parent for
-                    <span
-                      className="text-bold"
-                      style={{
-                        color:
-                          getUmaBasicInfoById(child.id)?.dress_color_main ||
-                          '#000000',
-                      }}
-                    >
-                      {' '}
-                      {getUmaNameById(child?.id, false)}
-                    </span>
-                  </h3>
-                ) : null}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                  {sortedFilteredParentUmas.map(uma => (
-                    <Card
-                      key={uma.chara_id}
-                      className="cursor-pointer transition-all hover:shadow-md"
-                      onClick={() => handleSelectUma(uma)}
-                    >
-                      <CardContent className="p-4">
-                        <div className="flex gap-4">
-                          <UmaImage
-                            charaId={uma.chara_id}
-                            alt={uma.chara_name}
-                            className="w-16 h-20 object-cover rounded-lg border-1 border-amber-200 flex-shrink-0"
-                          />
-                          <div className="flex-1 space-y-2">
-                            <h3 className="font-semibold text-md leading-tight">
-                              {uma.chara_name}
-                            </h3>
+                {/** Parent-based affinity **/}
+                <div className="mb-4">
+                  {child && sortByAffinity ? (
+                    <h3 className="font-semibold mb-2 text-lg leading-tight">
+                      As Parent for
+                      <span
+                        className="text-bold"
+                        style={{
+                          color:
+                            getUmaBasicInfoById(child.id)?.dress_color_main ||
+                            '#000000',
+                        }}
+                      >
+                        {' '}
+                        {getUmaNameById(child?.id, false)}
+                      </span>
+                    </h3>
+                  ) : null}
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    {sortedFilteredParentUmas.map(uma => (
+                      <Card
+                        key={uma.chara_id}
+                        className="cursor-pointer transition-all hover:shadow-md"
+                        onClick={() => handleSelectUma(uma)}
+                      >
+                        <CardContent className="p-4">
+                          <div className="flex gap-4">
+                            <UmaImage
+                              charaId={uma.chara_id}
+                              alt={uma.chara_name}
+                              className="w-16 h-20 object-cover rounded-lg border-1 border-amber-200 flex-shrink-0"
+                            />
+                            <div className="flex-1 space-y-2 flex flex-col">
+                              <h3 className="font-semibold text-md leading-tight">
+                                {uma.chara_name}
+                              </h3>
+                              <h4 className="text-sm text-gray-500 mt-auto">
+                                Affinity:{' '}
+                                {child
+                                  ? (getParentAffinityCombosById(child?.baseId)[
+                                    uma.chara_id_base
+                                  ] ?? 0)
+                                  : null}
+                              </h4>
+                            </div>
                           </div>
-                        </div>
-                      </CardContent>
-                    </Card>
-                  ))}
+                        </CardContent>
+                      </Card>
+                    ))}
+                  </div>
+                </div>
+                {/** Grandparent-based affinity **/}
+                <div>
+                  {child && grandChild && sortByAffinity ? (
+                    <h3 className="font-semibold mb-2 text-lg leading-tight">
+                      As grandparent for
+                      <span className="text-bold">
+                        <span
+                          style={{
+                            color:
+                              getUmaBasicInfoById(grandChild.id)
+                                ?.dress_color_main || '#000000',
+                          }}
+                        >{` ${getUmaNameById(grandChild?.id, false)} `}</span>
+                      </span>
+                      <span className="text-bold">
+                        with
+                        <span
+                          style={{
+                            color:
+                              getUmaBasicInfoById(child.id)?.dress_color_main ||
+                              '#000000',
+                          }}
+                        >{` ${getUmaNameById(child?.id, false)} `}</span>
+                        parent
+                      </span>
+                    </h3>
+                  ) : null}
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    {sortedFilteredGrandParentUmas.map(uma => (
+                      <Card
+                        key={uma.chara_id}
+                        className="cursor-pointer transition-all hover:shadow-md"
+                        onClick={() => handleSelectUma(uma)}
+                      >
+                        <CardContent className="p-4">
+                          <div className="flex gap-4">
+                            <UmaImage
+                              charaId={uma.chara_id}
+                              alt={uma.chara_name}
+                              className="w-16 h-20 object-cover rounded-lg border-1 border-amber-200 flex-shrink-0"
+                            />
+                            <div className="flex-1 space-y-2 flex flex-col">
+                              <h3 className="font-semibold text-md leading-tight">
+                                {uma.chara_name}
+                              </h3>
+                              <h4 className="text-sm text-gray-500 mt-auto">
+                                Affinity:{' '}
+                                {child && grandChild
+                                  ? (getGrandparentAffinityCombosByIds(
+                                    child.baseId,
+                                    grandChild.baseId
+                                  )[uma.chara_id_base] ?? 0)
+                                  : null}
+                              </h4>
+                            </div>
+                          </div>
+                        </CardContent>
+                      </Card>
+                    ))}
+                  </div>
                 </div>
               </div>
             </TabsContent>
