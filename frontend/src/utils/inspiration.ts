@@ -37,7 +37,6 @@ export const buildSparks = (treeData: TreeData, meta: TreeSlot) => {
   const baseAffinitySet = getBaseAffinity(treeData, meta)
   const raceAffinitySet = getRaceAffinity(treeData, meta)
   if (!umaFamilyPosition || !baseAffinitySet) return []
-  console.log({ umaFamilyPosition, affinitySet: baseAffinitySet })
   const sparkSet = []
 
   for (const [side, group] of Object.entries(umaFamilyPosition)) {
@@ -63,7 +62,6 @@ export const buildSparks = (treeData: TreeData, meta: TreeSlot) => {
       }
     }
   }
-  console.log({ sparkSet })
   return sparkSet
 }
 
@@ -83,7 +81,6 @@ export const groupSparks = (sparks: EnhanceSparkData[]): SparkWithChance[] => {
 
     // Handle both single SparkData and array of SparkData
     const sparkDataArray = Array.isArray(data) ? data : [data]
-    console.log({ sparkDataArray })
     for (const sparkData of sparkDataArray) {
       const { stat, isRace } = sparkData
       const innerType = type === 'whiteSpark' && isRace ? 'raceSpark' : type

@@ -45,7 +45,6 @@ export default function SparkProcDisplay({
     const sparkSet = buildSparks(treeData, { level, position })
     const groupedSpark = groupSparks(sparkSet)
     const sparkAtLeastOnceChances = getSparkAtLeastOnceChances(groupedSpark)
-    console.log({ sparkAtLeastOnceChances })
     const sortedSparks = Object.entries(sparkAtLeastOnceChances).sort(
       ([, a], [, b]) => b.chanceAtLeastOnce - a.chanceAtLeastOnce
     )

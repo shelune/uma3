@@ -110,7 +110,6 @@ export function useUrlSharing() {
 
         // Convert back to full TreeData format
         const fullData: TreeData = {}
-        console.log({ decodedData: minimalData })
         Object.entries(minimalData).forEach(([level, levelData]) => {
           const levelNum = parseInt(level, 10)
           fullData[levelNum] = {}
@@ -163,7 +162,6 @@ export function useUrlSharing() {
             }
           )
         })
-        console.log({ fullData })
         return fullData
       } catch (error) {
         console.error('Error decoding tree data from URL:', error)

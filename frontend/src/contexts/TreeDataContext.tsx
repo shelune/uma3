@@ -62,8 +62,6 @@ export const TreeDataProvider: React.FC<TreeDataProviderProps> = ({
       setTreeData(prev => {
         const newTree = { ...prev }
 
-        console.log({ prev, newTree, updates, level, position })
-
         if (!newTree[level]) {
           newTree[level] = {}
         }
@@ -86,16 +84,7 @@ export const TreeDataProvider: React.FC<TreeDataProviderProps> = ({
               ...(existingUma ? existingUma : {}),
               ...(updates as Uma),
             }
-            console.log({ newTree })
           } else {
-            // Create new Uma with defaults
-            console.log('huh', {
-              existingUma,
-              override,
-              updates,
-              level,
-              position,
-            })
             newTree[level][position] = {
               id: '',
               baseId: '',
