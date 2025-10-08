@@ -17,6 +17,7 @@ import UmaModal from '../components/UmaModal'
 import TreeDataManager from '../components/TreeDataManager'
 import SaveTreeModal from '../components/SaveTreeModal'
 import SavedTreesModal from '../components/SavedTreesModal'
+import SavedUmasModal from '../components/SavedUmasModal'
 import MobileActionsBar from '../components/MobileActionsBar'
 import MobileLevelNavigator from '../components/MobileLevelNavigator'
 import BreedingTreeHeader from '../components/BreedingTreeHeader'
@@ -33,6 +34,7 @@ const BreedingTree = () => {
   const [modalOpen, setModalOpen] = useState<boolean>(false)
   const [saveTreeModalOpen, setSaveTreeModalOpen] = useState<boolean>(false)
   const [savedTreesModalOpen, setSavedTreesModalOpen] = useState<boolean>(false)
+  const [savedUmasModalOpen, setSavedUmasModalOpen] = useState<boolean>(false)
 
   // level 0 and position 0 indicates no selection
   const [selectedSlot, setSelectedSlot] = useState<TreeSlot>({
@@ -234,6 +236,7 @@ const BreedingTree = () => {
             onClearTree={clearTree}
             onLoadTree={handleLoadTree}
             onOpenSavedTreesModal={() => setSavedTreesModalOpen(true)}
+            onOpenSavedUmasModal={() => setSavedUmasModalOpen(true)}
           />
 
           {/* Keep additional desktop actions */}
@@ -276,6 +279,8 @@ const BreedingTree = () => {
       {isMobile && (
         <MobileActionsBar
           onSaveTree={handleSaveTree}
+          onOpenSavedTrees={() => setSavedTreesModalOpen(true)}
+          onOpenSavedUmas={() => setSavedUmasModalOpen(true)}
           onShare={handleShare}
           onClearTree={clearTree}
         />
@@ -297,6 +302,10 @@ const BreedingTree = () => {
       <SavedTreesModal
         isOpen={savedTreesModalOpen}
         toggleOpen={() => setSavedTreesModalOpen(!savedTreesModalOpen)}
+      />
+      <SavedUmasModal
+        isOpen={savedUmasModalOpen}
+        onClose={() => setSavedUmasModalOpen(false)}
       />
     </div>
   )
