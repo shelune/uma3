@@ -40,7 +40,7 @@ const BlueSparkSelector = ({
                 {Array.from({ length: blueSpark.level }).map((_, i) => (
                   <Star
                     key={i}
-                    className="w-3 h-3 fill-blue-400 text-blue-400"
+                    className="w-3 h-3 fill-blue-400 text-blue-400 dark:fill-blue-50 dark:text-blue-50"
                   />
                 ))}
               </span>

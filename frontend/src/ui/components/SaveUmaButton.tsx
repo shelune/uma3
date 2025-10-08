@@ -7,10 +7,11 @@ import {
   DialogTitle,
   DialogFooter,
 } from '@/ui/base/dialog'
-import { Save } from 'lucide-react'
+import { Save, AlertTriangle } from 'lucide-react'
+import { getUmaNameById } from '../../utils/formatting'
 import { useState } from 'react'
 import type { Uma } from '../../types/uma'
-import { useSavedUmas } from '../../hooks/useSavedUmas'
+import { useSavedUmas, type SavedUma } from '../../hooks/useSavedUmas'
 
 interface SaveUmaButtonProps {
   uma: Uma | null | undefined
@@ -21,10 +22,14 @@ export default function SaveUmaButton({
   uma,
   className = '',
 }: SaveUmaButtonProps) {
-  const { saveUma, isNicknameTaken } = useSavedUmas()
+  const { saveUma, overrideUma, isNicknameTaken, getSavedUmaByNickname } =
+    useSavedUmas()
   const [showNicknameModal, setShowNicknameModal] = useState(false)
+  const [showOverrideConfirmation, setShowOverrideConfirmation] =
+    useState(false)
   const [nickname, setNickname] = useState('')
   const [error, setError] = useState('')
+  const [existingUma, setExistingUma] = useState<SavedUma | null>(null)
 
   const hasUmaData = uma && uma.id
 
@@ -43,27 +48,58 @@ export default function SaveUmaButton({
       setError('Nickname must be 60 characters or less')
       return
     }
-    if (isNicknameTaken(nickname)) {
-      setError('This nickname is already taken')
-      return
-    }
     if (!uma) {
       setError('No Uma data to save')
+      return
+    }
+
+    if (isNicknameTaken(nickname)) {
+      // Show override confirmation
+      const existing = getSavedUmaByNickname(nickname)
+      setExistingUma(existing || null)
+      setShowOverrideConfirmation(true)
       return
     }
 
     const success = saveUma(uma, nickname)
     if (success) {
       setShowNicknameModal(false)
+      setNickname('')
+      setError('')
     } else {
       setError('Failed to save Uma')
     }
   }
 
+  const handleOverrideConfirm = () => {
+    if (!uma) {
+      setError('No Uma data to save')
+      return
+    }
+
+    const success = overrideUma(uma, nickname)
+    if (success) {
+      setShowNicknameModal(false)
+      setShowOverrideConfirmation(false)
+      setNickname('')
+      setError('')
+      setExistingUma(null)
+    } else {
+      setError('Failed to override Uma')
+    }
+  }
+
+  const handleOverrideCancel = () => {
+    setShowOverrideConfirmation(false)
+    setExistingUma(null)
+  }
+
   const handleCancel = () => {
     setShowNicknameModal(false)
+    setShowOverrideConfirmation(false)
     setNickname('')
     setError('')
+    setExistingUma(null)
   }
 
   return (
@@ -88,6 +124,18 @@ export default function SaveUmaButton({
           </DialogHeader>
 
           <div className="space-y-4">
+            {/* Show current Uma info if available */}
+            {uma && (
+              <div className="p-3 bg-gray-50 dark:bg-gray-800 rounded-lg">
+                <div className="text-sm text-gray-600 dark:text-gray-300">
+                  Current Uma:{' '}
+                  <span className="font-medium">
+                    {getUmaNameById(uma.id, false)}
+                  </span>
+                </div>
+              </div>
+            )}
+
             <div className="space-y-2">
               <label htmlFor="nickname" className="text-sm font-medium">
                 Nickname (required)
@@ -115,6 +163,58 @@ export default function SaveUmaButton({
               Cancel
             </Button>
             <Button onClick={handleSaveWithNickname}>Save Uma</Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      {/* Override Confirmation Dialog */}
+      <Dialog
+        open={showOverrideConfirmation}
+        onOpenChange={setShowOverrideConfirmation}
+      >
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle className="flex items-center gap-2">
+              <AlertTriangle className="w-5 h-5 text-amber-500" />
+              Override Existing Uma?
+            </DialogTitle>
+          </DialogHeader>
+
+          <div className="space-y-4">
+            <div className="text-sm text-gray-600 dark:text-gray-300">
+              A Uma with the nickname{' '}
+              <span className="font-semibold">"{nickname}"</span> already
+              exists.
+            </div>
+
+            {existingUma && (
+              <div className="p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border">
+                <div className="text-sm">
+                  <div className="font-medium text-gray-900 dark:text-gray-100">
+                    Current: {getUmaNameById(existingUma.id, false)}
+                  </div>
+                  <div className="text-gray-500 dark:text-gray-400 text-xs mt-1">
+                    Saved: {new Date(existingUma.savedAt).toLocaleString()}
+                  </div>
+                </div>
+              </div>
+            )}
+
+            <div className="text-sm text-gray-600 dark:text-gray-300">
+              Do you want to override it with the current Uma configuration?
+            </div>
+          </div>
+
+          <DialogFooter>
+            <Button variant="outline" onClick={handleOverrideCancel}>
+              Cancel
+            </Button>
+            <Button
+              onClick={handleOverrideConfirm}
+              className="bg-amber-600 hover:bg-amber-700"
+            >
+              Override
+            </Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>

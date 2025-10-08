@@ -8,24 +8,34 @@ import {
 import { Badge } from '@/ui/base/badge'
 import { FolderOpen, Trash2, Users, Layers } from 'lucide-react'
 import { useState } from 'react'
-import type { TreeData } from '../../contexts/TreeDataContext'
 import { useSavedTrees, SavedTree } from '../../hooks/useSavedTrees'
+import { useTreeData } from '../../hooks'
+import { TreeData } from '../../contexts/TreeDataContext'
 
 interface SavedTreesModalProps {
-  onLoadTree: (treeData: TreeData) => void
+  isOpen?: boolean
+  toggleOpen: (state: boolean) => void
 }
 
-export default function SavedTreesModal({ onLoadTree }: SavedTreesModalProps) {
-  const { savedTrees, deleteTree, getTreeSummary, getSavedTreesStats } =
-    useSavedTrees()
-  const [isOpen, setIsOpen] = useState(false)
+export default function SavedTreesModal({
+  isOpen,
+  toggleOpen,
+}: SavedTreesModalProps) {
+  const {
+    savedTrees,
+    loadTree,
+    deleteTree,
+    getTreeSummary,
+    getSavedTreesStats,
+  } = useSavedTrees()
+  const { setTree } = useTreeData()
   const [deletingId, setDeletingId] = useState<string | null>(null)
 
   const stats = getSavedTreesStats()
 
-  const handleLoadTree = (tree: SavedTree) => {
-    onLoadTree(tree.treeData)
-    setIsOpen(false)
+  const handleLoadTree = (tree: TreeData) => {
+    setTree(tree)
+    toggleOpen(false)
   }
 
   const handleDeleteTree = async (tree: SavedTree) => {
@@ -53,17 +63,7 @@ export default function SavedTreesModal({ onLoadTree }: SavedTreesModalProps) {
 
   return (
     <>
-      <Button
-        variant="outline"
-        size="sm"
-        onClick={() => setIsOpen(true)}
-        className="flex items-center gap-2"
-      >
-        <FolderOpen className="w-4 h-4" />
-        Saved Trees ({stats.total})
-      </Button>
-
-      <Dialog open={isOpen} onOpenChange={setIsOpen}>
+      <Dialog open={isOpen} onOpenChange={toggleOpen}>
         <DialogContent className="max-w-4xl max-h-[80vh] overflow-y-auto">
           <DialogHeader>
             <DialogTitle className="flex items-center gap-2">
@@ -126,7 +126,9 @@ export default function SavedTreesModal({ onLoadTree }: SavedTreesModalProps) {
                           <div className="flex flex-col gap-2 ml-4">
                             <Button
                               size="sm"
-                              onClick={() => handleLoadTree(tree)}
+                              onClick={() =>
+                                handleLoadTree(loadTree(tree.id) ?? {})
+                              }
                               className="whitespace-nowrap"
                             >
                               Load Tree

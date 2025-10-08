@@ -1,7 +1,6 @@
 import { Button } from '@/ui/base/button'
-import { Card, CardContent } from '@/ui/base/card'
-import { Badge } from '@/ui/base/badge'
-import { ChevronDown, User } from 'lucide-react'
+import { Card, CardContent, CardFooter } from '@/ui/base/card'
+import { ChevronDown, Trash2, User } from 'lucide-react'
 import React, { useState } from 'react'
 import { useTreeData } from '../../hooks/useTreeData'
 import type {
@@ -21,6 +20,7 @@ import AffinityDisplay from '../components/AffinityDisplay'
 import SparkProcDisplay from '../components/SparkProcDisplay'
 import SaveUmaButton from '../components/SaveUmaButton'
 import UmaImage from '../components/UmaImage'
+import { getUmaNameById } from '../../utils/formatting'
 
 interface CompactUmaCardProps {
   uma?: Uma | null
@@ -61,7 +61,7 @@ const CompactUmaCard: React.FC<CompactUmaCardProps> = ({
   onWhiteSparkChange,
 }) => {
   const { updateTreeData } = useTreeData()
-  const [isExpanded, setIsExpanded] = useState(false)
+  const [isExpanded, setIsExpanded] = useState(true)
   const { blueSpark, pinkSpark, greenSpark, whiteSpark, races = [] } = uma || {}
 
   const handleClearUma = () => {
@@ -136,43 +136,9 @@ const CompactUmaCard: React.FC<CompactUmaCardProps> = ({
           </div>
 
           <div className="flex-1 min-w-0">
-            <div className="text-sm font-semibold truncate">{uma.name}</div>
-
-            {/* Compact spark indicators */}
-            <div className="flex gap-1 mt-1">
-              {blueSpark?.stat && (
-                <Badge variant="outline" className="text-xs px-1 py-0">
-                  B{blueSpark.level}
-                </Badge>
-              )}
-              {pinkSpark?.stat && (
-                <Badge variant="outline" className="text-xs px-1 py-0">
-                  P{pinkSpark.level}
-                </Badge>
-              )}
-              {greenSpark?.stat && (
-                <Badge variant="outline" className="text-xs px-1 py-0">
-                  G{greenSpark.level}
-                </Badge>
-              )}
-              {whiteSpark && whiteSpark.length > 0 && (
-                <Badge variant="outline" className="text-xs px-1 py-0">
-                  W{whiteSpark.length}
-                </Badge>
-              )}
+            <div className="text-sm font-semibold truncate">
+              {getUmaNameById(uma.id, false)}
             </div>
-          </div>
-
-          <div className="flex flex-col gap-1">
-            <SaveUmaButton uma={uma} />
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={handleClearUma}
-              className="p-1 h-6 w-6"
-            >
-              ×
-            </Button>
           </div>
         </div>
 
@@ -204,6 +170,7 @@ const CompactUmaCard: React.FC<CompactUmaCardProps> = ({
                 <GreenSparkSelector
                   greenSpark={greenSpark}
                   onGreenSparkChange={handleGreenSparkChange}
+                  uma={uma}
                 />
                 <RaceSparkSelector
                   races={races}
@@ -226,6 +193,21 @@ const CompactUmaCard: React.FC<CompactUmaCardProps> = ({
           )}
         </div>
       </CardContent>
+      <CardFooter className="p-2 space-y-2">
+        <div className="w-full flex gap-1">
+          <SaveUmaButton className="flex-1" uma={uma} />
+          <Button
+            onClick={handleClearUma}
+            variant="outline"
+            size="sm"
+            className="cursor-pointer flex items-center gap-2 text-red-600 hover:text-red-700 hover:bg-red-50 border-red-200 hover:border-red-300 dark:bg-red-600 dark:text-white w-1/2"
+            title="Clear all data for this position"
+          >
+            <Trash2 className="w-4 h-4" />
+            <span>Clear</span>
+          </Button>
+        </div>
+      </CardFooter>
     </Card>
   )
 }

@@ -52,7 +52,7 @@ const PinkSparkSelector = ({
                 {Array.from({ length: pinkSpark.level }).map((_, i) => (
                   <Star
                     key={i}
-                    className="w-3 h-3 fill-pink-400 text-pink-400"
+                    className="w-3 h-3 fill-pink-400 text-pink-400 dark:fill-pink-50 dark:text-pink-50"
                   />
                 ))}
               </span>

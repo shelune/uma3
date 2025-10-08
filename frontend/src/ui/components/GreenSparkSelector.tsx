@@ -23,7 +23,6 @@ const GreenSparkSelector = ({
     if (!onGreenSparkChange) return
     onGreenSparkChange(value)
   }
-
   return (
     <Popover>
       <PopoverTrigger asChild>
@@ -42,7 +41,7 @@ const GreenSparkSelector = ({
                 {Array.from({ length: greenSpark.level }).map((_, i) => (
                   <Star
                     key={i}
-                    className="w-3 h-3 fill-green-400 text-green-400"
+                    className="w-3 h-3 fill-green-400 text-green-400 dark:fill-green-50 dark:text-green-50"
                   />
                 ))}
               </span>
@@ -91,7 +90,7 @@ const GreenSparkSelector = ({
               </button>
             )
           })}
-          {!uma || !uma.baseId ? (
+          {!uma || !uma.id ? (
             <div className="text-[10px] text-red-600 font-medium flex items-center gap-1">
               Select a character first
             </div>

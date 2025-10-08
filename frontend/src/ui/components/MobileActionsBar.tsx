@@ -3,14 +3,12 @@ import { Save, Share, Trash2, FolderOpen } from 'lucide-react'
 
 interface MobileActionsBarProps {
   onSaveTree: () => void
-  onLoadTrees: () => void
   onShare: () => void
   onClearTree: () => void
 }
 
 const MobileActionsBar = ({
   onSaveTree,
-  onLoadTrees,
   onShare,
   onClearTree,
 }: MobileActionsBarProps) => {
@@ -30,8 +28,8 @@ const MobileActionsBar = ({
           size="sm"
           variant="ghost"
           className="rounded-full p-3"
-          onClick={onLoadTrees}
-          title="Load Trees"
+          onClick={() => {}}
+          title="Load Saved Trees"
         >
           <FolderOpen className="w-4 h-4" />
         </Button>

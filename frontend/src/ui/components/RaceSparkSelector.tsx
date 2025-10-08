@@ -49,7 +49,7 @@ export default function RaceSparkSelector({
           </span>
         </Badge>
       </PopoverTrigger>
-      <PopoverContent align="start" className="p-3 w-80 max-w-none">
+      <PopoverContent align="start" className="p-3 w-full max-w-dvw">
         <div className="flex justify-between items-center">
           <div className="text-xs uppercase tracking-wide font-semibold text-gray-600 mb-2">
             Races Won

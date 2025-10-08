@@ -131,7 +131,7 @@ export default function WhiteSparkSelector({
           {whiteSpark.length > 0 ? (
             <span className="flex items-center gap-0.5 truncate">
               <span className="truncate">White Sparks</span>
-              <span className="text-[10px] bg-gray-200 px-1 rounded">
+              <span className="ml-1 text-[10px] bg-gray-200 dark:bg-gray-600 px-1 rounded">
                 {whiteSpark.length}
               </span>
             </span>
@@ -140,7 +140,7 @@ export default function WhiteSparkSelector({
           )}
         </Badge>
       </PopoverTrigger>
-      <PopoverContent align="start" className="p-3 w-[520px] max-w-none">
+      <PopoverContent align="start" className="p-3 w-full max-w-dvw">
         <div className="flex justify-between items-center mb-2">
           <div className="text-xs uppercase tracking-wide font-semibold text-gray-600">
             White Sparks
@@ -254,7 +254,7 @@ export default function WhiteSparkSelector({
             <div className="text-[10px] text-gray-600 mb-1">
               Selected ({whiteSpark.length}):
             </div>
-            <div className="flex flex-wrap gap-1 max-h-20 overflow-auto">
+            <div className="flex flex-wrap gap-1 max-h-20">
               {whiteSpark.map((spark, index) => (
                 <Badge
                   key={`selected-${spark.stat}-${index}`}

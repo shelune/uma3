@@ -169,6 +169,31 @@ export function useSavedUmas() {
   )
 
   /**
+   * Override/update an existing saved Uma with the same nickname
+   */
+  const overrideUma = useCallback(
+    (uma: Uma, nickname: string): boolean => {
+      if (!nickname.trim()) {
+        return false // Nickname is required
+      }
+
+      const savedUma: SavedUma = {
+        ...uma,
+        savedAt: Date.now(),
+        nickname: nickname.trim(),
+      }
+
+      setSavedUmasData(prev => ({
+        ...prev,
+        [nickname.trim()]: savedUma,
+      }))
+
+      return true // Success
+    },
+    [setSavedUmasData]
+  )
+
+  /**
    * Remove a saved Uma by nickname
    */
   const removeSavedUma = useCallback(
@@ -282,6 +307,7 @@ export function useSavedUmas() {
   return {
     savedUmas,
     saveUma,
+    overrideUma,
     removeSavedUma,
     isUmaSaved,
     isNicknameTaken,

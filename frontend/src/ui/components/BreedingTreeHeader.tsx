@@ -7,7 +7,7 @@ import {
   DialogTitle,
 } from '@/ui/base/dialog'
 import { Input } from '@/ui/base/input'
-import { Heart, Edit2, Trash2, Save, X, Folder } from 'lucide-react'
+import { Heart, Edit2, Trash2, Save, X, Folder, FolderOpen } from 'lucide-react'
 import { useState } from 'react'
 import { useSavedUmas } from '../../hooks/useSavedUmas'
 import {
@@ -17,24 +17,30 @@ import {
 } from '../../utils/formatting'
 import { TreeData } from '../../contexts/TreeDataContext'
 import SavedTreesModal from './SavedTreesModal'
+import { useSavedTrees } from '../../hooks/useSavedTrees'
 
 interface BreedingTreeHeaderProps {
   isMobile: boolean
   onSaveTree: () => void
   onClearTree: () => void
   onLoadTree: (treeData: TreeData) => void
+  onOpenSavedTreesModal: () => void
 }
 
 const BreedingTreeHeader: React.FC<BreedingTreeHeaderProps> = ({
   isMobile,
   onSaveTree,
   onClearTree,
-  onLoadTree,
+  onOpenSavedTreesModal,
 }) => {
   const { savedUmas, removeSavedUma, updateUmaNickname, getSavedUmasStats } =
     useSavedUmas()
 
+  const { getSavedTreesStats } = useSavedTrees()
+  const { total } = getSavedTreesStats()
+
   const [savedUmasDialogOpen, setSavedUmasDialogOpen] = useState(false)
+
   const [editingUma, setEditingUma] = useState<string | null>(null)
   const [editNickname, setEditNickname] = useState('')
   const [notification, setNotification] = useState('')
@@ -109,7 +115,15 @@ const BreedingTreeHeader: React.FC<BreedingTreeHeaderProps> = ({
             <Save className="w-4 h-4" />
             Save Tree
           </Button>
-          <SavedTreesModal onLoadTree={onLoadTree} />
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => onOpenSavedTreesModal?.()}
+            className="flex items-center gap-2"
+          >
+            <FolderOpen className="w-4 h-4" />
+            Saved Trees ({total})
+          </Button>
           <Button
             variant="destructive"
             size="sm"

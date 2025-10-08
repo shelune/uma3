@@ -18,7 +18,7 @@ const MobileLevelNavigator = ({
         variant="ghost"
         size="sm"
         onClick={() => onLevelChange(Math.max(currentLevel - 1, 0))}
-        disabled={currentLevel === 0}
+        disabled={currentLevel <= 1}
         className="p-2"
       >
         <ChevronLeft className="w-4 h-4" />
@@ -29,7 +29,7 @@ const MobileLevelNavigator = ({
           Level {currentLevel}
         </div>
         <div className="text-xs text-gray-500 dark:text-gray-400">
-          Swipe left/right to navigate
+          Swipe left/right to go to child/parent
         </div>
       </div>
 

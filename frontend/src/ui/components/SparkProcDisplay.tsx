@@ -86,8 +86,7 @@ export default function SparkProcDisplay({
               sideOffset={16}
               side="right"
               align="end"
-              className="p-3 w-min-[300px] w-[600px] max-w-none"
-              style={{ maxHeight: '220px', overflowY: 'auto' }}
+              className="p-3 w-full max-w-dvw max-h-[300px] overflow-y-auto"
             >
               <div className="text-xs font-semibold mb-2">
                 Inspiration Chance List (per career)
