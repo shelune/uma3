@@ -1,7 +1,7 @@
 import { Button } from '@/ui/base/button'
 import { Card, CardContent } from '@/ui/base/card'
 import { Badge } from '@/ui/base/badge'
-import { ChevronDown, User, Trash2 } from 'lucide-react'
+import { ChevronDown, User } from 'lucide-react'
 import React, { useState } from 'react'
 import { useTreeData } from '../../hooks/useTreeData'
 import type {
@@ -186,8 +186,7 @@ const CompactUmaCard: React.FC<CompactUmaCardProps> = ({
           >
             <span>Details & Sparks</span>
             <ChevronDown
-              className={`w-3 h-3 transition-transform ${isExpanded ? 'rotate-180' : ''
-                }`}
+              className={`w-3 h-3 transition-transform ${isExpanded ? 'rotate-180' : ''}`}
             />
           </Button>
 

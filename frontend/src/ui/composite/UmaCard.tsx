@@ -132,13 +132,13 @@ const UmaCard: React.FC<ExtendedUmaCardProps> = ({
 
   return (
     <Card
-      className={`h-full ${getCardSize()} transition-all duration-300 hover:scale-105 hover:shadow-lg group`}
+      className={`h-full ${getCardSize()} transition-all duration-300 hover:scale-105 hover:shadow-lg group bg-white dark:bg-gray-900 border-gray-200 dark:border-gray-700`}
     >
       <CardHeader className="p-3 pb-2">
         <div className="flex justify-between items-center">
           {
             <div className="flex items-center gap-2 flex-1 mr-2">
-              <div className="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center">
+              <div className="w-8 h-8 bg-gray-200 dark:bg-gray-600 rounded-full flex items-center justify-center">
                 <Button
                   variant="ghost"
                   size="sm"
@@ -154,12 +154,12 @@ const UmaCard: React.FC<ExtendedUmaCardProps> = ({
                       style={{ width: 32, height: 32 }}
                     />
                   ) : (
-                    <User className="w-8 h-8 text-gray-400" />
+                    <User className="w-8 h-8 text-gray-400 dark:text-gray-500" />
                   )}
                 </Button>
               </div>
               <span
-                className="text-sm text-gray-800 cursor-pointer"
+                className="text-sm text-gray-800 dark:text-gray-200 cursor-pointer"
                 onClick={() => onSelectUma(level, position)}
               >
                 {uma?.id
@@ -237,7 +237,7 @@ const UmaCard: React.FC<ExtendedUmaCardProps> = ({
             onClick={handleClearData}
             variant="outline"
             size="sm"
-            className="flex items-center gap-2 text-red-600 hover:text-red-700 hover:bg-red-50 border-red-200 hover:border-red-300 w-1/2"
+            className="cursor-pointer flex items-center gap-2 text-red-600 hover:text-red-700 hover:bg-red-50 border-red-200 hover:border-red-300 dark:bg-red-600 dark:text-white w-1/2"
             title="Clear all data for this position"
           >
             <Trash2 className="w-4 h-4" />

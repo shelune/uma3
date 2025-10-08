@@ -70,7 +70,7 @@ export default function SparkProcDisplay({
   return (
     <>
       <div className="flex justify-between">
-        <div className="text-xs uppercase tracking-wide font-semibold text-gray-600">
+        <div className="text-xs uppercase tracking-wide font-semibold text-gray-600 dark:text-gray-50">
           {LOCALE_EN.SPARK_PROCS}
         </div>
         <div className="text-xs inline-flex gap-1">

@@ -1,5 +1,6 @@
 import { Button } from '@/ui/base/button'
 import { BookOpen } from 'lucide-react'
+import ThemeToggle from '../../components/ThemeToggle'
 
 interface NavigationProps {
   currentPage: 'breeding-tree' | 'instructions'
@@ -8,7 +9,7 @@ interface NavigationProps {
 
 const Navigation = ({ currentPage, onPageChange }: NavigationProps) => {
   return (
-    <header className="bg-white border-b border-gray-200 shadow-sm">
+    <header className="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <div className="flex items-center gap-3">
@@ -17,29 +18,33 @@ const Navigation = ({ currentPage, onPageChange }: NavigationProps) => {
               alt="Gold Ship Uma Musume"
               className="w-10 h-10 rounded-lg object-cover"
             />
-            <h1 className="text-xl font-bold text-gray-900">
+            <h1 className="text-xl font-bold text-gray-900 dark:text-white">
               Uma Breeding Tree
             </h1>
           </div>
 
-          <nav className="flex space-x-1">
-            <Button
-              variant={currentPage === 'breeding-tree' ? 'default' : 'ghost'}
-              onClick={() => onPageChange('breeding-tree')}
-              className="flex items-center gap-2"
-            >
-              Breeding Tree
-            </Button>
+          <div className="flex items-center gap-4">
+            <nav className="flex space-x-1">
+              <Button
+                variant={currentPage === 'breeding-tree' ? 'default' : 'ghost'}
+                onClick={() => onPageChange('breeding-tree')}
+                className="flex items-center gap-2"
+              >
+                Breeding Tree
+              </Button>
 
-            <Button
-              variant={currentPage === 'instructions' ? 'default' : 'ghost'}
-              onClick={() => onPageChange('instructions')}
-              className="flex items-center gap-2"
-            >
-              <BookOpen className="w-4 h-4" />
-              How To Use
-            </Button>
-          </nav>
+              <Button
+                variant={currentPage === 'instructions' ? 'default' : 'ghost'}
+                onClick={() => onPageChange('instructions')}
+                className="flex items-center gap-2"
+              >
+                <BookOpen className="w-4 h-4" />
+                How To Use
+              </Button>
+            </nav>
+
+            <ThemeToggle />
+          </div>
         </div>
       </div>
     </header>

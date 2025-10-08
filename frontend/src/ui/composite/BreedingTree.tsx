@@ -1,10 +1,9 @@
 import { Button } from '@/ui/base/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/ui/base/card'
-import { Trash2, Save, Share } from 'lucide-react'
+import { Trash2, Save } from 'lucide-react'
 import { useState } from 'react'
 import { useSwipeable } from 'react-swipeable'
 import { CharacterNameID } from '@/types/characterNameId'
-import UMA_LIST_WITH_ID from '../../assets/home/chara_names_with_id.json'
 import type {
   BlueSparkData,
   GreenSparkData,
@@ -23,6 +22,7 @@ import SavedTreesModal from '../components/SavedTreesModal'
 import MobileActionsBar from '../components/MobileActionsBar'
 import MobileLevelNavigator from '../components/MobileLevelNavigator'
 import { TreeSlot, TreeData } from '../../contexts/TreeDataContext'
+import UMA_LIST_WITH_ID from '../../assets/home/chara_names_with_id.json'
 
 const umaList: CharacterNameID[] = UMA_LIST_WITH_ID
 
@@ -221,18 +221,8 @@ const BreedingTree = () => {
 
   console.log({ treeData })
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 p-4">
-      <Card
-        className="max-w-8xl mx-auto rounded-none shadow-none border-none"
-        style={{
-          backgroundImage: `
-                linear-gradient(to right, rgba(59, 130, 246, 0.1) 0, rgba(59, 130, 246, 0.1) 2px, transparent 2px),
-                linear-gradient(to bottom, rgba(59, 130, 246, 0.1) 0, rgba(59, 130, 246, 0.1) 2px, transparent 2px)
-              `,
-          backgroundSize: '60px 60px',
-          backgroundColor: '#fefefe',
-        }}
-      >
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 p-4">
+      <Card className="max-w-8xl mx-auto rounded-none shadow-none border-none bg-gray-50 dark:bg-gray-800 grid-pattern-light dark:grid-pattern-dark">
         <CardHeader className="text-center">
           <CardTitle
             className={`${isMobile ? 'text-2xl' : 'text-4xl'} font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent`}
@@ -254,10 +244,9 @@ const BreedingTree = () => {
               </Button>
               <SavedTreesModal onLoadTree={handleLoadTree} />
               <Button
-                variant="destructive"
                 size="sm"
                 onClick={clearTree}
-                className="flex items-center gap-2 text-white"
+                className="flex items-center gap-2 text-white bg-red-600"
               >
                 <Trash2 className="w-4 h-4" />
                 Clear Tree

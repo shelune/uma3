@@ -6,7 +6,7 @@ import {
   DialogTitle,
 } from '@/ui/base/dialog'
 import { Badge } from '@/ui/base/badge'
-import { FolderOpen, Trash2, Calendar, Users, Layers } from 'lucide-react'
+import { FolderOpen, Trash2, Users, Layers } from 'lucide-react'
 import { useState } from 'react'
 import type { TreeData } from '../../contexts/TreeDataContext'
 import { useSavedTrees, SavedTree } from '../../hooks/useSavedTrees'

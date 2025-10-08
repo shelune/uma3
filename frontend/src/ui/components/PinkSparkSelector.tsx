@@ -42,7 +42,7 @@ const PinkSparkSelector = ({
         <Badge
           variant="outline"
           role="button"
-          className="text-xs w-full justify-center bg-pink-50 border-pink-200 cursor-pointer select-none"
+          className="text-xs w-full justify-center bg-pink-50 dark:bg-pink-400 border-pink-200 cursor-pointer select-none"
           title="Set Pink Spark Category & Level"
         >
           {pinkSpark && pinkSpark.stat && pinkSpark.level ? (

@@ -85,7 +85,7 @@ const UmaModal = ({
 
         <div className="px-6 space-y-4">
           <div className="relative">
-            <Search className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
+            <Search className="absolute left-3 top-3 h-4 w-4 text-gray-400 dark:text-gray-500" />
             <Input
               placeholder="Search Uma Musume..."
               value={searchTerm}
@@ -104,7 +104,7 @@ const UmaModal = ({
             />
             <label
               htmlFor="sort-affinity"
-              className="text-sm font-medium text-gray-400"
+              className="text-sm font-medium text-gray-400 dark:text-gray-500"
             >
               Sort by affinity (coming soon)
             </label>
@@ -161,8 +161,8 @@ const UmaModal = ({
             <TabsContent isActive={activeTab === 'saved'}>
               <div className="h-[400px] overflow-y-auto">
                 {savedUmasList.length === 0 ? (
-                  <div className="flex flex-col items-center justify-center h-full text-gray-500">
-                    <Heart className="w-12 h-12 mb-4 text-gray-300" />
+                  <div className="flex flex-col items-center justify-center h-full text-gray-500 dark:text-gray-400">
+                    <Heart className="w-12 h-12 mb-4 text-gray-300 dark:text-gray-600" />
                     <p className="text-lg font-medium">No saved Uma Musume</p>
                   </div>
                 ) : (

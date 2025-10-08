@@ -14,7 +14,7 @@ import Step11 from '@/assets/home/images/instructions/step-11.jpg'
 
 const Instructions = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 p-4 scroll-smooth">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 p-4 scroll-smooth">
       <Card className="max-w-4xl mx-auto">
         <CardHeader className="text-center">
           <CardTitle className="text-4xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">

@@ -31,7 +31,7 @@ const GreenSparkSelector = ({
           variant="outline"
           role="button"
           className={
-            'text-xs w-full justify-center bg-green-50 border-green-200 cursor-pointer select-none'
+            'text-xs w-full justify-center bg-green-50 border-green-200 cursor-pointer select-none dark:bg-green-400'
           }
           title="Set Green Spark Level"
         >

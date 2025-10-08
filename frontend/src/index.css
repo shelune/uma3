@@ -135,3 +135,38 @@ body {
     white-space: pre-wrap;
   }
 }
+
+/* Grid pattern backgrounds for breeding tree */
+.grid-pattern-light {
+  background-image:
+    linear-gradient(
+      to right,
+      rgba(59, 130, 246, 0.1) 0,
+      rgba(59, 130, 246, 0.1) 2px,
+      transparent 2px
+    ),
+    linear-gradient(
+      to bottom,
+      rgba(59, 130, 246, 0.1) 0,
+      rgba(59, 130, 246, 0.1) 2px,
+      transparent 2px
+    );
+  background-size: 60px 60px;
+}
+
+.grid-pattern-dark {
+  background-image:
+    linear-gradient(
+      to right,
+      rgba(99, 102, 241, 0.2) 0,
+      rgba(99, 102, 241, 0.2) 2px,
+      transparent 2px
+    ),
+    linear-gradient(
+      to bottom,
+      rgba(99, 102, 241, 0.2) 0,
+      rgba(99, 102, 241, 0.2) 2px,
+      transparent 2px
+    );
+  background-size: 60px 60px;
+}

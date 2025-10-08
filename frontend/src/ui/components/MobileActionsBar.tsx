@@ -16,7 +16,7 @@ const MobileActionsBar = ({
 }: MobileActionsBarProps) => {
   return (
     <div className="fixed bottom-4 left-4 right-4 z-50 md:hidden">
-      <div className="bg-white rounded-full shadow-lg border p-2 flex justify-around">
+      <div className="bg-white dark:bg-gray-800 rounded-full shadow-lg border border-gray-200 dark:border-gray-700 p-2 flex justify-around">
         <Button
           size="sm"
           variant="ghost"

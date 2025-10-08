@@ -124,7 +124,7 @@ export default function WhiteSparkSelector({
           variant="outline"
           role="button"
           className={
-            'text-xs w-full justify-center cursor-pointer select-none bg-gray-50 hover:bg-gray-100 border-gray-200'
+            'text-xs w-full justify-center cursor-pointer select-none bg-gray-50 dark:bg-gray-400 hover:bg-gray-100 border-gray-200'
           }
           title="Set White Spark Skills"
         >
@@ -183,7 +183,7 @@ export default function WhiteSparkSelector({
                       key={`${spark.stat}`}
                       onClick={() => selectWhiteSpark(spark)}
                       className={mergeTwClass(
-                        'flex items-center gap-2 p-1 rounded text-xs transition-colors text-left',
+                        'flex items-center gap-2 p-1 rounded text-xs transition-colors text-left dark:hover:bg-gray-400',
                         activeClass,
                         disabledClass
                       )}

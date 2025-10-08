@@ -30,7 +30,7 @@ const BlueSparkSelector = ({
         <Badge
           variant="outline"
           role="button"
-          className={`text-xs w-full justify-center bg-blue-50 border-blue-200 cursor-pointer select-none`}
+          className={`text-xs w-full justify-center bg-blue-50 border-blue-200 cursor-pointer select-none dark:bg-blue-400`}
           title="Set Blue Spark Stat & Level"
         >
           {blueSpark && blueSpark.stat && blueSpark.level ? (
