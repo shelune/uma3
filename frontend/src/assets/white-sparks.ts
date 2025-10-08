@@ -283,7 +283,10 @@ export const WHITE_SPARK_SKILLS: string[] = [
   "Playtime's Over!",
 ]
 
+export const WHITE_SPARK_SCENARIOS: string[] = ['URA Finale']
+
 export default {
   WHITE_SPARK_RACES,
   WHITE_SPARK_SKILLS,
+  WHITE_SPARK_SCENARIOS,
 }
