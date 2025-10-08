@@ -7,7 +7,8 @@ import {
 } from '@/ui/base/dialog'
 import { Input } from '@/ui/base/input'
 import { Checkbox } from '@/ui/base/checkbox'
-import { Search, Heart, BookMarkedIcon } from 'lucide-react'
+import { Button } from '@/ui/base/button'
+import { Search, Heart, BookMarkedIcon, ChevronDown } from 'lucide-react'
 import { useMemo, useState } from 'react'
 
 import { CharacterNameID } from '@/types/characterNameId'
@@ -54,6 +55,9 @@ const UmaModal = ({
   const [searchTerm, setSearchTerm] = useState<string>('')
   const [activeTab, setActiveTab] = useState<'all' | 'saved'>('all')
   const [sortByAffinity, setSortByAffinity] = useState<boolean>(true)
+  const [parentVisibleCount, setParentVisibleCount] = useState<number>(6)
+  const [grandparentVisibleCount, setGrandparentVisibleCount] =
+    useState<number>(6)
   const { savedUmas } = useSavedUmas()
 
   const child = getChildByPosition(treeData, { level, position })
@@ -92,7 +96,6 @@ const UmaModal = ({
       child.baseId,
       grandchild.baseId
     )
-    console.log({ grandparentAffinityCombos })
     // Sort filteredUmas by the order and value of parentAffinityCombos
     const affinityComboMap = new Map<string, number>()
     Object.entries(grandparentAffinityCombos).forEach(([id, value]) => {
@@ -132,6 +135,13 @@ const UmaModal = ({
     }
   }
 
+  const handleSearchChange = (value: string): void => {
+    setSearchTerm(value)
+    // Reset visible counts when search changes
+    setParentVisibleCount(6)
+    setGrandparentVisibleCount(6)
+  }
+
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="max-w-4xl max-h-[90vh] p-0">
@@ -147,7 +157,7 @@ const UmaModal = ({
             <Input
               placeholder="Search Uma Musume..."
               value={searchTerm}
-              onChange={e => setSearchTerm(e.target.value)}
+              onChange={e => handleSearchChange(e.target.value)}
               className="pl-10"
               autoFocus
             />
@@ -189,7 +199,7 @@ const UmaModal = ({
             <TabsContent isActive={activeTab === 'all'}>
               <div className="h-[400px] overflow-y-auto">
                 {/** Parent-based affinity **/}
-                <div className="mb-4">
+                <div className="mb-6">
                   {child && sortByAffinity ? (
                     <h3 className="font-semibold mb-2 text-lg leading-tight">
                       As Parent for
@@ -206,99 +216,138 @@ const UmaModal = ({
                       </span>
                     </h3>
                   ) : null}
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                    {sortedFilteredParentUmas.map(uma => (
-                      <Card
-                        key={uma.chara_id}
-                        className="cursor-pointer transition-all hover:shadow-md"
-                        onClick={() => handleSelectUma(uma)}
-                      >
-                        <CardContent className="p-4">
-                          <div className="flex gap-4">
-                            <UmaImage
-                              charaId={uma.chara_id}
-                              alt={uma.chara_name}
-                              className="w-16 h-20 object-cover rounded-lg border-1 border-amber-200 flex-shrink-0"
-                            />
-                            <div className="flex-1 space-y-2 flex flex-col">
-                              <h3 className="font-semibold text-md leading-tight">
-                                {uma.chara_name}
-                              </h3>
-                              <h4 className="text-sm text-gray-500 mt-auto">
-                                Affinity:{' '}
-                                {child
-                                  ? (getParentAffinityCombosById(child?.baseId)[
-                                    uma.chara_id_base
-                                  ] ?? 0)
-                                  : null}
-                              </h4>
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-4">
+                    {sortedFilteredParentUmas
+                      .slice(0, parentVisibleCount)
+                      .map(uma => (
+                        <Card
+                          key={uma.chara_id}
+                          className="cursor-pointer transition-all hover:shadow-md"
+                          onClick={() => handleSelectUma(uma)}
+                        >
+                          <CardContent className="p-4">
+                            <div className="flex gap-4">
+                              <UmaImage
+                                charaId={uma.chara_id}
+                                alt={uma.chara_name}
+                                className="w-16 h-20 object-cover rounded-lg border-1 border-amber-200 flex-shrink-0"
+                              />
+                              <div className="flex-1 space-y-2 flex flex-col">
+                                <h3 className="font-semibold text-md leading-tight">
+                                  {uma.chara_name}
+                                </h3>
+                                <h4 className="text-sm text-gray-500 mt-auto">
+                                  Affinity:{' '}
+                                  {child
+                                    ? (getParentAffinityCombosById(
+                                      child?.baseId
+                                    )[uma.chara_id_base] ?? 0)
+                                    : null}
+                                </h4>
+                              </div>
                             </div>
-                          </div>
-                        </CardContent>
-                      </Card>
-                    ))}
+                          </CardContent>
+                        </Card>
+                      ))}
                   </div>
+                  {sortedFilteredParentUmas.length > parentVisibleCount && (
+                    <div className="flex justify-center">
+                      <Button
+                        variant="outline"
+                        onClick={() => setParentVisibleCount(prev => prev + 6)}
+                        className="flex items-center gap-2"
+                      >
+                        <ChevronDown className="w-4 h-4" />
+                        Load More (
+                        {sortedFilteredParentUmas.length -
+                          parentVisibleCount}{' '}
+                        remaining)
+                      </Button>
+                    </div>
+                  )}
                 </div>
                 {/** Grandparent-based affinity **/}
                 <div>
                   {child && grandChild && sortByAffinity ? (
-                    <h3 className="font-semibold mb-2 text-lg leading-tight">
-                      As grandparent for
-                      <span className="text-bold">
-                        <span
-                          style={{
-                            color:
-                              getUmaBasicInfoById(grandChild.id)
-                                ?.dress_color_main || '#000000',
-                          }}
-                        >{` ${getUmaNameById(grandChild?.id, false)} `}</span>
-                      </span>
-                      <span className="text-bold">
-                        with
-                        <span
-                          style={{
-                            color:
-                              getUmaBasicInfoById(child.id)?.dress_color_main ||
-                              '#000000',
-                          }}
-                        >{` ${getUmaNameById(child?.id, false)} `}</span>
-                        parent
-                      </span>
-                    </h3>
+                    <div className="sticky top-0 z-10 py-2 -mx-6 px-6 mb-2 border-b dark:border-gray-700">
+                      <h3 className="font-semibold text-lg leading-tight">
+                        As grandparent for
+                        <span className="text-bold">
+                          <span
+                            style={{
+                              color:
+                                getUmaBasicInfoById(grandChild.id)
+                                  ?.dress_color_main || '#000000',
+                            }}
+                          >{` ${getUmaNameById(grandChild?.id, false)} `}</span>
+                        </span>
+                        <span className="text-bold">
+                          with
+                          <span
+                            style={{
+                              color:
+                                getUmaBasicInfoById(child.id)
+                                  ?.dress_color_main || '#000000',
+                            }}
+                          >{` ${getUmaNameById(child?.id, false)} `}</span>
+                          parent
+                        </span>
+                      </h3>
+                    </div>
                   ) : null}
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                    {sortedFilteredGrandParentUmas.map(uma => (
-                      <Card
-                        key={uma.chara_id}
-                        className="cursor-pointer transition-all hover:shadow-md"
-                        onClick={() => handleSelectUma(uma)}
-                      >
-                        <CardContent className="p-4">
-                          <div className="flex gap-4">
-                            <UmaImage
-                              charaId={uma.chara_id}
-                              alt={uma.chara_name}
-                              className="w-16 h-20 object-cover rounded-lg border-1 border-amber-200 flex-shrink-0"
-                            />
-                            <div className="flex-1 space-y-2 flex flex-col">
-                              <h3 className="font-semibold text-md leading-tight">
-                                {uma.chara_name}
-                              </h3>
-                              <h4 className="text-sm text-gray-500 mt-auto">
-                                Affinity:{' '}
-                                {child && grandChild
-                                  ? (getGrandparentAffinityCombosByIds(
-                                    child.baseId,
-                                    grandChild.baseId
-                                  )[uma.chara_id_base] ?? 0)
-                                  : null}
-                              </h4>
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-4">
+                    {sortedFilteredGrandParentUmas
+                      .slice(0, grandparentVisibleCount)
+                      .map(uma => (
+                        <Card
+                          key={uma.chara_id}
+                          className="cursor-pointer transition-all hover:shadow-md"
+                          onClick={() => handleSelectUma(uma)}
+                        >
+                          <CardContent className="p-4">
+                            <div className="flex gap-4">
+                              <UmaImage
+                                charaId={uma.chara_id}
+                                alt={uma.chara_name}
+                                className="w-16 h-20 object-cover rounded-lg border-1 border-amber-200 flex-shrink-0"
+                              />
+                              <div className="flex-1 space-y-2 flex flex-col">
+                                <h3 className="font-semibold text-md leading-tight">
+                                  {uma.chara_name}
+                                </h3>
+                                <h4 className="text-sm text-gray-500 mt-auto">
+                                  Affinity:{' '}
+                                  {child && grandChild
+                                    ? (getGrandparentAffinityCombosByIds(
+                                      child.baseId,
+                                      grandChild.baseId
+                                    )[uma.chara_id_base] ?? 0)
+                                    : null}
+                                </h4>
+                              </div>
                             </div>
-                          </div>
-                        </CardContent>
-                      </Card>
-                    ))}
+                          </CardContent>
+                        </Card>
+                      ))}
                   </div>
+                  {sortedFilteredGrandParentUmas.length >
+                    grandparentVisibleCount && (
+                      <div className="flex justify-center">
+                        <Button
+                          variant="outline"
+                          onClick={() =>
+                            setGrandparentVisibleCount(prev => prev + 6)
+                          }
+                          className="flex items-center gap-2"
+                        >
+                          <ChevronDown className="w-4 h-4" />
+                          Load More (
+                          {sortedFilteredGrandParentUmas.length -
+                            grandparentVisibleCount}{' '}
+                          remaining)
+                        </Button>
+                      </div>
+                    )}
                 </div>
               </div>
             </TabsContent>
