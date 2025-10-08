@@ -254,8 +254,8 @@ const UmaModal = ({
                                   Affinity:{' '}
                                   {child
                                     ? (getParentAffinityCombosById(
-                                      child?.baseId
-                                    )[uma.chara_id_base] ?? 0)
+                                        child?.baseId
+                                      )[uma.chara_id_base] ?? 0)
                                     : null}
                                 </h4>
                               </div>
@@ -333,9 +333,9 @@ const UmaModal = ({
                                   Affinity:{' '}
                                   {child && grandChild
                                     ? (getGrandparentAffinityCombosByIds(
-                                      child.baseId,
-                                      grandChild.baseId
-                                    )[uma.chara_id_base] ?? 0)
+                                        child.baseId,
+                                        grandChild.baseId
+                                      )[uma.chara_id_base] ?? 0)
                                     : null}
                                 </h4>
                               </div>
@@ -346,22 +346,22 @@ const UmaModal = ({
                   </div>
                   {sortedFilteredGrandParentUmas.length >
                     grandparentVisibleCount && (
-                      <div className="flex justify-center">
-                        <Button
-                          variant="outline"
-                          onClick={() =>
-                            setGrandparentVisibleCount(prev => prev + 6)
-                          }
-                          className="flex items-center gap-2"
-                        >
-                          <ChevronDown className="w-4 h-4" />
-                          Load More (
-                          {sortedFilteredGrandParentUmas.length -
-                            grandparentVisibleCount}{' '}
-                          remaining)
-                        </Button>
-                      </div>
-                    )}
+                    <div className="flex justify-center">
+                      <Button
+                        variant="outline"
+                        onClick={() =>
+                          setGrandparentVisibleCount(prev => prev + 6)
+                        }
+                        className="flex items-center gap-2"
+                      >
+                        <ChevronDown className="w-4 h-4" />
+                        Load More (
+                        {sortedFilteredGrandParentUmas.length -
+                          grandparentVisibleCount}{' '}
+                        remaining)
+                      </Button>
+                    </div>
+                  )}
                 </div>
               </div>
             </TabsContent>

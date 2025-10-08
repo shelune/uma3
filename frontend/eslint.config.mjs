@@ -1,6 +1,5 @@
 import reactHooks from 'eslint-plugin-react-hooks'
 import reactRefresh from 'eslint-plugin-react-refresh'
-import prettier from 'eslint-plugin-prettier'
 import prettierConfig from 'eslint-config-prettier'
 import globals from 'globals'
 import baseConfig from '../eslint.config.mjs'
@@ -12,7 +11,6 @@ export default [
     plugins: {
       'react-hooks': reactHooks,
       'react-refresh': reactRefresh,
-      prettier,
     },
     rules: {
       ...reactHooks.configs.recommended.rules,
@@ -20,7 +18,6 @@ export default [
         'warn',
         { allowConstantExport: true },
       ],
-      'prettier/prettier': 'error',
     },
     languageOptions: {
       ecmaVersion: 2020,
