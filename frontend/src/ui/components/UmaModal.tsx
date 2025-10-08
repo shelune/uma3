@@ -142,6 +142,20 @@ const UmaModal = ({
     setGrandparentVisibleCount(6)
   }
 
+  const handleTabChange = (tab: 'all' | 'saved'): void => {
+    setActiveTab(tab)
+    // Reset visible counts when tab changes
+    setParentVisibleCount(6)
+    setGrandparentVisibleCount(6)
+  }
+
+  const handleSortChange = (checked: boolean): void => {
+    setSortByAffinity(checked)
+    // Reset visible counts when sorting changes
+    setParentVisibleCount(6)
+    setGrandparentVisibleCount(6)
+  }
+
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="max-w-4xl max-h-[90vh] p-0">
@@ -167,7 +181,7 @@ const UmaModal = ({
             <Checkbox
               id="sort-affinity"
               checked={sortByAffinity}
-              onCheckedChange={setSortByAffinity}
+              onCheckedChange={handleSortChange}
             />
             <label
               htmlFor="sort-affinity"
@@ -181,14 +195,14 @@ const UmaModal = ({
             <TabsList className="w-full">
               <TabsTrigger
                 isActive={activeTab === 'all'}
-                onClick={() => setActiveTab('all')}
+                onClick={() => handleTabChange('all')}
                 className="flex-1"
               >
                 All Uma ({filteredUmas.length})
               </TabsTrigger>
               <TabsTrigger
                 isActive={activeTab === 'saved'}
-                onClick={() => setActiveTab('saved')}
+                onClick={() => handleTabChange('saved')}
                 className="flex-1"
               >
                 <BookMarkedIcon className="w-4 h-4 mr-1" />
