@@ -163,6 +163,7 @@ export default function WhiteSparkSelector({
                 value={whiteSparkSearch}
                 onChange={e => setWhiteSparkSearch(e.target.value)}
                 className="text-xs h-8"
+                autoFocus
               />
             </div>
             <div className="max-h-48 overflow-auto pr-1">

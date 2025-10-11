@@ -1,4 +1,4 @@
-import UMA_AFFINITY_MAPPING from '../assets/home/affinity-mapping.json'
+import UMA_AFFINITY_MAPPING from '../assets/home/affinity_mapping.json'
 import { TreeData, TreeSlot } from '../contexts/TreeDataContext'
 import { getUmaByPosition } from './uma'
 
