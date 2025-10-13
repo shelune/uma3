@@ -56,6 +56,15 @@ else
     echo -e "${YELLOW}Warning: affinity-combined.json not found in ./data/home${NC}"
 fi
 
+# Move character images directory
+if [[ -d "./data/home/images/characters" ]]; then
+  mkdir -p ./frontend/src/assets/home/images/characters
+  cp -rn ./data/home/images/characters/* ./frontend/src/assets/home/images/characters/
+  echo "Moved character images to frontend assets"
+else
+  echo -e "${YELLOW}Warning: ./data/home/images/characters directory not found${NC}"
+fi
+
 echo -e "${GREEN}File movement completed successfully!${NC}"
 echo "================================================"
 echo "Files moved to ./frontend/src/assets/home/:"
