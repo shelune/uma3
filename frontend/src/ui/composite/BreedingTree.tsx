@@ -142,10 +142,11 @@ const BreedingTree = () => {
       position: idx + 1,
     }))
 
-    // Split cards into rows of maximum 8 cards each
+    // Split cards into rows - level 4 uses 4 cards per row, others use 8
+    const cardsPerRow = level >= 4 ? 4 : 8
     const rows = []
-    for (let i = 0; i < cardsInLevel; i += 8) {
-      const rowSize = Math.min(8, cardsInLevel - i)
+    for (let i = 0; i < cardsInLevel; i += cardsPerRow) {
+      const rowSize = Math.min(cardsPerRow, cardsInLevel - i)
       rows.push({ cards: cards.slice(i, i + rowSize), size: rowSize })
     }
 
@@ -155,7 +156,7 @@ const BreedingTree = () => {
           {rows.map((row, rowIndex) => (
             <div
               key={`row-${rowIndex}`}
-              className={`grid grid-cols-[repeat(auto-fit,minmax(100px,1fr))] auto-rows-auto gap-4 mx-auto justify-items-center items-center`}
+              className={`grid ${level >= 4 ? 'grid-cols-4' : 'grid-cols-[repeat(auto-fit,minmax(100px,1fr))]'} auto-rows-auto gap-4 mx-auto justify-items-center items-center`}
             >
               {row.cards.map(({ position }) => (
                 <div key={`${level}-${position}`} className="relative h-full">
