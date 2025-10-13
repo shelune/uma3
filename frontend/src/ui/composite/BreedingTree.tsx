@@ -1,6 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/ui/base/card'
 import { Button } from '@/ui/base/button'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useSwipeable } from 'react-swipeable'
 import { ChevronDown, ChevronUp } from 'lucide-react'
 import { CharacterNameID } from '@/types/characterNameId'
@@ -44,12 +44,17 @@ const BreedingTree = () => {
     position: 0,
   })
 
-  // Mobile navigation state
   const [currentMobileLevel, setCurrentMobileLevel] = useState(1)
-  const maxLevel = 4
+  const MAX_LEVEL = 4
 
-  // Desktop level 4 visibility toggle
-  const [showLevel4, setShowLevel4] = useState(false)
+  // Check if level 4 has any data, show on start if yes
+  const hasLevel4Data = () => {
+    const level4Data = treeData[4]
+    if (!level4Data) return false
+    return Object.values(level4Data).some(card => card && card.id)
+  }
+
+  const [showLevel4, setShowLevel4] = useState(() => hasLevel4Data())
 
   const handleSelectUma = (level: number, position: number): void => {
     setSelectedSlot({ level, position })
@@ -114,8 +119,8 @@ const BreedingTree = () => {
   // Mobile swipe handlers
   const swipeHandlers = useSwipeable({
     onSwipedLeft: () => {
-      if (isMobile && currentMobileLevel < maxLevel) {
-        setCurrentMobileLevel(prev => Math.min(prev + 1, maxLevel))
+      if (isMobile && currentMobileLevel < MAX_LEVEL) {
+        setCurrentMobileLevel(prev => Math.min(prev + 1, MAX_LEVEL))
       }
     },
     onSwipedRight: () => {
@@ -245,7 +250,7 @@ const BreedingTree = () => {
           {isMobile && (
             <MobileLevelNavigator
               currentLevel={currentMobileLevel}
-              maxLevel={maxLevel}
+              maxLevel={MAX_LEVEL}
               onLevelChange={setCurrentMobileLevel}
             />
           )}
