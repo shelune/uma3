@@ -16,7 +16,7 @@ interface TupleResult {
 // Read data files
 const charaData: CharacterNameID[] = JSON.parse(
   fs.readFileSync(
-    path.join(__dirname, '../home/chara_names_with_id.json'),
+    path.join(__dirname, '../home/chara-names-with-id.json'),
     'utf-8'
   )
 )

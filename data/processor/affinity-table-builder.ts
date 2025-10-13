@@ -5,13 +5,13 @@ import { AffinityGroup, MemberInRelation, Relation } from '../types/relation'
 // Load data
 const memberData: MemberInRelation[] = JSON.parse(
   fs.readFileSync(
-    path.resolve(__dirname, '../wild/succession_relation_member.json'),
+    path.resolve(__dirname, '../wild/succession-relation-member.json'),
     'utf-8'
   )
 )
 const relationData: Relation[] = JSON.parse(
   fs.readFileSync(
-    path.resolve(__dirname, '../wild/succession_relation.json'),
+    path.resolve(__dirname, '../wild/succession-relation.json'),
     'utf-8'
   )
 )

@@ -30,6 +30,12 @@
     "dress_color_main": "#EA504A"
   },
   {
+    "chara_id": "100501",
+    "chara_name": "[Shooting Star Revue] Fuji Kiseki",
+    "chara_id_base": "1005",
+    "dress_color_main": "#444745"
+  },
+  {
     "chara_id": "100601",
     "chara_name": "[Starlight Beat] Oguri Cap",
     "chara_id_base": "1006",

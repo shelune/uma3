@@ -2,7 +2,7 @@ import * as fs from 'fs'
 import * as path from 'path'
 
 import { CharacterNameID } from '../../frontend/src/types/characterNameId'
-import characterListJSON from '../home/chara_names_with_id.json'
+import characterListJSON from '../home/chara-names-with-id.json'
 
 // Output and make sure directory exists
 const outputDir = path.resolve(__dirname, '../home/images/characters')

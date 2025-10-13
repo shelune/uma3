@@ -4,8 +4,8 @@ import { CharacterNameID } from '../../frontend/src/types/characterNameId'
 import { DressData } from '../../frontend/src/types/dressData'
 import { TextData } from '../../frontend/src/types/textData'
 
-const allTextsPath = path.resolve(__dirname, '../wild/all_texts.json')
-const dressDataPath = path.resolve(__dirname, '../wild/dress_data.json')
+const allTextsPath = path.resolve(__dirname, '../wild/all-texts.json')
+const dressDataPath = path.resolve(__dirname, '../wild/dress-data.json')
 
 const allTextsRaw = fs.readFileSync(allTextsPath, 'utf-8')
 const allTexts: Array<TextData> = JSON.parse(allTextsRaw)
