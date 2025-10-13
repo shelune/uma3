@@ -7,7 +7,7 @@ import { LOCALE_EN } from '../../locale/en'
 import type { Uma } from '../../types/uma'
 
 interface AffinityDisplayProps {
-  uma?: Uma | null
+  uma: Uma | null | undefined
   level: number
   position: number
 }

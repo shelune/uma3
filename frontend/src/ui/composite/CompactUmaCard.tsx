@@ -255,7 +255,11 @@ const CompactUmaCard: React.FC<CompactUmaCardProps> = ({
 
                 {/* Affinity and proc displays */}
                 <div className="grid grid-cols-2 gap-2">
-                  <AffinityDisplay level={level} position={position} />
+                  <AffinityDisplay
+                    uma={uma}
+                    level={level}
+                    position={position}
+                  />
                   <SparkProcDisplay level={level} position={position} />
                 </div>
               </div>

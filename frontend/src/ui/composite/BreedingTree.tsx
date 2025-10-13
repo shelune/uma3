@@ -1,6 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/ui/base/card'
 import { Button } from '@/ui/base/button'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { useSwipeable } from 'react-swipeable'
 import { ChevronDown, ChevronUp } from 'lucide-react'
 import { CharacterNameID } from '@/types/characterNameId'

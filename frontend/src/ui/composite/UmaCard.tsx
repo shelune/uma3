@@ -1,7 +1,7 @@
 import { Button } from '@/ui/base/button'
 import { Card, CardContent, CardHeader } from '@/ui/base/card'
 import { getImagePath, getUmaNameById } from '@/utils/formatting'
-import { User, Trash2 } from 'lucide-react'
+import { Trash2 } from 'lucide-react'
 import React from 'react'
 import { useTreeData } from '../../hooks/useTreeData'
 import type {
