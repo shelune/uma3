@@ -283,8 +283,8 @@ const UmaModal = ({
                 {/** Grandparent-based affinity **/}
                 <div>
                   {child && grandChild && sortByAffinity ? (
-                    <div className="sticky top-0 z-10 py-2 -mx-6 px-6 mb-2 border-b dark:border-gray-700">
-                      <h3 className="font-semibold text-lg leading-tight">
+                    <div className="bg-gray-50 sticky top-0 z-10 py-2 px-6 mb-2 border-b dark:border-gray-700">
+                      <h3 className="font-semibold text-gray-600 text-lg leading-tight">
                         As grandparent for
                         <span className="text-bold">
                           <span
