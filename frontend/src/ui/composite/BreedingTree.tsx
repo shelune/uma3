@@ -225,7 +225,7 @@ const BreedingTree = () => {
           <CardTitle
             className={`${isMobile ? 'text-2xl' : 'text-4xl'} font-bold text-[#DA3C57]`}
           >
-            Uma Musume Breeding Tree
+            Uma Musume Pedigree Maker
           </CardTitle>
 
           <BreedingTreeHeader

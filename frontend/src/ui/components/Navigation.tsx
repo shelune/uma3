@@ -29,7 +29,7 @@ const Navigation = ({ currentPage, onPageChange }: NavigationProps) => {
               />
             </a>
             <h1 className="max-sm:hidden text-xl font-bold text-gray-900 dark:text-white">
-              Uma Breeding Tree
+              Uma Pedigree Maker
             </h1>
           </div>
 
