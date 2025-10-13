@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Script to move processed Uma Musume data files to frontend assets
-# Moves chara_names_with_id.json, affinity_mapping.json, and affinity_combined.json
+# Moves chara-names-with-id.json, affinity-mapping.json, and affinity-combined.json
 # from ./data/home to ./frontend/src/assets/home
 
 set -e  # Exit on any error
@@ -32,15 +32,15 @@ mkdir -p ./frontend/src/assets/home
 
 echo -e "${YELLOW}Moving processed data files to frontend assets...${NC}"
 
-# Move chara_names_with_id.json
-if [[ -f "./data/home/chara_names_with_id.json" ]]; then
-    cp ./data/home/chara_names_with_id.json ./frontend/src/assets/home/
-    echo "Moved chara_names_with_id.json"
+# Move chara-names-with-id.json
+if [[ -f "./data/home/chara-names-with-id.json" ]]; then
+    cp ./data/home/chara-names-with-id.json ./frontend/src/assets/home/
+    echo "Moved chara-names-with-id.json"
 else
-    echo -e "${YELLOW}Warning: chara_names_with_id.json not found in ./data/home${NC}"
+    echo -e "${YELLOW}Warning: chara-names-with-id.json not found in ./data/home${NC}"
 fi
 
-# Move affinity_mapping.json
+# Move affinity-mapping.json
 if [[ -f "./data/home/affinity-mapping.json" ]]; then
     cp ./data/home/affinity-mapping.json ./frontend/src/assets/home/
     echo "Moved affinity-mapping.json"
@@ -48,7 +48,7 @@ else
     echo -e "${YELLOW}Warning: affinity-mapping.json not found in ./data/home${NC}"
 fi
 
-# Move affinity_combined.json
+# Move affinity-combined.json
 if [[ -f "./data/home/affinity-combined.json" ]]; then
     cp ./data/home/affinity-combined.json ./frontend/src/assets/home/
     echo "Moved affinity-combined.json"
@@ -59,7 +59,7 @@ fi
 echo -e "${GREEN}File movement completed successfully!${NC}"
 echo "================================================"
 echo "Files moved to ./frontend/src/assets/home/:"
-echo "- chara_names_with_id.json"
+echo "- chara-names-with-id.json"
 echo "- affinity-mapping.json" 
 echo "- affinity-combined.json"
 echo -e "${GREEN}Frontend assets updated!${NC}"
