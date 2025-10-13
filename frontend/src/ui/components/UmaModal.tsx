@@ -12,7 +12,7 @@ import { Search, Heart, BookMarkedIcon, ChevronDown } from 'lucide-react'
 import { useMemo, useState } from 'react'
 
 import { CharacterNameID } from '@/types/characterNameId'
-import UMA_LIST_WITH_ID from '../../assets/home/chara_names_with_id.json'
+import UMA_LIST_WITH_ID from '../../assets/home/chara-names-with-id.json'
 import UmaImage from '../../ui/components/UmaImage'
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/ui/base/tabs'
 import { SavedUma, useSavedUmas } from '@/hooks/useSavedUmas'

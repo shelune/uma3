@@ -1,7 +1,7 @@
 import { TreeData, TreeSlot } from '../contexts/TreeDataContext'
 import { SavedUma } from '../hooks/useSavedUmas'
 import { Uma } from '../types/uma'
-import UMA_LIST_WITH_ID from '../assets/home/chara_names_with_id.json'
+import UMA_LIST_WITH_ID from '../assets/home/chara-names-with-id.json'
 import { CharacterNameID } from '../types/characterNameId'
 
 const umaListWithId: CharacterNameID[] = UMA_LIST_WITH_ID

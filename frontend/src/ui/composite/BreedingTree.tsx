@@ -22,7 +22,7 @@ import MobileActionsBar from '../components/MobileActionsBar'
 import MobileLevelNavigator from '../components/MobileLevelNavigator'
 import BreedingTreeHeader from '../components/BreedingTreeHeader'
 import { TreeSlot, TreeData } from '../../contexts/TreeDataContext'
-import UMA_LIST_WITH_ID from '../../assets/home/chara_names_with_id.json'
+import UMA_LIST_WITH_ID from '../../assets/home/chara-names-with-id.json'
 
 const umaList: CharacterNameID[] = UMA_LIST_WITH_ID
 

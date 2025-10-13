@@ -5,10 +5,16 @@ import {
   getUmaNameById,
   to2Decimal,
 } from '@/utils/formatting'
-import { SquareArrowUpRightIcon } from 'lucide-react'
+import {
+  SquareArrowUpRightIcon,
+  ChevronUp,
+  ChevronDown,
+  Search,
+} from 'lucide-react'
 import { useCallback, useContext, useState } from 'react'
 import { TreeDataContext } from '../../contexts/TreeDataContext'
 import { LOCALE_EN } from '../../locale/en'
+import { Input } from '@/ui/base/input'
 import {
   buildSparks,
   getSparkAtLeastOnceChances,
@@ -21,6 +27,9 @@ interface SparkProcDisplayProps {
   position: number
 }
 
+type SortColumn = 'name' | 'type' | 'chance'
+type SortDirection = 'asc' | 'desc'
+
 export default function SparkProcDisplay({
   level,
   position,
@@ -28,6 +37,9 @@ export default function SparkProcDisplay({
   const treeDataContext = useContext(TreeDataContext)
   const { treeData } = treeDataContext || {}
   const [showSparkProcPopover, setShowSparkProcPopover] = useState(false)
+  const [sortColumn, setSortColumn] = useState<SortColumn>('chance')
+  const [sortDirection, setSortDirection] = useState<SortDirection>('desc')
+  const [searchQuery, setSearchQuery] = useState('')
 
   const getBadgeBySpark = (sparkType: string) => {
     return (
@@ -40,14 +52,67 @@ export default function SparkProcDisplay({
     )
   }
 
+  const handleSort = (column: SortColumn) => {
+    if (sortColumn === column) {
+      setSortDirection(sortDirection === 'asc' ? 'desc' : 'asc')
+    } else {
+      setSortColumn(column)
+      setSortDirection('desc')
+    }
+  }
+
+  const getSortIcon = (column: SortColumn) => {
+    if (sortColumn !== column) return null
+    return sortDirection === 'asc' ? (
+      <ChevronUp className="w-3 h-3" />
+    ) : (
+      <ChevronDown className="w-3 h-3" />
+    )
+  }
+
   const getSparkProcContent = useCallback(() => {
     if (!showSparkProcPopover || !treeData) return null
     const sparkSet = buildSparks(treeData, { level, position })
     const groupedSpark = groupSparks(sparkSet)
     const sparkAtLeastOnceChances = getSparkAtLeastOnceChances(groupedSpark)
-    const sortedSparks = Object.entries(sparkAtLeastOnceChances).sort(
-      ([, a], [, b]) => b.chanceAtLeastOnce - a.chanceAtLeastOnce
+
+    // filtering by name
+    const filteredSparks = Object.entries(sparkAtLeastOnceChances).filter(
+      ([stat, sparkDetail]) => {
+        if (searchQuery.trim()) {
+          const name =
+            sparkDetail.type === 'greenSpark' ? getUmaNameById(stat) : stat
+          return name.toLowerCase().includes(searchQuery.toLowerCase().trim())
+        }
+        return true
+      }
     )
+
+    // sorting
+    const sortedSparks = filteredSparks.sort(
+      ([statA, sparkA], [statB, sparkB]) => {
+        if (sortColumn === 'name') {
+          const nameA =
+            sparkA.type === 'greenSpark' ? getUmaNameById(statA) : statA
+          const nameB =
+            sparkB.type === 'greenSpark' ? getUmaNameById(statB) : statB
+          const comparison = nameA.localeCompare(nameB)
+          return sortDirection === 'asc' ? comparison : -comparison
+        }
+        if (sortColumn === 'type') {
+          const typeA = sparkA.type ?? ''
+          const typeB = sparkB.type ?? ''
+          const comparison = typeA.localeCompare(typeB)
+          return sortDirection === 'asc' ? comparison : -comparison
+        }
+        if (sortColumn === 'chance') {
+          const comparison = sparkA.chanceAtLeastOnce - sparkB.chanceAtLeastOnce
+          return sortDirection === 'asc' ? comparison : -comparison
+        }
+        return 0
+      }
+    )
+
     return sortedSparks.map(([stat, sparkDetail]) => (
       <div
         key={stat}
@@ -64,7 +129,15 @@ export default function SparkProcDisplay({
         </div>
       </div>
     ))
-  }, [level, position, showSparkProcPopover, treeData])
+  }, [
+    level,
+    position,
+    showSparkProcPopover,
+    treeData,
+    sortColumn,
+    sortDirection,
+    searchQuery,
+  ])
 
   return (
     <>
@@ -91,10 +164,37 @@ export default function SparkProcDisplay({
               <div className="text-xs font-semibold mb-2">
                 Inspiration Chance List (per career)
               </div>
+              <div className="relative mb-3">
+                <Search className="absolute left-2 top-1/2 transform -translate-y-1/2 w-3 h-3 text-gray-400" />
+                <Input
+                  placeholder="Search by name..."
+                  value={searchQuery}
+                  onChange={e => setSearchQuery(e.target.value)}
+                  className="pl-7 text-xs h-7"
+                />
+              </div>
               <div className="flex gap-2 text-xs font-bold uppercase border-b pb-1 mb-1">
-                <span className="flex-1/2">Name</span>
-                <span className="flex-1/4">Type</span>
-                <span className="flex-1/4">Chance</span>
+                <button
+                  className="flex-1/2 flex items-center gap-1 hover:bg-gray-100 dark:hover:bg-gray-800 px-1 py-0.5 rounded transition-colors cursor-pointer"
+                  onClick={() => handleSort('name')}
+                >
+                  <span>Name</span>
+                  {getSortIcon('name')}
+                </button>
+                <button
+                  className="flex-1/4 flex items-center gap-1 hover:bg-gray-100 dark:hover:bg-gray-800 px-1 py-0.5 rounded transition-colors cursor-pointer"
+                  onClick={() => handleSort('type')}
+                >
+                  <span>Type</span>
+                  {getSortIcon('type')}
+                </button>
+                <button
+                  className="flex-1/4 flex items-center gap-1 hover:bg-gray-100 dark:hover:bg-gray-800 px-1 py-0.5 rounded transition-colors cursor-pointer"
+                  onClick={() => handleSort('chance')}
+                >
+                  <span>Chance</span>
+                  {getSortIcon('chance')}
+                </button>
               </div>
               <div className="divide-y">{getSparkProcContent()}</div>
             </PopoverContent>

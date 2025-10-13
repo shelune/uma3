@@ -1,5 +1,5 @@
 import { CharacterNameID } from '../types/characterNameId'
-import UMA_LIST_WITH_ID from '../assets/home/chara_names_with_id.json'
+import UMA_LIST_WITH_ID from '../assets/home/chara-names-with-id.json'
 import { BASE_CHANCE } from './inspiration'
 import { SparkData } from '../types/uma'
 
