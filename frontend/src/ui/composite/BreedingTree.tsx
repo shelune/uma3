@@ -25,6 +25,7 @@ import MobileLevelNavigator from '../components/MobileLevelNavigator'
 import BreedingTreeHeader from '../components/BreedingTreeHeader'
 import { TreeSlot, TreeData } from '../../contexts/TreeDataContext'
 import UMA_LIST_WITH_ID from '../../assets/home/chara-names-with-id.json'
+import { mergeTwClass } from '../../lib/utils'
 
 const umaList: CharacterNameID[] = UMA_LIST_WITH_ID
 
@@ -159,7 +160,12 @@ const BreedingTree = () => {
               className={`grid ${level >= 4 ? 'grid-cols-4' : 'grid-cols-[repeat(auto-fit,minmax(100px,1fr))]'} auto-rows-auto gap-4 mx-auto justify-items-center items-center`}
             >
               {row.cards.map(({ position }) => (
-                <div key={`${level}-${position}`} className="relative h-full">
+                <div
+                  key={`${level}-${position}`}
+                  className={mergeTwClass('relative h-full min-w-[300px]', {
+                    'w-full': cardsInLevel > 4,
+                  })}
+                >
                   <UmaCard
                     uma={
                       treeData[level] && treeData[level][position]

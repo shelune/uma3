@@ -143,7 +143,10 @@ const CompactUmaCard: React.FC<CompactUmaCardProps> = ({
 
       <CardContent className="p-2 space-y-2">
         {/* Compact header with key info */}
-        <div className="flex items-center gap-2">
+        <div
+          className="flex items-center gap-2"
+          onClick={() => onSelectUma(level, position)}
+        >
           <div className="w-12 h-12 flex-shrink-0">
             <UmaImage charaId={uma.id} alt={uma.name || 'Uma'} />
           </div>

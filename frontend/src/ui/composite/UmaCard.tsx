@@ -23,6 +23,8 @@ import SaveUmaButton from '../components/SaveUmaButton'
 import { Separator } from '../base/separator'
 import { getUmaBasicInfoById } from '../../utils/uma'
 
+import Golshiderp from '@/assets/home/images/misc/golshiderp.png'
+
 export interface UmaCardProps {
   uma?: Uma | null
   name?: string
@@ -123,15 +125,44 @@ const UmaCard: React.FC<ExtendedUmaCardProps> = ({
   // Dynamic sizing based on level
   const getCardSize = () => {
     if (size === 'big') {
-      return 'min-h-48 min-w-[180px]'
+      return 'min-h-[300px] min-w-[180px]'
     } else {
-      return 'min-h-32'
+      return 'min-h-[300px]'
     }
   }
 
   const basicInfo = uma ? getUmaBasicInfoById(uma.id) : null
 
   const isSmallSize = size === 'small'
+
+  // Show placeholder when no Uma is selected
+  if (!uma?.id) {
+    return (
+      <Card
+        className={`h-full ${getCardSize()} transition-all duration-300 hover:scale-105 hover:shadow-lg group bg-white dark:bg-gray-900 border-2 border-dashed border-gray-300 flex items-center`}
+      >
+        <CardContent
+          className={`${isSmallSize ? 'p-2 pt-0' : 'p-3 pt-0'} flex-1 flex flex-col items-center justify-center`}
+        >
+          <Button
+            variant="ghost"
+            className="w-full h-full flex flex-col items-center justify-center gap-2 text-gray-500 hover:bg-transparent dark:text-gray-400 min-h-[120px]"
+            onClick={() => onSelectUma(level, position)}
+          >
+            <div className="w-16 h-16 bg-gray-100 dark:bg-gray-700 rounded-full flex items-center justify-center">
+              <img src={Golshiderp} alt="Golshiderp" className="rounded-4xl" />
+            </div>
+            <div className="text-center">
+              <div className="text-sm font-medium">Select Uma</div>
+              <div className="text-xs text-gray-400">
+                Click to choose character
+              </div>
+            </div>
+          </Button>
+        </CardContent>
+      </Card>
+    )
+  }
 
   return (
     <Card
@@ -152,25 +183,19 @@ const UmaCard: React.FC<ExtendedUmaCardProps> = ({
                   onClick={() => onSelectUma(level, position)}
                   title="Select Uma"
                 >
-                  {uma?.id ? (
-                    <img
-                      src={getImagePath(uma.id)}
-                      alt={uma?.name || 'Uma Musume'}
-                      className="w-8 h-8 rounded-full object-cover"
-                      style={{ width: 32, height: 32 }}
-                    />
-                  ) : (
-                    <User className="w-8 h-8 text-gray-400 dark:text-gray-500" />
-                  )}
+                  <img
+                    src={getImagePath(uma.id)}
+                    alt={uma?.name || 'Uma Musume'}
+                    className="w-8 h-8 rounded-full object-cover"
+                    style={{ width: 32, height: 32 }}
+                  />
                 </Button>
               </div>
               <span
                 className="text-sm text-gray-800 dark:text-gray-200 cursor-pointer"
                 onClick={() => onSelectUma(level, position)}
               >
-                {uma?.id
-                  ? getUmaNameById(uma.id, false)
-                  : 'Click to select Uma'}
+                {getUmaNameById(uma.id, false)}
               </span>
             </div>
           }
