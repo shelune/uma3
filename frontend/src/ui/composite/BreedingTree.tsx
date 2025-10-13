@@ -1,6 +1,8 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/ui/base/card'
+import { Button } from '@/ui/base/button'
 import { useState } from 'react'
 import { useSwipeable } from 'react-swipeable'
+import { ChevronDown, ChevronUp } from 'lucide-react'
 import { CharacterNameID } from '@/types/characterNameId'
 import type {
   BlueSparkData,
@@ -45,6 +47,9 @@ const BreedingTree = () => {
   // Mobile navigation state
   const [currentMobileLevel, setCurrentMobileLevel] = useState(1)
   const maxLevel = 4
+
+  // Desktop level 4 visibility toggle
+  const [showLevel4, setShowLevel4] = useState(false)
 
   const handleSelectUma = (level: number, position: number): void => {
     setSelectedSlot({ level, position })
@@ -248,9 +253,34 @@ const BreedingTree = () => {
           {/* Desktop view */}
           {!isMobile && (
             <div className="space-y-8 overflow-x-auto overflow-y-auto p-4 min-h-[600px]">
-              {[1, 2, 3, 4].map(level => (
+              {/* Render levels 1-3 */}
+              {[1, 2, 3].map(level => (
                 <div key={level}>{renderTreeLevel(level)}</div>
               ))}
+
+              {/* Toggle button for level 4 */}
+              <div className="flex justify-center py-4">
+                <Button
+                  variant="outline"
+                  onClick={() => setShowLevel4(!showLevel4)}
+                  className="flex items-center gap-2"
+                >
+                  {showLevel4 ? (
+                    <>
+                      <ChevronUp className="w-4 h-4" />
+                      Hide Level 4
+                    </>
+                  ) : (
+                    <>
+                      <ChevronDown className="w-4 h-4" />
+                      Show Level 4
+                    </>
+                  )}
+                </Button>
+              </div>
+
+              {/* Conditionally render level 4 */}
+              {showLevel4 && <div>{renderTreeLevel(4)}</div>}
             </div>
           )}
 
