@@ -1,20 +1,18 @@
 import { Button } from '@/ui/base/button'
-import { Save, Share, Trash2, FolderOpen } from 'lucide-react'
+import { Share, Trash2, FolderOpen } from 'lucide-react'
 import { useCallback, useState } from 'react'
 import { useTreeDataWithStorage } from '../../hooks'
 import { useUrlSharing } from '../../hooks/useUrlSharing'
 
 interface MobileActionsBarProps {
-  onSaveTree: () => void
   onClearTree: () => void
-  onOpenSavedTrees: () => void
+  onOpenTreeManager: () => void
   onOpenSavedUmas: () => void
 }
 
 const MobileActionsBar = ({
-  onSaveTree,
   onClearTree,
-  onOpenSavedTrees,
+  onOpenTreeManager,
   onOpenSavedUmas,
 }: MobileActionsBarProps) => {
   const { hasTreeData } = useTreeDataWithStorage()
@@ -45,21 +43,11 @@ const MobileActionsBar = ({
           size="sm"
           variant="ghost"
           className="rounded-full p-2 flex flex-col items-center leading-[0.5]"
-          onClick={onSaveTree}
-          title="Save Tree"
-        >
-          <Save className="w-4 h-4" />
-          <span className="text-[10px]">Save Tree</span>
-        </Button>
-        <Button
-          size="sm"
-          variant="ghost"
-          className="rounded-full p-2 flex flex-col items-center leading-[0.5]"
-          onClick={onOpenSavedTrees}
-          title="Load Saved Trees"
+          onClick={onOpenTreeManager}
+          title="Manage Trees"
         >
           <FolderOpen className="w-4 h-4" />
-          <span className="text-[10px]">Load Tree</span>
+          <span className="text-[10px]">Trees</span>
         </Button>
         <Button
           size="sm"

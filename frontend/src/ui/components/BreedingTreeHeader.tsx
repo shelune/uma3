@@ -1,24 +1,22 @@
 import { Button } from '@/ui/base/button'
 import { Badge } from '@/ui/base/badge'
-import { Save, Folder, FolderOpen, Trash2 } from 'lucide-react'
+import { Folder, FolderOpen, Trash2 } from 'lucide-react'
 import { useSavedUmas } from '../../hooks/useSavedUmas'
 import { useSavedTrees } from '../../hooks/useSavedTrees'
 import { TreeData } from '../../contexts/TreeDataContext'
 
 interface BreedingTreeHeaderProps {
   isMobile: boolean
-  onSaveTree: () => void
   onClearTree: () => void
   onLoadTree: (treeData: TreeData) => void
-  onOpenSavedTreesModal: () => void
+  onOpenTreeManagerModal: () => void
   onOpenSavedUmasModal: () => void
 }
 
 const BreedingTreeHeader: React.FC<BreedingTreeHeaderProps> = ({
   isMobile,
-  onSaveTree,
   onClearTree,
-  onOpenSavedTreesModal,
+  onOpenTreeManagerModal,
   onOpenSavedUmasModal,
 }) => {
   const { getSavedUmasStats } = useSavedUmas()
@@ -49,20 +47,16 @@ const BreedingTreeHeader: React.FC<BreedingTreeHeaderProps> = ({
           <Button
             variant="outline"
             size="sm"
-            onClick={onSaveTree}
-            className="flex items-center gap-2"
-          >
-            <Save className="w-4 h-4" />
-            Save Tree
-          </Button>
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() => onOpenSavedTreesModal?.()}
+            onClick={onOpenTreeManagerModal}
             className="flex items-center gap-2"
           >
             <FolderOpen className="w-4 h-4" />
-            Saved Trees ({total})
+            Manage Trees
+            {total > 0 && (
+              <Badge variant="secondary" className="ml-1">
+                {total}
+              </Badge>
+            )}
           </Button>
           <Button
             size="sm"

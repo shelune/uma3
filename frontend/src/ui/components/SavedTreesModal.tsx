@@ -6,7 +6,7 @@ import {
   DialogTitle,
 } from '@/ui/base/dialog'
 import { Badge } from '@/ui/base/badge'
-import { FolderOpen, Trash2, Users, Layers } from 'lucide-react'
+import { FolderOpen, Trash2, Users, Layers, RefreshCw } from 'lucide-react'
 import { useState } from 'react'
 import { useSavedTrees, SavedTree } from '../../hooks/useSavedTrees'
 import { useTreeData } from '../../hooks'
@@ -25,11 +25,13 @@ export default function SavedTreesModal({
     savedTrees,
     loadTree,
     deleteTree,
+    updateTree,
     getTreeSummary,
     getSavedTreesStats,
   } = useSavedTrees()
-  const { setTree } = useTreeData()
+  const { setTree, treeData } = useTreeData()
   const [deletingId, setDeletingId] = useState<string | null>(null)
+  const [overwritingId, setOverwritingId] = useState<string | null>(null)
 
   const stats = getSavedTreesStats()
 
@@ -47,6 +49,27 @@ export default function SavedTreesModal({
         deleteTree(tree.id)
       } finally {
         setDeletingId(null)
+      }
+    }
+  }
+
+  const handleOverwriteTree = async (tree: SavedTree) => {
+    if (overwritingId) return
+
+    if (
+      window.confirm(
+        `Are you sure you want to overwrite "${tree.name}" with the current breeding tree?`
+      )
+    ) {
+      setOverwritingId(tree.id)
+      try {
+        const success = updateTree(tree.id, tree.name, treeData)
+        if (success) {
+          // Optionally show a success message or toast notification
+          console.log(`Successfully updated "${tree.name}"`)
+        }
+      } finally {
+        setOverwritingId(null)
       }
     }
   }
@@ -132,6 +155,18 @@ export default function SavedTreesModal({
                               className="whitespace-nowrap"
                             >
                               Load Tree
+                            </Button>
+
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              onClick={() => handleOverwriteTree(tree)}
+                              disabled={overwritingId === tree.id}
+                              className="text-white-600 hover:text-black hover:bg-gray-50 border-gray-200 hover:border-gray-300 whitespace-nowrap"
+                            >
+                              {overwritingId === tree.id
+                                ? 'Updating...'
+                                : 'Overwrite'}
                             </Button>
 
                             <Button

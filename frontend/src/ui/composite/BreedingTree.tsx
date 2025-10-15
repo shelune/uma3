@@ -17,8 +17,7 @@ import UmaCard from './UmaCard'
 import CompactUmaCard from './CompactUmaCard'
 import UmaModal from '../components/UmaModal'
 import TreeDataManager from '../components/TreeDataManager'
-import SaveTreeModal from '../components/SaveTreeModal'
-import SavedTreesModal from '../components/SavedTreesModal'
+import TreeManagerModal from '../components/TreeManagerModal'
 import SavedUmasModal from '../components/SavedUmasModal'
 import MobileActionsBar from '../components/MobileActionsBar'
 import MobileLevelNavigator from '../components/MobileLevelNavigator'
@@ -35,8 +34,8 @@ const BreedingTree = () => {
   const isMobile = useIsMobile()
 
   const [modalOpen, setModalOpen] = useState<boolean>(false)
-  const [saveTreeModalOpen, setSaveTreeModalOpen] = useState<boolean>(false)
-  const [savedTreesModalOpen, setSavedTreesModalOpen] = useState<boolean>(false)
+  const [treeManagerModalOpen, setTreeManagerModalOpen] =
+    useState<boolean>(false)
   const [savedUmasModalOpen, setSavedUmasModalOpen] = useState<boolean>(false)
 
   // level 0 and position 0 indicates no selection
@@ -107,10 +106,6 @@ const BreedingTree = () => {
 
   const handleRacesWonChange = (value: RacesData, meta: TreeSlot) => {
     updateTreeData(meta.level, meta.position, { races: value.races })
-  }
-
-  const handleSaveTree = () => {
-    setSaveTreeModalOpen(true)
   }
 
   const handleLoadTree = (newTreeData: TreeData) => {
@@ -237,10 +232,9 @@ const BreedingTree = () => {
 
           <BreedingTreeHeader
             isMobile={isMobile}
-            onSaveTree={handleSaveTree}
             onClearTree={clearTree}
             onLoadTree={handleLoadTree}
-            onOpenSavedTreesModal={() => setSavedTreesModalOpen(true)}
+            onOpenTreeManagerModal={() => setTreeManagerModalOpen(true)}
             onOpenSavedUmasModal={() => setSavedUmasModalOpen(true)}
           />
 
@@ -308,8 +302,7 @@ const BreedingTree = () => {
       {/* Mobile actions bar */}
       {isMobile && (
         <MobileActionsBar
-          onSaveTree={handleSaveTree}
-          onOpenSavedTrees={() => setSavedTreesModalOpen(true)}
+          onOpenTreeManager={() => setTreeManagerModalOpen(true)}
           onOpenSavedUmas={() => setSavedUmasModalOpen(true)}
           onClearTree={clearTree}
         />
@@ -323,14 +316,9 @@ const BreedingTree = () => {
         position={selectedSlot.position || 1}
       />
 
-      <SaveTreeModal
-        isOpen={saveTreeModalOpen}
-        onClose={() => setSaveTreeModalOpen(false)}
-        treeData={treeData}
-      />
-      <SavedTreesModal
-        isOpen={savedTreesModalOpen}
-        toggleOpen={() => setSavedTreesModalOpen(!savedTreesModalOpen)}
+      <TreeManagerModal
+        isOpen={treeManagerModalOpen}
+        onClose={() => setTreeManagerModalOpen(false)}
       />
       <SavedUmasModal
         isOpen={savedUmasModalOpen}
