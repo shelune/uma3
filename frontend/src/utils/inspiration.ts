@@ -1,10 +1,12 @@
 import { TreeData, TreeSlot } from '../contexts/TreeDataContext'
 import { EnhanceSparkData, SparkData, Uma } from '../types/uma'
 import {
+  FamilyTreePosition,
   getBaseAffinity,
   getFamilyPositionSet,
   getRaceAffinity,
 } from './affinity'
+import { consoleLogDev } from './debug'
 import { getUmaByPosition } from './uma'
 
 export const BASE_CHANCE: Record<string, Record<number, number>> = {
@@ -38,17 +40,35 @@ export const buildSparks = (treeData: TreeData, meta: TreeSlot) => {
   const raceAffinitySet = getRaceAffinity(treeData, meta)
   if (!umaFamilyPosition || !baseAffinitySet) return []
   const sparkSet = []
-
-  for (const [side, group] of Object.entries(umaFamilyPosition)) {
-    for (const [relation, pos] of Object.entries(group)) {
+  consoleLogDev('baseAffinitySet', baseAffinitySet)
+  for (const [side, group] of Object.entries(umaFamilyPosition) as [
+    side: 'left' | 'right',
+    group: FamilyTreePosition,
+  ][]) {
+    for (const [relation, pos] of Object.entries(group) as [
+      relation: 'parent' | 'grandParentPos1' | 'grandParentPos2',
+      pos: string,
+    ][]) {
       const uma = getUmaByPosition(treeData, pos)
       if (!uma) continue
       for (const sparkName of RELEVANT_SPARKS) {
-        const baseAffinity =
-          baseAffinitySet[side as 'left' | 'right'][
-            relation as 'parent' | 'grandParentPos1' | 'grandParentPos2'
-          ]
-        const affinity = baseAffinity + raceAffinitySet
+        const isParent = relation === 'parent'
+        const baseAffinity = !isParent
+          ? // is grandparent, only takes from that grandparent x parent node
+            baseAffinitySet[side][relation]
+          : // if parent, takes from both parents and both grandparents of that parent
+            baseAffinitySet[side].parent +
+            baseAffinitySet.parents +
+            baseAffinitySet[side].grandParentPos1 +
+            baseAffinitySet[side].grandParentPos2
+        const raceAffinity = !isParent
+          ? raceAffinitySet[side][
+              relation as 'grandParentPos1' | 'grandParentPos2'
+            ]
+          : raceAffinitySet.parents +
+            raceAffinitySet[side].grandParentPos1 +
+            raceAffinitySet[side].grandParentPos2
+        const affinity = baseAffinity + raceAffinity
         const data = uma[sparkName] ?? null
         const sparkData: EnhanceSparkData = { data, affinity, type: sparkName }
         if (

@@ -21,6 +21,7 @@ import {
   groupSparks,
 } from '../../utils/inspiration'
 import { Badge } from '@/ui/base/badge'
+import { consoleLogDev } from '../../utils/debug'
 
 interface SparkProcDisplayProps {
   level: number
@@ -73,7 +74,9 @@ export default function SparkProcDisplay({
   const getSparkProcContent = useCallback(() => {
     if (!showSparkProcPopover || !treeData) return null
     const sparkSet = buildSparks(treeData, { level, position })
+    consoleLogDev('sparkSet', sparkSet)
     const groupedSpark = groupSparks(sparkSet)
+    consoleLogDev('groupedSpark', groupedSpark)
     const sparkAtLeastOnceChances = getSparkAtLeastOnceChances(groupedSpark)
 
     // filtering by name

@@ -43,7 +43,7 @@ export default function AffinityDisplay({
     const raceAffinity = getRaceAffinity(treeData, {
       level,
       position,
-    })
+    }).total
 
     return {
       total: baseAffinity + raceAffinity,

@@ -268,7 +268,7 @@ const UmaModal = ({
                     <div className="flex justify-center">
                       <Button
                         variant="outline"
-                        onClick={() => setParentVisibleCount(prev => prev + 6)}
+                        onClick={() => setParentVisibleCount(prev => prev + 10)}
                         className="flex items-center gap-2"
                       >
                         <ChevronDown className="w-4 h-4" />
@@ -350,7 +350,7 @@ const UmaModal = ({
                       <Button
                         variant="outline"
                         onClick={() =>
-                          setGrandparentVisibleCount(prev => prev + 6)
+                          setGrandparentVisibleCount(prev => prev + 10)
                         }
                         className="flex items-center gap-2"
                       >

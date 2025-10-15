@@ -7,13 +7,13 @@ const umaAffinityTable: Record<string, number> = UMA_AFFINITY_MAPPING
 const MAX_TREE_LEVEL = 4
 const MAX_TREE_WIDTH = 2 ** (MAX_TREE_LEVEL - 1)
 
-type FamilyTreePosition = {
+export type FamilyTreePosition = {
   parent: string
   grandParentPos1: string
   grandParentPos2: string
 }
 
-type FamilyTreePositionSet = {
+export type FamilyTreePositionSet = {
   left: FamilyTreePosition
   right: FamilyTreePosition
 }
@@ -56,6 +56,7 @@ const getSafeAffinity = (id: string | null | undefined) => {
 
 type AffinityResult = {
   total: number
+  parents: number
   left: {
     parent: number
     grandParentPos1: number
@@ -127,6 +128,7 @@ export const getBaseAffinity = (
 
   return {
     total,
+    parents: bothParentsAffinity,
     left: {
       parent: parentLeftAffinity,
       grandParentPos1: grandparentLeftAffinity1,
@@ -153,12 +155,40 @@ export const getSharedRacesCount = (
   return count
 }
 
+export type RaceAffinitySet = {
+  total: number
+  parents: number
+  left: {
+    grandParentPos1: number
+    grandParentPos2: number
+  }
+  right: {
+    grandParentPos1: number
+    grandParentPos2: number
+  }
+}
+
 // TODO: check for undefined occurrences and type it better
-export const getRaceAffinity = (treeData: TreeData, meta: TreeSlot): number => {
-  if (meta.level === null || meta.position === null) return 0
+export const getRaceAffinity = (
+  treeData: TreeData,
+  meta: TreeSlot
+): RaceAffinitySet => {
+  const DEFAULT_RESULT = {
+    total: 0,
+    left: {
+      grandParentPos1: 0,
+      grandParentPos2: 0,
+    },
+    right: {
+      grandParentPos1: 0,
+      grandParentPos2: 0,
+    },
+    parents: 0,
+  }
+  if (meta.level === null || meta.position === null) return DEFAULT_RESULT
 
   const familyTreePositionSet = getFamilyPositionSet(meta)
-  if (!familyTreePositionSet) return 0
+  if (!familyTreePositionSet) return DEFAULT_RESULT
 
   const { left, right } = familyTreePositionSet
   const parentLeftRaces = getUmaByPosition(treeData, left.parent)?.races
@@ -184,15 +214,43 @@ export const getRaceAffinity = (treeData: TreeData, meta: TreeSlot): number => {
     parentLeftRaces,
     parentRightRaces
   )
-  const parentsLeftSideRaces =
-    getSharedRacesCount(parentLeftRaces, grandparentLeftPos1Races) +
-    getSharedRacesCount(parentLeftRaces, grandparentLeftPos2Races)
 
-  const parentsRightSideRaces =
-    getSharedRacesCount(parentRightRaces, grandparentRightPos1Races) +
-    getSharedRacesCount(parentRightRaces, grandparentRightPos2Races)
+  const grandparentLeftPos1SharedRaces = getSharedRacesCount(
+    parentLeftRaces,
+    grandparentLeftPos1Races
+  )
+  const grandparentLeftPos2SharedRaces = getSharedRacesCount(
+    parentLeftRaces,
+    grandparentLeftPos2Races
+  )
+  const grandparentRightPos1SharedRaces = getSharedRacesCount(
+    parentRightRaces,
+    grandparentRightPos1Races
+  )
+  const grandparentRightPos2SharedRaces = getSharedRacesCount(
+    parentRightRaces,
+    grandparentRightPos2Races
+  )
 
-  return parentsSharedRaces + parentsLeftSideRaces + parentsRightSideRaces
+  const total =
+    parentsSharedRaces +
+    grandparentLeftPos1SharedRaces +
+    grandparentLeftPos2SharedRaces +
+    grandparentRightPos1SharedRaces +
+    grandparentRightPos2SharedRaces
+
+  return {
+    total: total,
+    parents: parentsSharedRaces,
+    left: {
+      grandParentPos1: grandparentLeftPos1SharedRaces,
+      grandParentPos2: grandparentLeftPos2SharedRaces,
+    },
+    right: {
+      grandParentPos1: grandparentRightPos1SharedRaces,
+      grandParentPos2: grandparentRightPos2SharedRaces,
+    },
+  }
 }
 
 export const getParentAffinityCombosById = (id: string) => {
