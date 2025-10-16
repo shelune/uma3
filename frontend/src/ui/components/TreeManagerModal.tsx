@@ -104,8 +104,8 @@ export default function TreeManagerModal({
       return
     }
 
-    if (treeName.length > 50) {
-      setSaveError('Tree name must be 50 characters or less')
+    if (treeName.length > 100) {
+      setSaveError('Tree name must be 100 characters or less')
       return
     }
 
@@ -304,12 +304,12 @@ export default function TreeManagerModal({
                   value={treeName}
                   onChange={e => handleNameChange(e.target.value)}
                   placeholder="Enter a name for this tree..."
-                  maxLength={50}
+                  maxLength={100}
                   autoFocus
                   disabled={isSaving}
                 />
                 <div className="flex justify-between text-xs text-gray-500">
-                  <span>{treeName.length}/50 characters</span>
+                  <span>{treeName.length}/100 characters</span>
                   <span>{stats.total}/5 trees saved</span>
                 </div>
                 {saveError && (
