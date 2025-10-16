@@ -142,8 +142,9 @@ export default function WhiteSparkSelector({
       </PopoverTrigger>
       <PopoverContent
         align="start"
+        side="top"
         className="p-3 w-full max-w-dvw"
-        avoidCollisions={false}
+        alignOffset={16}
       >
         <div className="flex justify-between items-center mb-2">
           <div className="text-xs uppercase tracking-wide font-semibold text-gray-600">
