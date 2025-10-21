@@ -2,7 +2,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/ui/base/card'
 import { Button } from '@/ui/base/button'
 import { useState } from 'react'
 import { useSwipeable } from 'react-swipeable'
-import { ChevronDown, ChevronUp } from 'lucide-react'
+import { ChevronDown, ChevronUp, X } from 'lucide-react'
 import { CharacterNameID } from '@/types/characterNameId'
 import type {
   BlueSparkData,
@@ -55,6 +55,23 @@ const BreedingTree = () => {
   }
 
   const [showLevel4, setShowLevel4] = useState(() => hasLevel4Data())
+  const [showUpdateBanner, setShowUpdateBanner] = useState(true)
+
+  // Update banner content - you can customize this
+  const updateBannerText = (
+    <div>
+      <strong>Update 22/10/2025:</strong>
+      <ul>
+        <li>
+          + Added ChronoGenesis import feature for White Sparks! Go to{' '}
+          <a href="#edit-sparks-inheritances" className="underline">
+            instructions (last part) to check out{' '}
+          </a>
+        </li>
+        <li>+ Added umas up to Meisho Doto</li>
+      </ul>
+    </div>
+  )
 
   const handleSelectUma = (level: number, position: number): void => {
     setSelectedSlot({ level, position })
@@ -221,109 +238,125 @@ const BreedingTree = () => {
   }
 
   return (
-    <div className="min-h-screen bg-purple-50 dark:bg-gray-900 p-4">
-      <Card className="max-w-8xl mx-auto rounded-none shadow-none border-none bg-gray-50 dark:bg-gray-800 grid-pattern-light dark:grid-pattern-dark">
-        <CardHeader className="text-center">
-          <CardTitle
-            className={`${isMobile ? 'text-2xl' : 'text-4xl'} font-bold text-[#DA3C57]`}
+    <div className=" bg-purple-50 dark:bg-gray-900">
+      {/* Update Banner */}
+      {showUpdateBanner && (
+        <div className="bg-yellow-600 text-white h-min-10 flex items-center justify-between px-4 py-2 shadow-sm">
+          <div className="text-sm font-medium truncate">{updateBannerText}</div>
+          <button
+            onClick={() => setShowUpdateBanner(false)}
+            className="ml-2 hover:bg-blue-700 rounded p-1 flex-shrink-0 transition-colors"
+            aria-label="Close update banner"
           >
-            Uma Musume Pedigree Maker
-          </CardTitle>
-
-          <BreedingTreeHeader
-            isMobile={isMobile}
-            onClearTree={clearTree}
-            onLoadTree={handleLoadTree}
-            onOpenTreeManagerModal={() => setTreeManagerModalOpen(true)}
-            onOpenSavedUmasModal={() => setSavedUmasModalOpen(true)}
-          />
-
-          {/* Keep additional desktop actions */}
-          {!isMobile && (
-            <div className="flex justify-center items-center gap-4 mt-2">
-              <TreeDataManager />
-            </div>
-          )}
-        </CardHeader>
-
-        <CardContent>
-          {/* Mobile level navigator */}
-          {isMobile && (
-            <MobileLevelNavigator
-              currentLevel={currentMobileLevel}
-              maxLevel={MAX_LEVEL}
-              onLevelChange={setCurrentMobileLevel}
-            />
-          )}
-
-          {/* Desktop view */}
-          {!isMobile && (
-            <div className="space-y-8 overflow-x-auto overflow-y-auto p-4 min-h-[600px]">
-              {/* Render levels 1-3 */}
-              {[1, 2, 3].map(level => (
-                <div key={level}>{renderTreeLevel(level)}</div>
-              ))}
-
-              {/* Toggle button for level 4 */}
-              <div className="flex justify-center py-4">
-                <Button
-                  variant="outline"
-                  onClick={() => setShowLevel4(!showLevel4)}
-                  className="flex items-center gap-2"
-                >
-                  {showLevel4 ? (
-                    <>
-                      <ChevronUp className="w-4 h-4" />
-                      Hide Level 4
-                    </>
-                  ) : (
-                    <>
-                      <ChevronDown className="w-4 h-4" />
-                      Show Level 4
-                    </>
-                  )}
-                </Button>
-              </div>
-
-              {/* Conditionally render level 4 */}
-              {showLevel4 && <div>{renderTreeLevel(4)}</div>}
-            </div>
-          )}
-
-          {/* Mobile view with swipe support */}
-          {isMobile && (
-            <div {...swipeHandlers} className="p-2 min-h-[400px] pb-20">
-              {renderMobileTreeLevel(currentMobileLevel)}
-            </div>
-          )}
-        </CardContent>
-      </Card>
-
-      {/* Mobile actions bar */}
-      {isMobile && (
-        <MobileActionsBar
-          onOpenTreeManager={() => setTreeManagerModalOpen(true)}
-          onOpenSavedUmas={() => setSavedUmasModalOpen(true)}
-          onClearTree={clearTree}
-        />
+            <X className="w-4 h-4" />
+          </button>
+        </div>
       )}
 
-      <UmaModal
-        isOpen={modalOpen}
-        onClose={handleCloseModal}
-        onSelectUma={handleUmaSelection}
-        level={selectedSlot.level || 1}
-        position={selectedSlot.position || 1}
-      />
+      <div className="p-4">
+        <Card className="max-w-8xl mx-auto rounded-none shadow-none border-none bg-gray-50 dark:bg-gray-800 grid-pattern-light dark:grid-pattern-dark">
+          <CardHeader className="text-center">
+            <CardTitle
+              className={`${isMobile ? 'text-2xl' : 'text-4xl'} font-bold text-[#DA3C57]`}
+            >
+              Uma Musume Pedigree Maker
+            </CardTitle>
 
-      <TreeManagerModal
-        isOpen={treeManagerModalOpen}
-        onClose={() => setTreeManagerModalOpen(false)}
-      />
-      <SavedUmasModal
-        isOpen={savedUmasModalOpen}
-        onClose={() => setSavedUmasModalOpen(false)}
-      />
+            <BreedingTreeHeader
+              isMobile={isMobile}
+              onClearTree={clearTree}
+              onLoadTree={handleLoadTree}
+              onOpenTreeManagerModal={() => setTreeManagerModalOpen(true)}
+              onOpenSavedUmasModal={() => setSavedUmasModalOpen(true)}
+            />
+
+            {/* Keep additional desktop actions */}
+            {!isMobile && (
+              <div className="flex justify-center items-center gap-4 mt-2">
+                <TreeDataManager />
+              </div>
+            )}
+          </CardHeader>
+
+          <CardContent>
+            {/* Mobile level navigator */}
+            {isMobile && (
+              <MobileLevelNavigator
+                currentLevel={currentMobileLevel}
+                maxLevel={MAX_LEVEL}
+                onLevelChange={setCurrentMobileLevel}
+              />
+            )}
+
+            {/* Desktop view */}
+            {!isMobile && (
+              <div className="space-y-8 overflow-x-auto overflow-y-auto p-4 min-h-[600px]">
+                {/* Render levels 1-3 */}
+                {[1, 2, 3].map(level => (
+                  <div key={level}>{renderTreeLevel(level)}</div>
+                ))}
+
+                {/* Toggle button for level 4 */}
+                <div className="flex justify-center py-4">
+                  <Button
+                    variant="outline"
+                    onClick={() => setShowLevel4(!showLevel4)}
+                    className="flex items-center gap-2"
+                  >
+                    {showLevel4 ? (
+                      <>
+                        <ChevronUp className="w-4 h-4" />
+                        Hide Level 4
+                      </>
+                    ) : (
+                      <>
+                        <ChevronDown className="w-4 h-4" />
+                        Show Level 4
+                      </>
+                    )}
+                  </Button>
+                </div>
+
+                {/* Conditionally render level 4 */}
+                {showLevel4 && <div>{renderTreeLevel(4)}</div>}
+              </div>
+            )}
+
+            {/* Mobile view with swipe support */}
+            {isMobile && (
+              <div {...swipeHandlers} className="p-2 min-h-[400px] pb-20">
+                {renderMobileTreeLevel(currentMobileLevel)}
+              </div>
+            )}
+          </CardContent>
+        </Card>
+
+        {/* Mobile actions bar */}
+        {isMobile && (
+          <MobileActionsBar
+            onOpenTreeManager={() => setTreeManagerModalOpen(true)}
+            onOpenSavedUmas={() => setSavedUmasModalOpen(true)}
+            onClearTree={clearTree}
+          />
+        )}
+
+        <UmaModal
+          isOpen={modalOpen}
+          onClose={handleCloseModal}
+          onSelectUma={handleUmaSelection}
+          level={selectedSlot.level || 1}
+          position={selectedSlot.position || 1}
+        />
+
+        <TreeManagerModal
+          isOpen={treeManagerModalOpen}
+          onClose={() => setTreeManagerModalOpen(false)}
+        />
+        <SavedUmasModal
+          isOpen={savedUmasModalOpen}
+          onClose={() => setSavedUmasModalOpen(false)}
+        />
+      </div>
     </div>
   )
 }

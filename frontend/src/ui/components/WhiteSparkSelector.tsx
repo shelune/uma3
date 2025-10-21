@@ -2,6 +2,7 @@ import { Badge } from '@/ui/base/badge'
 import { Input } from '@/ui/base/input'
 import { Popover, PopoverContent, PopoverTrigger } from '@/ui/base/popover'
 import { Separator } from '@/ui/base/separator'
+import { Textarea } from '@/ui/base/textarea'
 import { pickBadgeColorBySparkType, renderSparkType } from '@/utils/formatting'
 import { Star, X } from 'lucide-react'
 import React, { useState } from 'react'
@@ -34,6 +35,8 @@ export default function WhiteSparkSelector({
     spark: null,
     level: 1,
   })
+  const [chronoGenesisInput, setChronoGenesisInput] = useState('')
+  const [showChronoGenesis, setShowChronoGenesis] = useState(false)
 
   // Create white spark data array (skills only)
   const ALL_WHITE_SPARKS = React.useMemo(() => {
@@ -54,6 +57,73 @@ export default function WhiteSparkSelector({
     }))
     return [...raceData, ...skillData]
   }, [])
+
+  // ChronoGenesis abbreviation replacements
+  const normalizeChronoGenesisText = (text: string): string => {
+    return text
+      .replace(/\bC\./g, 'Cup')
+      .replace(/\bJ\.F\./g, 'Juvenile Fillies')
+      .replace(/\bF\.S\./g, 'Futuriy Stakes')
+      .replace(/\bS\./g, 'Stakes')
+  }
+
+  // Parse ChronoGenesis format input
+  const parseChronoGenesisInput = (input: string): SparkData[] => {
+    const lines = input
+      .trim()
+      .split('\n')
+      .filter(line => line.trim())
+    const parsedSparks: SparkData[] = []
+
+    for (const line of lines) {
+      const trimmedLine = line.trim()
+      if (!trimmedLine) continue
+
+      // Count stars at the end
+      const starMatch = trimmedLine.match(/★+$/)
+      const level = starMatch ? starMatch[0].length : 1
+
+      // Extract spark name (everything before the stars)
+      const sparkName = trimmedLine.replace(/\s*★+\s*$/, '').trim()
+      const normalizedSparkName = normalizeChronoGenesisText(sparkName)
+
+      // Find matching spark in ALL_WHITE_SPARKS
+      const matchingSpark = ALL_WHITE_SPARKS.find(spark => {
+        const sparkStatLower = spark.stat.toLowerCase()
+        const normalizedLower = normalizedSparkName.toLowerCase()
+        return (
+          sparkStatLower === normalizedLower ||
+          sparkStatLower.includes(normalizedLower) ||
+          normalizedLower.includes(sparkStatLower)
+        )
+      })
+
+      if (matchingSpark) {
+        parsedSparks.push({
+          ...matchingSpark,
+          level: Math.min(level, 3), // Cap at level 3
+        })
+      }
+    }
+
+    return parsedSparks
+  }
+
+  const applyChronoGenesisInput = () => {
+    const parsedSparks = parseChronoGenesisInput(chronoGenesisInput)
+
+    // Remove duplicates by stat name and merge with existing
+    const existingSparks = whiteSpark.filter(
+      existing => !parsedSparks.some(parsed => parsed.stat === existing.stat)
+    )
+
+    const newSelection = [...existingSparks, ...parsedSparks]
+    onWhiteSparkChange?.(newSelection)
+
+    // Clear input and hide section
+    setChronoGenesisInput('')
+    setShowChronoGenesis(false)
+  }
 
   // Filter white spark data based on search
   const filteredWhiteSparkData = React.useMemo(() => {
@@ -150,13 +220,56 @@ export default function WhiteSparkSelector({
           <div className="text-xs uppercase tracking-wide font-semibold text-gray-600">
             White Sparks
           </div>
-          <button
-            className="cursor-pointer text-xs uppercase tracking-wide font-semibold text-red-600"
-            onClick={clearAllWhiteSparks}
-          >
-            Clear All
-          </button>
+          <div className="flex gap-2">
+            <button
+              className="cursor-pointer text-xs uppercase tracking-wide font-semibold text-blue-600 hover:text-blue-800"
+              onClick={() => setShowChronoGenesis(!showChronoGenesis)}
+            >
+              Paste from ChronoGenesis
+            </button>
+            <button
+              className="cursor-pointer text-xs uppercase tracking-wide font-semibold text-red-600"
+              onClick={clearAllWhiteSparks}
+            >
+              Clear All
+            </button>
+          </div>
         </div>
+
+        {/* ChronoGenesis Input Section */}
+        {showChronoGenesis && (
+          <div className="mb-3 p-2 border rounded bg-blue-50 dark:bg-blue-900/20">
+            <div className="text-xs text-blue-700 dark:text-blue-300 mb-2">
+              Paste ChronoGenesis format (e.g., "Satsuki Sho ★★")
+            </div>
+            <Textarea
+              placeholder="Satsuki Sho ★&#10;Kikuka Sho ★★&#10;Hopeful S. ★&#10;Corner Adept ○ ★"
+              value={chronoGenesisInput}
+              onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
+                setChronoGenesisInput(e.target.value)
+              }
+              className="text-xs mb-2 min-h-[100px]"
+            />
+            <div className="flex gap-2">
+              <button
+                onClick={applyChronoGenesisInput}
+                disabled={!chronoGenesisInput.trim()}
+                className="text-xs bg-blue-600 hover:bg-blue-700 disabled:bg-gray-300 text-white px-2 py-1 rounded transition-colors"
+              >
+                Apply
+              </button>
+              <button
+                onClick={() => {
+                  setShowChronoGenesis(false)
+                  setChronoGenesisInput('')
+                }}
+                className="text-xs bg-gray-500 hover:bg-gray-600 text-white px-2 py-1 rounded transition-colors"
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        )}
 
         {/* Selection Section */}
         <div className="flex gap-2 mb-3">
@@ -247,7 +360,7 @@ export default function WhiteSparkSelector({
             <button
               onClick={addWhiteSpark}
               disabled={!currentWhiteSpark.spark}
-              className="w-full mt-2 text-xs bg-green-600 hover:bg-green-700 disabled:bg-gray-300 text-white px-2 py-1 rounded transition-colors"
+              className="w-full mt-2 text-xs bg-green-600 hover:bg-green-700 disabled:bg-gray-300 disabled:text-gray-600 text-white px-2 py-1 rounded transition-colors"
             >
               Add
             </button>
@@ -265,7 +378,7 @@ export default function WhiteSparkSelector({
                 <Badge
                   key={`selected-${spark.stat}-${index}`}
                   variant="outline"
-                  className="text-[10px] px-1 py-0.5 flex items-center gap-1 cursor-pointer hover:bg-red-50"
+                  className="text-[10px] px-1 py-0.5 flex items-center gap-1 cursor-pointer hover:bg-white hover:text-gray-600"
                   onClick={() => removeWhiteSpark(spark)}
                 >
                   <span className="truncate max-w-20">{spark.stat}</span>

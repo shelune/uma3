@@ -5,6 +5,9 @@ import Step1 from '@/assets/home/images/instructions/step-1.jpg'
 import Step2 from '@/assets/home/images/instructions/step-2.jpg'
 import Step3 from '@/assets/home/images/instructions/step-3.jpg'
 import Step4 from '@/assets/home/images/instructions/step-4.jpg'
+import Step4a from '@/assets/home/images/instructions/step-4a.png'
+import Step4b from '@/assets/home/images/instructions/step-4b.png'
+import Step4c from '@/assets/home/images/instructions/step-4c.png'
 import Step5 from '@/assets/home/images/instructions/step-5.jpg'
 import Step7 from '@/assets/home/images/instructions/step-7.jpg'
 import Step8 from '@/assets/home/images/instructions/step-8.jpg'
@@ -96,7 +99,7 @@ const Instructions = () => {
             >
               Filling the uma line
             </h2>
-            <div className="bg-blue-50 p-4 rounded-lg">
+            <div className="bg-blue-50 dark:bg-gray-400 mb-4 p-4 rounded-lg">
               <img src={Step1} className="block my-4" />
               <pre>
                 1+2. Select the parent umas (also repeat for lower levels)
@@ -104,7 +107,7 @@ const Instructions = () => {
               <pre>3. Select the child uma</pre>
             </div>
 
-            <div className="bg-blue-50 p-4 rounded-lg">
+            <div className="bg-blue-50 dark:bg-gray-400 mb-4 p-4 rounded-lg">
               <img src={Step2} className="block my-4" />
               <pre>1. Filter by name or pick from list</pre>
               <pre>2. Select the uma</pre>
@@ -118,7 +121,7 @@ const Instructions = () => {
             >
               Edit Uma's sparks & inheritances
             </h2>
-            <div className="bg-blue-50 p-4 rounded-lg whitespace-pre-wrap">
+            <div className="bg-blue-50 dark:bg-gray-400 mb-4 p-4 rounded-lg whitespace-pre-wrap">
               <img src={Step3} className="block my-4" />
               <pre>1. Select stats/aptitude/unique skill and levels</pre>
               <pre>2. Fill white sparks</pre>
@@ -127,7 +130,7 @@ const Instructions = () => {
               </pre>
             </div>
 
-            <div className="bg-blue-50 p-4 rounded-lg">
+            <div className="bg-blue-50 dark:bg-gray-400 mb-4 p-4 rounded-lg">
               <img src={Step4} className="block my-4" />
               <pre>1. Filter by name or pick from list</pre>
               <pre>2. Select spark level</pre>
@@ -139,6 +142,20 @@ const Instructions = () => {
                 4. Delete single spark (or "Clear All" at top right if needed)
               </pre>
             </div>
+
+            <div className="bg-blue-50 dark:bg-gray-400 mb-4 p-4 rounded-lg">
+              <div className="flex flex-wrap">
+                <img src={Step4c} className="block my-4" />
+                <img src={Step4a} className="block my-4" />
+                <img src={Step4b} className="block my-4" />
+              </div>
+              <pre>
+                1. Highlight the skill from ChronoGenesis (take the stars as
+                well)
+              </pre>
+              <pre>2. Click on "Paste from ChronoGenesis"</pre>
+              <pre>3. Paste in here and hope for the best</pre>
+            </div>
           </section>
 
           <section className="my-8">
@@ -148,7 +165,7 @@ const Instructions = () => {
             >
               Check your spark chance & affinity
             </h2>
-            <div className="bg-blue-50 p-4 rounded-lg">
+            <div className="bg-blue-50 dark:bg-gray-400 mb-4 p-4 rounded-lg">
               <img src={Step8} className="block my-4" />
               <pre>
                 1. Click this to show chance to inherit spark per career (2
@@ -159,7 +176,7 @@ const Instructions = () => {
               </pre>
             </div>
 
-            <div className="bg-blue-50 p-4 rounded-lg">
+            <div className="bg-blue-50 dark:bg-gray-400 mb-4 p-4 rounded-lg">
               <h2
                 id="save-entire-tree"
                 className="text-2xl font-semibold my-4 flex items-center gap-2"
@@ -184,7 +201,7 @@ const Instructions = () => {
             >
               (Optional) Save parent uma for future re-use
             </h2>
-            <div className="bg-blue-50 p-4 rounded-lg whitespace-pre-wrap">
+            <div className="bg-blue-50 dark:bg-gray-400 mb-4 p-4 rounded-lg whitespace-pre-wrap">
               <img src={Step5} className="block my-4" />
               <pre>
                 1. Save and put in some name e.g. "Spe - Med 3* - Groundwork 3*"
@@ -193,7 +210,7 @@ const Instructions = () => {
               <pre>2. Clear this uma</pre>
             </div>
 
-            <div className="bg-blue-50 p-4 rounded-lg">
+            <div className="bg-blue-50 dark:bg-gray-400 mb-4 p-4 rounded-lg">
               <img src={Step7} className="block my-4" />
               <pre>1. Saved Uma will be here in the Uma selector</pre>
               <pre>
@@ -209,7 +226,7 @@ const Instructions = () => {
             >
               (Optional) Share to yourself or other people
             </h2>
-            <div className="bg-blue-50 p-4 rounded-lg">
+            <div className="bg-blue-50 dark:bg-gray-400 mb-4 p-4 rounded-lg">
               <img src={Step11} className="block my-4" />
               <pre>1. Click this to get link</pre>
               <pre>2. Click this to copy URL and paste somewhere else</pre>
