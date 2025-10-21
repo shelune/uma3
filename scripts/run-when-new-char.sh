@@ -31,15 +31,15 @@ if [[ -f "./universal-assets/master.db" ]]; then
     
     # Export dress_data table
     echo "  Exporting dress_data..."
-    sqlite3 -json master.db "SELECT * FROM dress_data;" > dress_data.json
+    sqlite3 -json master.db "SELECT * FROM dress_data;" > dress-data.json
     
     # Export succession_relation_member table
     echo "  Exporting succession_relation_member..."
-    sqlite3 -json master.db "SELECT * FROM succession_relation_member;" > succession_relation_member.json
+    sqlite3 -json master.db "SELECT * FROM succession_relation_member;" > succession-relation-member.json
     
     # Export succession_relation table
     echo "  Exporting succession_relation..."
-    sqlite3 -json master.db "SELECT * FROM succession_relation;" > succession_relation.json
+    sqlite3 -json master.db "SELECT * FROM succession_relation;" > succession-relation.json
     
     cd ..
     echo "SQLite export completed"
@@ -56,19 +56,19 @@ echo -e "${YELLOW}Step 2: Moving JSON files to data/wild directory...${NC}"
 mkdir -p ./data/wild
 
 # Move JSON files
-if [[ -f "./universal-assets/dress_data.json" ]]; then
-    mv ./universal-assets/dress_data.json ./data/wild/
-    echo "Moved dress_data.json"
+if [[ -f "./universal-assets/dress-data.json" ]]; then
+    mv ./universal-assets/dress-data.json ./data/wild/
+    echo "Moved dress-data.json"
 fi
 
-if [[ -f "./universal-assets/succession_relation_member.json" ]]; then
-    mv ./universal-assets/succession_relation_member.json ./data/wild/
-    echo "Moved succession_relation_member.json"
+if [[ -f "./universal-assets/succession-relation-member.json" ]]; then
+    mv ./universal-assets/succession-relation-member.json ./data/wild/
+    echo "Moved succession-relation-member.json"
 fi
 
-if [[ -f "./universal-assets/succession_relation.json" ]]; then
-    mv ./universal-assets/succession_relation.json ./data/wild/
-    echo "Moved succession_relation.json"
+if [[ -f "./universal-assets/succession-relation.json" ]]; then
+    mv ./universal-assets/succession-relation.json ./data/wild/
+    echo "Moved succession-relation.json"
 fi
 
 echo "File movement completed"

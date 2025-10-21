@@ -36,7 +36,7 @@ const exportCharacterNames = async () => {
 
   return new Promise<void>((resolve, reject) => {
     fs.writeFile(
-      path.resolve(__dirname, '../home/chara_names_with_id.json'),
+      path.resolve(__dirname, '../home/chara-names-with-id.json'),
       JSON.stringify(result, null, 2),
       'utf-8',
       err => {
