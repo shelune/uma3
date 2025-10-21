@@ -3,6 +3,7 @@ import { Button } from '@/ui/base/button'
 import { useState } from 'react'
 import { useSwipeable } from 'react-swipeable'
 import { ChevronDown, ChevronUp, X } from 'lucide-react'
+import { Link } from 'react-router-dom'
 import { CharacterNameID } from '@/types/characterNameId'
 import type {
   BlueSparkData,
@@ -64,9 +65,12 @@ const BreedingTree = () => {
       <ul>
         <li>
           + Added ChronoGenesis import feature for White Sparks! Go to{' '}
-          <a href="#edit-sparks-inheritances" className="underline">
-            instructions (last part) to check out{' '}
-          </a>
+          <Link
+            to="/instructions#import-sparks-chronogenesis"
+            className="underline"
+          >
+            instructions to check out
+          </Link>
         </li>
         <li>+ Added umas up to Meisho Doto</li>
       </ul>

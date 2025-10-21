@@ -1,20 +1,16 @@
 import { Button } from '@/ui/base/button'
 import { Menu, X } from 'lucide-react'
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 import ThemeToggle from '../../components/ThemeToggle'
 
 interface NavigationProps {
   currentPage: 'breeding-tree' | 'instructions'
-  onPageChange: (page: 'breeding-tree' | 'instructions') => void
+  onPageChange?: (page: 'breeding-tree' | 'instructions') => void
 }
 
-const Navigation = ({ currentPage, onPageChange }: NavigationProps) => {
+const Navigation = ({ currentPage }: NavigationProps) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
-
-  const handlePageChange = (page: 'breeding-tree' | 'instructions') => {
-    onPageChange(page)
-    setIsMobileMenuOpen(false) // Close mobile menu after selection
-  }
 
   return (
     <header className="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 shadow-sm">
@@ -36,21 +32,25 @@ const Navigation = ({ currentPage, onPageChange }: NavigationProps) => {
           <div className="flex items-center gap-4">
             {/* Desktop Navigation */}
             <nav className="hidden md:flex space-x-1">
-              <Button
-                variant={currentPage === 'breeding-tree' ? 'default' : 'ghost'}
-                onClick={() => handlePageChange('breeding-tree')}
-                className="flex items-center gap-2"
-              >
-                Breeding Tree
-              </Button>
+              <Link to="/">
+                <Button
+                  variant={
+                    currentPage === 'breeding-tree' ? 'default' : 'ghost'
+                  }
+                  className="flex items-center gap-2"
+                >
+                  Breeding Tree
+                </Button>
+              </Link>
 
-              <Button
-                variant={currentPage === 'instructions' ? 'default' : 'ghost'}
-                onClick={() => handlePageChange('instructions')}
-                className="flex items-center gap-2"
-              >
-                How To Use
-              </Button>
+              <Link to="/instructions">
+                <Button
+                  variant={currentPage === 'instructions' ? 'default' : 'ghost'}
+                  className="flex items-center gap-2"
+                >
+                  How To Use
+                </Button>
+              </Link>
             </nav>
 
             <ThemeToggle />
@@ -76,21 +76,28 @@ const Navigation = ({ currentPage, onPageChange }: NavigationProps) => {
         {isMobileMenuOpen && (
           <div className="md:hidden border-t border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
             <nav className="px-4 py-3 space-y-2">
-              <Button
-                variant={currentPage === 'breeding-tree' ? 'default' : 'ghost'}
-                onClick={() => handlePageChange('breeding-tree')}
-                className="w-full justify-start flex items-center gap-2"
-              >
-                Breeding Tree
-              </Button>
+              <Link to="/" onClick={() => setIsMobileMenuOpen(false)}>
+                <Button
+                  variant={
+                    currentPage === 'breeding-tree' ? 'default' : 'ghost'
+                  }
+                  className="w-full justify-start flex items-center gap-2"
+                >
+                  Breeding Tree
+                </Button>
+              </Link>
 
-              <Button
-                variant={currentPage === 'instructions' ? 'default' : 'ghost'}
-                onClick={() => handlePageChange('instructions')}
-                className="w-full justify-start flex items-center gap-2"
+              <Link
+                to="/instructions"
+                onClick={() => setIsMobileMenuOpen(false)}
               >
-                How To Use
-              </Button>
+                <Button
+                  variant={currentPage === 'instructions' ? 'default' : 'ghost'}
+                  className="w-full justify-start flex items-center gap-2"
+                >
+                  How To Use
+                </Button>
+              </Link>
             </nav>
           </div>
         )}

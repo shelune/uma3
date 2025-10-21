@@ -49,6 +49,15 @@ const Instructions = () => {
                     Edit Uma's sparks & inheritances
                   </a>
                 </li>
+                <li>
+                  <a
+                    href="#import-sparks-chronogenesis"
+                    className="flex items-center gap-2 text-blue-600"
+                  >
+                    <ArrowRight className="w-3 h-3" />
+                    Import sparks from ChronoGenesis
+                  </a>
+                </li>
 
                 <li>
                   <a
@@ -142,7 +151,18 @@ const Instructions = () => {
                 4. Delete single spark (or "Clear All" at top right if needed)
               </pre>
             </div>
+          </section>
 
+          <section className="my-8">
+            <h2
+              id="import-sparks-chronogenesis"
+              className="text-2xl font-semibold my-4 flex items-center gap-2"
+            >
+              Paste sparks directly from{' '}
+              <a href="https://chronogenesis.net/" className="underline">
+                ChronoGenesis
+              </a>
+            </h2>
             <div className="bg-blue-50 dark:bg-gray-400 mb-4 p-4 rounded-lg">
               <div className="flex flex-wrap">
                 <img src={Step4c} className="block my-4" />
