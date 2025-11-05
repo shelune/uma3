@@ -61,7 +61,7 @@ const BreedingTree = () => {
   // Update banner content - you can customize this
   const updateBannerText = (
     <div>
-      <strong>Update 22/10/2025:</strong>
+      <strong>CHANGELOG 05/11/2025:</strong>
       <ul>
         <li>
           + Added ChronoGenesis import feature for White Sparks! Go to{' '}
@@ -72,7 +72,9 @@ const BreedingTree = () => {
             instructions to check out
           </Link>
         </li>
-        <li>+ Added umas up to Meisho Doto</li>
+        <li>
+          + Added umas up to <strong>Eishin Flash</strong>
+        </li>
       </ul>
     </div>
   )
