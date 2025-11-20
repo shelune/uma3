@@ -61,19 +61,11 @@ const BreedingTree = () => {
   // Update banner content - you can customize this
   const updateBannerText = (
     <div>
-      <strong>CHANGELOG 05/11/2025:</strong>
+      <strong>CHANGELOG 20/11/2025:</strong>
       <ul>
+        <li>+ Unity Cup skills are now available as White Sparks!</li>
         <li>
-          + Added ChronoGenesis import feature for White Sparks! Go to{' '}
-          <Link
-            to="/instructions#import-sparks-chronogenesis"
-            className="underline"
-          >
-            instructions to check out
-          </Link>
-        </li>
-        <li>
-          + Added umas up to <strong>Eishin Flash</strong>
+          + Added umas up to <strong>Agnes Digital</strong>
         </li>
       </ul>
     </div>

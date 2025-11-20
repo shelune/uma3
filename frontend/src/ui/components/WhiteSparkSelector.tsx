@@ -217,10 +217,7 @@ export default function WhiteSparkSelector({
         alignOffset={16}
       >
         <div className="flex justify-between items-center mb-2">
-          <div className="text-xs uppercase tracking-wide font-semibold text-gray-600">
-            White Sparks
-          </div>
-          <div className="flex gap-2">
+          <div className="flex w-full gap-2">
             <button
               className="cursor-pointer text-xs uppercase tracking-wide font-semibold text-blue-600 hover:text-blue-800"
               onClick={() => setShowChronoGenesis(!showChronoGenesis)}
@@ -228,7 +225,7 @@ export default function WhiteSparkSelector({
               Paste from ChronoGenesis
             </button>
             <button
-              className="cursor-pointer text-xs uppercase tracking-wide font-semibold text-red-600"
+              className="cursor-pointer ml-auto text-xs uppercase tracking-wide font-semibold text-red-600"
               onClick={clearAllWhiteSparks}
             >
               Clear All
