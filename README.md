@@ -1,8 +1,9 @@
 # Data Source
 
 - all_texts.json -> directly from master.mdb (game client)
-  - Uma names
-  - does not need updating
+  - Uma names & texts
+  - needs to rerun every patch with new characters
+  - - Run `sqlite3 -json master.db "SELECT * FROM text_data;" > all-texts.json`
 - skills.json -> https://www.tracenacademy.com/api/skilldata -> SkillData
   - rerun every now and then
 - dress_data -> directly from master.mdb

@@ -28,7 +28,11 @@ if [[ -f "./universal-assets/master.db" ]]; then
     echo "Found master.db, exporting data to JSON..."
     
     cd universal-assets
-    
+
+    # Export text_data table
+    echo "  Exporting text_data..."
+    sqlite3 -json master.db "SELECT * FROM text_data;" > all-texts.json
+
     # Export dress_data table
     echo "  Exporting dress_data..."
     sqlite3 -json master.db "SELECT * FROM dress_data;" > dress-data.json
@@ -59,6 +63,11 @@ mkdir -p ./data/wild
 if [[ -f "./universal-assets/dress-data.json" ]]; then
     mv ./universal-assets/dress-data.json ./data/wild/
     echo "Moved dress-data.json"
+fi
+
+if [[ -f "./universal-assets/all-texts.json" ]]; then
+    mv ./universal-assets/all-texts.json ./data/wild/
+    echo "Moved all-texts.json"
 fi
 
 if [[ -f "./universal-assets/succession-relation-member.json" ]]; then
@@ -94,6 +103,11 @@ if [[ ! -f "affinity-calculator.ts" ]]; then
     exit 1
 fi
 
+if [[ ! -f "chara-image-downloader.ts" ]]; then
+    echo -e "${RED}Error: chara-image-downloader.ts not found in ./data/processor directory${NC}"
+    exit 1
+fi
+
 # Run processors in sequence
 echo "Step 3.1: Exporting character names..."
 npx tsx chara-name-exporter.ts
@@ -113,6 +127,13 @@ echo "Step 3.3: Calculating affinity combinations..."
 npx tsx affinity-calculator.ts
 if [[ $? -ne 0 ]]; then
     echo -e "${RED}Error: affinity-calculator.ts failed${NC}"
+    exit 1
+fi
+
+echo "Step 3.4: Downloading character images..."
+npx tsx chara-image-downloader.ts
+if [[ $? -ne 0 ]]; then
+    echo -e "${RED}Error: chara-image-downloader.ts failed${NC}"
     exit 1
 fi
 

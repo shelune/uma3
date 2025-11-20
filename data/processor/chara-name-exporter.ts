@@ -25,12 +25,20 @@ const exportCharacterNames = async () => {
         ?.dress_color_main || '000000'
     }`,
   })
-
+  console.log('dress id', JSON.stringify(dressIds, null, 2))
   const result = allTexts
-    .filter(
-      item =>
-        // matching "index" to "id" and category to 4 (character names)?
-        dressIds.has(item.index.toString()) && item.category === 4
+    .filter(item =>
+      // matching "index" to "id" and category to 4 OR 75 (character names)?
+      {
+        if (
+          dressIds.has(item.index.toString()) &&
+          (item.category === 4 || item.category === 75)
+        ) {
+          console.log('Found matching character', item.text)
+          return true
+        }
+        return false
+      }
     )
     .map(formatCharacter)
 

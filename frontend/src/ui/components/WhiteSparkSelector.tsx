@@ -180,7 +180,7 @@ export default function WhiteSparkSelector({
     return (
       <Badge
         variant="secondary"
-        className={`text-[10px] px-1 py-0 ${pickBadgeColorBySparkType(sparkType ?? '')}`}
+        className={`text-[10px] dark:hover:text-white px-1 py-0 ${pickBadgeColorBySparkType(sparkType ?? '')}`}
       >
         {renderSparkType(sparkType)}
       </Badge>

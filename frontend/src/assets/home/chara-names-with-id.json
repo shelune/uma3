@@ -120,10 +120,28 @@
     "dress_color_main": "#0092CB"
   },
   {
+    "chara_id": "101901",
+    "chara_name": "[Full-Color Fangirling] Agnes Digital",
+    "chara_id_base": "1019",
+    "dress_color_main": "#F37F96"
+  },
+  {
     "chara_id": "102001",
     "chara_name": "[Reeling in the Big One] Seiun Sky",
     "chara_id_base": "1020",
     "dress_color_main": "#65D283"
+  },
+  {
+    "chara_id": "102101",
+    "chara_name": "[Fast as Lightning] Tamamo Cross",
+    "chara_id_base": "1021",
+    "dress_color_main": "#3290D6"
+  },
+  {
+    "chara_id": "102201",
+    "chara_name": "[Noble Seamair] Fine Motion",
+    "chara_id_base": "1022",
+    "dress_color_main": "#20A95C"
   },
   {
     "chara_id": "102301",
@@ -138,6 +156,12 @@
     "dress_color_main": "#F57D38"
   },
   {
+    "chara_id": "102501",
+    "chara_name": "[Creeping Shadow] Manhattan Cafe",
+    "chara_id_base": "1025",
+    "dress_color_main": "#494541"
+  },
+  {
     "chara_id": "102601",
     "chara_name": "[MB-19890425] Mihono Bourbon",
     "chara_id_base": "1026",
@@ -150,16 +174,34 @@
     "dress_color_main": "#14BAAE"
   },
   {
+    "chara_id": "102801",
+    "chara_name": "[Buono ☆ Alla Moda] Hishi Akebono",
+    "chara_id_base": "1028",
+    "dress_color_main": "#208BCD"
+  },
+  {
     "chara_id": "103001",
     "chara_name": "[Rosy Dreams] Rice Shower",
     "chara_id_base": "1030",
     "dress_color_main": "#384A86"
   },
   {
+    "chara_id": "103101",
+    "chara_name": "[Always Electrifying] Ines Fujin",
+    "chara_id_base": "1031",
+    "dress_color_main": "#F078C5"
+  },
+  {
     "chara_id": "103201",
     "chara_name": "[Tach-nology] Agnes Tachyon",
     "chara_id_base": "1032",
     "dress_color_main": "#35B2B6"
+  },
+  {
+    "chara_id": "103301",
+    "chara_name": "[Starry Nocturne] Admire Vega",
+    "chara_id_base": "1033",
+    "dress_color_main": "#3865A1"
   },
   {
     "chara_id": "103501",
@@ -178,6 +220,12 @@
     "chara_name": "[Fille Éclair] Curren Chan",
     "chara_id_base": "1038",
     "dress_color_main": "#F86669"
+  },
+  {
+    "chara_id": "103901",
+    "chara_name": "[Princess of Pink] Kawakami Princess",
+    "chara_id_base": "1039",
+    "dress_color_main": "#E146A7"
   },
   {
     "chara_id": "104001",
@@ -204,10 +252,22 @@
     "dress_color_main": "#F8587B"
   },
   {
+    "chara_id": "104801",
+    "chara_name": "[Jokester ☆ Vibes] Tosen Jordan",
+    "chara_id_base": "1048",
+    "dress_color_main": "#25B8AE"
+  },
+  {
     "chara_id": "105001",
     "chara_name": "[Nevertheless] Narita Taishin",
     "chara_id_base": "1050",
     "dress_color_main": "#E575CE"
+  },
+  {
+    "chara_id": "105101",
+    "chara_name": "[Layered Petals] Nishino Flower",
+    "chara_id_base": "1051",
+    "dress_color_main": "#E26ECB"
   },
   {
     "chara_id": "105201",
@@ -228,6 +288,12 @@
     "dress_color_main": "#46449B"
   },
   {
+    "chara_id": "105901",
+    "chara_name": "[Off the Line] Mejiro Dober",
+    "chara_id_base": "1059",
+    "dress_color_main": "#19B49E"
+  },
+  {
     "chara_id": "106001",
     "chara_name": "[Poinsettia Ribbon] Nice Nature",
     "chara_id_base": "1060",
@@ -238,5 +304,41 @@
     "chara_name": "[King of Emeralds] King Halo",
     "chara_id_base": "1061",
     "dress_color_main": "#0E9451"
+  },
+  {
+    "chara_id": "106201",
+    "chara_name": "[Clippety-Tippety-Clop] Matikanetannhauser",
+    "chara_id_base": "1062",
+    "dress_color_main": "#0f8dce"
+  },
+  {
+    "chara_id": "106701",
+    "chara_name": "[Natural Brilliance] Satono Diamond",
+    "chara_id_base": "1067",
+    "dress_color_main": "#94bf01"
+  },
+  {
+    "chara_id": "106801",
+    "chara_name": "[Gilded Shrine to Glory] Kitasan Black",
+    "chara_id_base": "1068",
+    "dress_color_main": "#5a6065"
+  },
+  {
+    "chara_id": "106901",
+    "chara_name": "[Strength in Full Bloom] Sakura Chiyono O",
+    "chara_id_base": "1069",
+    "dress_color_main": "#f9879d"
+  },
+  {
+    "chara_id": "107101",
+    "chara_name": "[Crystalline] Mejiro Ardan",
+    "chara_id_base": "1071",
+    "dress_color_main": "#28baa5"
+  },
+  {
+    "chara_id": "107401",
+    "chara_name": "[Brunissage Line] Mejiro Bright",
+    "chara_id_base": "1074",
+    "dress_color_main": "#45C5C1"
   }
 ]
