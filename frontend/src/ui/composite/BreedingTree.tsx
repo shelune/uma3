@@ -61,11 +61,10 @@ const BreedingTree = () => {
   // Update banner content - you can customize this
   const updateBannerText = (
     <div>
-      <strong>CHANGELOG 20/11/2025:</strong>
+      <strong>CHANGELOG 14/01/2026:</strong>
       <ul>
-        <li>+ Unity Cup skills are now available as White Sparks!</li>
         <li>
-          + Added umas up to <strong>Agnes Digital</strong>
+          + Added umas up to <strong>Mejiro Dober</strong>
         </li>
       </ul>
     </div>

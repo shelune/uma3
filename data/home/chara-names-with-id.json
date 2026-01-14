@@ -240,6 +240,12 @@
     "dress_color_main": "#EE6FAB"
   },
   {
+    "chara_id": "104401",
+    "chara_name": "[Platanus Witch] Sweep Tosho",
+    "chara_id_base": "1044",
+    "dress_color_main": "#926DDA"
+  },
+  {
     "chara_id": "104501",
     "chara_name": "[Murmuring Stream] Super Creek",
     "chara_id_base": "1045",
